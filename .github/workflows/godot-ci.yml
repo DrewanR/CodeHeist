@@ -91,8 +91,8 @@ jobs:
       - name: Install rsync
         run: |
           apt-get update && apt-get install -y rsync
-#      - name: Deploy to GitHub Pages
-#        uses: JamesIves/github-pages-deploy-action@releases/v4
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build/web # The folder the action should deploy.
