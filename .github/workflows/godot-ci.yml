@@ -5,7 +5,7 @@ on: push
 
 env:
   GODOT_VERSION: 4.6
-  EXPORT_NAME: codeHeist
+  EXPORT_NAME: CodeHeist
   PROJECT_PATH: .
 
 jobs:
