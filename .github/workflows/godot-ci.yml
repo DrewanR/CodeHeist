@@ -92,13 +92,7 @@ jobs:
       - name: Deploy to GitHub Pages ORIGINAL
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
-      - name: Deploy to GitHub Pages EXPERIMENTAL
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          branch: gh-pages # The branch the action should deploy to.
+          branch: gh-pages-new # The branch the action should deploy to.
           folder: build/web # The folder the action should deploy.
 
 
