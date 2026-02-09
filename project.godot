@@ -11,13 +11,10 @@ config_version=5
 [application]
 
 config/name="Code Heist"
-<<<<<<< HEAD
-run/main_scene="uid://w34ucavaoxd1"
-=======
 run/main_scene="uid://c2bagp16dmh4l"
->>>>>>> main
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+<<<<<<<HEADrun/main_scene="uid://w34ucavaoxd1"
 
 [autoload]
 
@@ -25,9 +22,7 @@ CameraInformation="*res://src/autoload/camera_information.gd"
 
 [display]
 
-window/size/viewport_width=384
-window/size/viewport_height=216
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [file_customization]
 
