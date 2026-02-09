@@ -8,7 +8,7 @@ There will likely be some amount of information on taking part in the study here
 
 ### Online Web Version
 
-1. Follow [this link]{}
+1. Follow [this link]{https://drewanr.github.io/CodeHeist/game/}
 2. ???
 3. Profit
 
