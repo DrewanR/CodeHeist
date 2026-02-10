@@ -1,8 +1,12 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://cml4xcp4b3ew5"]
 
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="1_wkupu"]
+
 [resource]
 line_spacing = -3.0
-font_size = 42
+font = ExtResource("1_wkupu")
+font_size = 48
+font_color = Color(1, 1, 0, 1)
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 2

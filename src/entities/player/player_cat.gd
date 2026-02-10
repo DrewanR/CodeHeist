@@ -11,6 +11,7 @@ const MAX_SPEED := 160.0 ## The threshold at which the player is considered to b
 # Health
 const MAX_HP := 3 ## The max hp available
 const STARTING_HP := 3 ## The starting hp
+const MAX_STABILITY := 3 ## Maximum errors before damage is dealt
 
 # Physics Constants
 const SPEED := (MAX_SPEED*10)/SLIPMOD ## Players horizontal speed value. /!\ Effected by delta
@@ -64,8 +65,8 @@ signal major_error_occurred(text :String)
 #===========================================
 
 ## Node variables
-@onready var debug_text_node = $DebugInformation/PlayerData
-@onready var debug_fps_node = $DebugInformation/TempFPS
+@onready var debug_text_node = $BasicUI/PlayerData
+@onready var debug_fps_node = $BasicUI/TempFPS
 @onready var sprite_node = $Sprite2D
 @onready var animation_player_node = $AnimationPlayer
 
@@ -74,6 +75,11 @@ func _ready() -> void:
 	max_hp = MAX_HP
 	hp_changed.emit(0, hp)
 	max_hp_changed.emit(0, max_hp)
+	
+	stability = MAX_STABILITY
+	max_stability = MAX_STABILITY
+	stability_changed.emit(0, stability)
+	max_stability_changed.emit(0, max_stability)
 
 # Main Processes
 #===========================================
@@ -115,6 +121,10 @@ func _physics_process(delta: float) -> void:
 		damage(1)
 	if Input.is_action_just_pressed("debug_heal"):
 		heal(1)
+	if Input.is_action_just_pressed("debug_destablise"):
+		decrease_stability(1)
+	if Input.is_action_just_pressed("debug_stabalise"):
+		increase_stability(1)
 
 # Physics
 
@@ -152,7 +162,7 @@ func running_logic(delta: float, direction: float) -> void:
 ## Uses [delta] to process the floaty part of jumps
 # TODO: test, extract
 func jump_logic(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and can_jump(): # JUMP
+	if Input.is_action_just_pressed("primary_action") and can_jump(): # JUMP
 		jump()
 	elif is_air_hovering(): # That thing where holding down the button can adjust the height
 		air_hover(delta)
@@ -188,7 +198,7 @@ func air_hover(delta :float) -> void:
 ##
 ## Uses [direction] for velocity impulse
 func strikes(delta:float, direction: float) -> void:
-	if Input.is_action_just_pressed("action") and can_strike():
+	if Input.is_action_just_pressed("secondary_action") and can_strike():
 		flip_sprite(direction, true)
 		air_strikes += 1
 		strike_cooldown += STRIKE_COOLDOWN_COST
@@ -252,7 +262,7 @@ func can_strike() -> bool:
 
 ## Returns [true] if the player is air hovering
 func is_air_hovering() -> bool:
-	return air_time < 0.6 and air_time > 0 and Input.is_action_pressed("jump") #and first_ascent #and (air_entry in [3,4,5])
+	return air_time < 0.6 and air_time > 0 and Input.is_action_pressed("primary_action") #and first_ascent #and (air_entry in [3,4,5])
 
 ## Returns [true] if
 ##   [value_a] and [value_b] are both positive or both negative;

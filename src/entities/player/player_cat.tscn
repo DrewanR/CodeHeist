@@ -5,10 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://cli1hs7wvb156" path="res://assets/player/Kitis.png" id="2_pimje"]
 [ext_resource type="LabelSettings" uid="uid://767687giqxrr" path="res://assets/ui/debug_text_s2.tres" id="3_w0fkd"]
 [ext_resource type="LabelSettings" uid="uid://cml4xcp4b3ew5" path="res://assets/ui/debug_text_s2_large.tres" id="5_fijc8"]
+[ext_resource type="PackedScene" uid="uid://34fb21mylwqj" path="res://src/ui/simple_stability_readout.tscn" id="6_cgwl0"]
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="7_itvx8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w0fkd"]
 radius = 3.0
 height = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_cgwl0"]
+font = ExtResource("7_itvx8")
+font_size = 14
 
 [sub_resource type="Animation" id="Animation_3jpiv"]
 length = 0.001
@@ -144,9 +150,9 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_w0fkd")
 debug_color = Color(0.42, 0, 0.7, 0.419608)
 
-[node name="DebugInformation" type="CanvasLayer" parent="." unique_id=1273297337]
+[node name="BasicUI" type="CanvasLayer" parent="." unique_id=1273297337]
 
-[node name="PlayerData" type="Label" parent="DebugInformation" unique_id=926159387]
+[node name="PlayerData" type="Label" parent="BasicUI" unique_id=926159387]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -157,26 +163,64 @@ text = "DEBUG
 bottom text"
 label_settings = ExtResource("3_w0fkd")
 
-[node name="TempFPS" type="Label" parent="DebugInformation" unique_id=481506965]
+[node name="TempFPS" type="Label" parent="BasicUI" unique_id=481506965]
 offset_right = 44.0
 offset_bottom = 23.0
 text = "69 "
 label_settings = ExtResource("3_w0fkd")
 horizontal_alignment = 2
 
-[node name="SimpleHPReadout" parent="DebugInformation" unique_id=1824230142 node_paths=PackedStringArray("parent") instance=ExtResource("2_fijc8")]
+[node name="HUD" type="VBoxContainer" parent="BasicUI" unique_id=651481612]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -44.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 23.0
+offset_left = -132.0
+offset_bottom = 58.0
 grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="Stats" type="HBoxContainer" parent="BasicUI/HUD" unique_id=547557091]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="SimpleHPReadout" parent="BasicUI/HUD/Stats" unique_id=1824230142 node_paths=PackedStringArray("parent") instance=ExtResource("2_fijc8")]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "HP:1/3"
 label_settings = ExtResource("5_fijc8")
-parent = NodePath("../..")
-pre_text = "HP: "
-post_text = " "
+parent = NodePath("../../../..")
+pre_text = "HP:"
+
+[node name="Label" type="Label" parent="BasicUI/HUD/Stats" unique_id=1409653635]
+layout_mode = 2
+text = "+"
+label_settings = ExtResource("5_fijc8")
+
+[node name="SimpleSBReadout" parent="BasicUI/HUD/Stats" unique_id=1137967255 node_paths=PackedStringArray("parent") instance=ExtResource("6_cgwl0")]
+layout_mode = 2
+text = "SB:1/3"
+label_settings = ExtResource("5_fijc8")
+parent = NodePath("../../../..")
+pre_text = ""
+post_text = "SB"
+show_max = false
+
+[node name="Panel" type="Panel" parent="BasicUI/HUD" unique_id=472110135]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BasicUI/HUD/Panel" unique_id=1153290347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "pos: (1000,1000), vel: (1000,1000)"
+label_settings = SubResource("LabelSettings_cgwl0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1725447709]
 visible = false
