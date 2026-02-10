@@ -106,7 +106,7 @@ func _physics_process(delta: float) -> void:
 	flip_sprite(direction, false)
 	calculation_animation_state(direction, delta)
 	animation()
-	update_debug_text(direction)
+	update_debug_text()
 
 	velocity.x *= 1 if (abs(velocity.x) >= delta*5) else 0
 
@@ -287,7 +287,7 @@ func get_direction_y() -> float:
 
 
 ## Updates the debug text
-func update_debug_text(direction) -> void:
+func update_debug_text() -> void:
 	debug_text += " Y-VEL: " + str(round(velocity.y)) + "\n "
 	debug_text += "X-VEL: " + str(round(velocity.x)) + "\n "
 	debug_text += "AIR-ENTRY: " + str(air_entry) + "-" + air_entry_state_names[air_entry] + "\n "
