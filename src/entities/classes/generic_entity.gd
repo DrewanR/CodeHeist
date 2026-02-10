@@ -37,6 +37,7 @@ func damage(amount :int) -> void:
 func heal(amount :int) -> void:
 	if damagable:
 		hp += amount
+		cap_hp()
 		healing_received.emit(amount, hp)
 		hp_changed.emit(amount, hp)
 
@@ -44,6 +45,7 @@ func heal(amount :int) -> void:
 ## Emits signal: [hp_changed]
 func change_hp(amount :int) -> void:
 	hp += amount
+	cap_hp()
 	hp_changed.emit(amount, hp)
 
 ## Sets HP to integer [amount] [br]

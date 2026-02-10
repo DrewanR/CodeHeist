@@ -10,7 +10,7 @@ const MAX_SPEED := 160.0 ## The threshold at which the player is considered to b
 
 # Health
 const MAX_HP := 3 ## The max hp available
-const STARTING_HP := 2 ## The starting hp
+const STARTING_HP := 3 ## The starting hp
 
 # Physics Constants
 const SPEED := (MAX_SPEED*10)/SLIPMOD ## Players horizontal speed value. /!\ Effected by delta
@@ -58,7 +58,7 @@ var debug_text: String = "DEBUG"
 # Signals
 #===========================================
 
-signal major_error(text :String)
+signal major_error_occurred(text :String)
 
 # Setup
 #===========================================
@@ -261,7 +261,10 @@ func is_air_hovering() -> bool:
 ## Returns [false] if
 ##   [value_a] and [value_b] are 0, when [both_cant_be_zero] is [true]
 func is_same_sign(value_a: float, value_b: float, a_can_be_zero = false,  b_can_be_zero = false, both_cant_be_zero = false) -> bool:
-	return ((a_can_be_zero and value_a == 0) or (b_can_be_zero and value_b == 0) or ((value_a * value_b) > 0)) and !(both_cant_be_zero and value_a == 0 and value_b == 0)
+	return (
+		(a_can_be_zero and value_a == 0) or
+		(b_can_be_zero and value_b == 0) or
+		((value_a * value_b) > 0)) and !(both_cant_be_zero and value_a == 0 and value_b == 0)
 
 ## Returns the current airstate according to the defined [FALLING_THRESHOLDS]
 func get_airstate() -> int:
@@ -296,7 +299,7 @@ func update_debug_text() -> void:
 	debug_text += "J " if can_jump() else ""
 	debug_text += "S " if can_strike() else ""
 	debug_text_node.text = debug_text
-	debug_fps_node.text = str(Engine.get_frames_per_second()) + " "
+	debug_fps_node.text = " " + str(Engine.get_frames_per_second()) + "fps"
 
 # Aesthetics TODO: check spelling
 
@@ -376,7 +379,7 @@ func must_be_grounded(text="Value") -> bool:
 
 # Handles the error message
 func produce_error(message :String) -> void:
-	major_error.emit("Error: " + message)
+	major_error_occurred.emit("Error: " + message)
 
 # Signals
 #===========================================

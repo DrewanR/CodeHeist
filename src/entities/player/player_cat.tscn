@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://y4i1f2i4m7vs" path="res://src/ui/simple_hp_readout.tscn" id="2_fijc8"]
 [ext_resource type="Texture2D" uid="uid://cli1hs7wvb156" path="res://assets/player/Kitis.png" id="2_pimje"]
 [ext_resource type="LabelSettings" uid="uid://767687giqxrr" path="res://assets/ui/debug_text_s2.tres" id="3_w0fkd"]
+[ext_resource type="LabelSettings" uid="uid://cml4xcp4b3ew5" path="res://assets/ui/debug_text_s2_large.tres" id="5_fijc8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w0fkd"]
 radius = 3.0
@@ -125,15 +126,10 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxody"]
 radius = 3.0
 
-[node name="playerCat" type="CharacterBody2D" unique_id=1345683778]
+[node name="catBot" type="CharacterBody2D" unique_id=1345683778]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_w0fkd")
-
-[node name="SimpleHPReadout" parent="." unique_id=1824230142 instance=ExtResource("2_fijc8")]
-visible = false
-offset_top = -21.0
-offset_bottom = -9.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=191773836]
 position = Vector2(0, -6)
@@ -162,15 +158,25 @@ bottom text"
 label_settings = ExtResource("3_w0fkd")
 
 [node name="TempFPS" type="Label" parent="DebugInformation" unique_id=481506965]
+offset_right = 44.0
+offset_bottom = 23.0
+text = "69 "
+label_settings = ExtResource("3_w0fkd")
+horizontal_alignment = 2
+
+[node name="SimpleHPReadout" parent="DebugInformation" unique_id=1824230142 node_paths=PackedStringArray("parent") instance=ExtResource("2_fijc8")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -44.0
+offset_top = 0.0
+offset_right = 0.0
 offset_bottom = 23.0
 grow_horizontal = 0
-text = "69 "
-label_settings = ExtResource("3_w0fkd")
-horizontal_alignment = 2
+label_settings = ExtResource("5_fijc8")
+parent = NodePath("../..")
+pre_text = "HP: "
+post_text = " "
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1725447709]
 visible = false

@@ -1,12 +1,13 @@
 extends Label
 
-var parent :generic_entity 
+@export var parent :generic_entity
+@export var pre_text  :String
+@export var post_text :String
+
 var hp :int
 var max_hp :int
 
 func _ready() -> void:
-	parent = get_parent()
-	
 	parent.damage_received.connect(_on_damage_received)
 	parent.healing_received.connect(_on_healing_received)
 	parent.hp_changed.connect(_on_hp_change)
@@ -39,4 +40,4 @@ func _on_max_hp_change(amount, new_value):
 
 
 func update_text():
-	text = str(hp) + "/" + str(max_hp)
+	text = pre_text + str(hp) + "/" + str(max_hp) + post_text
