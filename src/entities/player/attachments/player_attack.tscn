@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dps1v8duebosk"]
+
+[ext_resource type="Texture2D" uid="uid://d3nt5qsynypx4" path="res://assets/player/Attacks.png" id="1_akkx7"]
+[ext_resource type="Script" uid="uid://cdhlhlgypdrj2" path="res://src/entities/player/attachments/player_attack.gd" id="1_j6ks6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frlw3"]
+size = Vector2(10, 12)
+
+[sub_resource type="Animation" id="Animation_p6rda"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_561u8"]
+resource_name = "groundedAttack"
+length = 0.208338
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mqr32"]
+_data = {
+&"RESET": SubResource("Animation_p6rda"),
+&"groundedAttack": SubResource("Animation_561u8")
+}
+
+[node name="Attack" type="Node2D"]
+script = ExtResource("1_j6ks6")
+
+[node name="collider" type="Area2D" parent="."]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collider"]
+position = Vector2(5, -3)
+shape = SubResource("RectangleShape2D_frlw3")
+debug_color = Color(0.701961, 0.176471, 0.196078, 0.419608)
+
+[node name="sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+position = Vector2(0, -5)
+texture = ExtResource("1_akkx7")
+hframes = 5
+vframes = 2
+frame = 6
+
+[node name="AP" type="AnimationPlayer" parent="."]
+root_node = NodePath("../sprite")
+libraries = {
+&"": SubResource("AnimationLibrary_mqr32")
+}
+autoplay = "groundedAttack"
+
+[connection signal="body_entered" from="collider" to="." method="_on_collider_body_entered"]
+[connection signal="animation_finished" from="AP" to="." method="_on_ap_animation_finished"]

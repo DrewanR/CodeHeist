@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://y4i1f2i4m7vs"]
+
+[ext_resource type="LabelSettings" uid="uid://4ys27as0nhwu" path="res://assets/ui/debug_text_s0.tres" id="1_af7dm"]
+[ext_resource type="Script" uid="uid://df8fcy1i2vxcu" path="res://src/ui/hp_readout.gd" id="2_vfkxy"]
+
+[sub_resource type="Animation" id="Animation_af7dm"]
+resource_name = "damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.098953, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vfkxy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_atpab"]
+resource_name = "healed"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.098953, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 0.116667, 1), Color(0, 1, 0.116667, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3jmad"]
+_data = {
+&"RESET": SubResource("Animation_vfkxy"),
+&"damaged": SubResource("Animation_af7dm"),
+&"healed": SubResource("Animation_atpab")
+}
+
+[node name="SimpleHPReadout" type="Label"]
+offset_left = -22.0
+offset_top = -12.0
+offset_right = 22.0
+pivot_offset = Vector2(22, 9)
+size_flags_horizontal = 4
+text = "1/3"
+label_settings = ExtResource("1_af7dm")
+horizontal_alignment = 1
+script = ExtResource("2_vfkxy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3jmad")
+}

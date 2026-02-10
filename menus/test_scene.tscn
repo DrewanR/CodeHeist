@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c2bagp16dmh4l"]
+
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_ewbpy"]
+[ext_resource type="Script" uid="uid://dr3g42p1ae3cf" path="res://menus/testScene.gd" id="2_8tna7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ia1lp"]
+font_size = 32
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TestScene" type="Node2D" unique_id=2066390471]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=687327470]
+position = Vector2(89, 81)
+texture = ExtResource("1_ewbpy")
+script = ExtResource("2_8tna7")
+
+[node name="Label" type="Label" parent="." unique_id=1113901877]
+offset_left = 100.0
+offset_top = 88.0
+offset_right = 298.0
+offset_bottom = 133.0
+text = "CodeHeist"
+label_settings = SubResource("LabelSettings_ia1lp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=357747509]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1650500362]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+offset_right = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=2046900192]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "This is a quick prototype for testing physics with controls hardwired. 
+Everything is still a work in progress. 
+
+[b]Controls[/b] 
+Arrow keys: Movement 
+[Z] / [SPACE]: Primary action (Jump) 
+[X]: Secondary action (Strike) 
+
+[b]Test Levels[/b] 
+Click buttons to access "
+fit_content = true
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1177761094]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=290945238]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "test_level_00"
+
+[node name="Button2" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=2121196275]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "test_level_01"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button" to="Icon" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button2" to="Icon" method="_on_button_2_pressed"]
