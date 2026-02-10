@@ -27,8 +27,10 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://assets/": "orange",
-"res://src/": "yellow",
+"res://assets/": "red",
+"res://levels/": "orange",
+"res://menus/": "yellow",
+"res://src/": "green",
 "res://src/platformer/": "green",
 "res://src/platformer/player/": "green"
 }
