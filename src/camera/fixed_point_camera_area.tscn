@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gqsv2xy2b8wk"]
+
+[ext_resource type="Script" uid="uid://dncadm1whhxsy" path="res://src/camera/fixed_point_camera_area.gd" id="1_kbnsw"]
+
+[node name="CamField" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_kbnsw")

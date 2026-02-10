@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://cyg8iga1g5alj"]
+
+[ext_resource type="Script" uid="uid://hr4tmp57qs7u" path="res://src/entities/player/player_cat.gd" id="1_w0fkd"]
+[ext_resource type="PackedScene" uid="uid://y4i1f2i4m7vs" path="res://src/ui/simple_hp_readout.tscn" id="2_fijc8"]
+[ext_resource type="Texture2D" uid="uid://cli1hs7wvb156" path="res://assets/player/Kitis.png" id="2_pimje"]
+[ext_resource type="LabelSettings" uid="uid://767687giqxrr" path="res://assets/ui/debug_text_s2.tres" id="3_w0fkd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w0fkd"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_3jpiv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_68vuy"]
+resource_name = "fast_climb"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_17mf7"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sp7as"]
+resource_name = "run"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_kexg2"]
+resource_name = "slow_climb"
+length = 1.00001
+loop_mode = 1
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_b33c3"]
+resource_name = "walk"
+length = 0.500004
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dw3hp"]
+_data = {
+&"RESET": SubResource("Animation_3jpiv"),
+&"fast_climb": SubResource("Animation_68vuy"),
+&"idle": SubResource("Animation_17mf7"),
+&"run": SubResource("Animation_sp7as"),
+&"slow_climb": SubResource("Animation_kexg2"),
+&"walk": SubResource("Animation_b33c3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxody"]
+radius = 3.0
+
+[node name="playerCat" type="CharacterBody2D" unique_id=1345683778]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_w0fkd")
+
+[node name="SimpleHPReadout" parent="." unique_id=1824230142 instance=ExtResource("2_fijc8")]
+visible = false
+offset_top = -21.0
+offset_bottom = -9.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=191773836]
+position = Vector2(0, -6)
+texture = ExtResource("2_pimje")
+hframes = 8
+vframes = 8
+frame = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=620464693]
+position = Vector2(0, -3)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_w0fkd")
+debug_color = Color(0.42, 0, 0.7, 0.419608)
+
+[node name="DebugInformation" type="CanvasLayer" parent="." unique_id=1273297337]
+
+[node name="PlayerData" type="Label" parent="DebugInformation" unique_id=926159387]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 44.0
+grow_vertical = 0
+text = "DEBUG
+bottom text"
+label_settings = ExtResource("3_w0fkd")
+
+[node name="TempFPS" type="Label" parent="DebugInformation" unique_id=481506965]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "69 "
+label_settings = ExtResource("3_w0fkd")
+horizontal_alignment = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1725447709]
+visible = false
+enabled = false
+position_smoothing_speed = 25.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1905074853]
+root_node = NodePath("../CollisionShape2D")
+libraries/ = SubResource("AnimationLibrary_dw3hp")
+autoplay = &"idle"
+
+[node name="killer" type="Area2D" parent="." unique_id=984530514]
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killer" unique_id=534473491]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_cxody")
+debug_color = Color(0.732089, 0, 0.189313, 0.42)
+
+[connection signal="damage_received" from="." to="." method="_on_damage_received"]
+[connection signal="healing_received" from="." to="." method="_on_healing_received"]
+[connection signal="hp_changed" from="." to="." method="_on_hp_changed"]
+[connection signal="area_entered" from="killer" to="." method="_on_killer_area_entered"]
+[connection signal="body_entered" from="killer" to="." method="_on_killer_body_entered"]

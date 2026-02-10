@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6f7lpxxyh6ae"]
+
+[ext_resource type="Script" uid="uid://bxwwohvg4t4t4" path="res://src/camera/camera_manager.gd" id="1_0f6im"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nwpgy"]
+radius = 2.0
+
+[node name="CameraManager" type="Node2D"]
+script = ExtResource("1_0f6im")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+priority = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_nwpgy")
+debug_color = Color(0.752941, 0.196078, 1, 0.419608)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

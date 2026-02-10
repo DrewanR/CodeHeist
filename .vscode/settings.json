@@ -1,0 +1,14 @@
+{
+    "cSpell.ignoreWords": [
+        "COOLDOWN",
+        "SLIPMOD",
+        "slipiness",
+        "walktime"
+    ],
+    "cSpell.words": [
+        "AIRBOUND",
+        "airstate",
+        "Catbot",
+        "lerp"
+    ]
+}
