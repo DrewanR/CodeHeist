@@ -59,11 +59,15 @@ size_flags_horizontal = 8
 [node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=290945238]
 layout_mode = 2
 size_flags_horizontal = 8
+focus_neighbor_right = NodePath("../Button2")
+focus_next = NodePath("../Button2")
 text = "test_level_00"
 
 [node name="Button2" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=2121196275]
 layout_mode = 2
 size_flags_horizontal = 8
+focus_neighbor_left = NodePath("../Button")
+focus_previous = NodePath("../Button")
 text = "test_level_01"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button" to="Icon" method="_on_button_pressed"]
