@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://6j1ipmfbky1g"]
+
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="1_yvkev"]
+
+[resource]
+font = ExtResource("1_yvkev")
+font_size = 14

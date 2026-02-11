@@ -1,4 +1,4 @@
-extends generic_entity
+class_name player_cat extends generic_entity
 
 # Constants
 #===========================================
@@ -11,7 +11,7 @@ const MAX_SPEED := 160.0 ## The threshold at which the player is considered to b
 # Health
 const MAX_HP := 3 ## The max hp available
 const STARTING_HP := 3 ## The starting hp
-const MAX_STABILITY := 3 ## Maximum errors before damage is dealt
+const MAX_STABILITY := 2 ## Maximum errors before damage is dealt
 
 # Physics Constants
 const SPEED := (MAX_SPEED*10)/SLIPMOD ## Players horizontal speed value. /!\ Effected by delta
@@ -65,8 +65,8 @@ signal major_error_occurred(text :String)
 #===========================================
 
 ## Node variables
-@onready var debug_text_node = $BasicUI/PlayerData
-@onready var debug_fps_node = $BasicUI/TempFPS
+@onready var debug_text_node = $BasicUI/MarginContainer/PlayerData
+@onready var debug_fps_node = $BasicUI/MarginContainer/TempFPS
 @onready var sprite_node = $Sprite2D
 @onready var animation_player_node = $AnimationPlayer
 
@@ -122,7 +122,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_heal"):
 		heal(1)
 	if Input.is_action_just_pressed("debug_destablise"):
-		decrease_stability(1)
+		must_be_within_range(2,0,1)
 	if Input.is_action_just_pressed("debug_stabalise"):
 		increase_stability(1)
 
@@ -238,7 +238,7 @@ func calculate_airtime(delta: float) -> void:
 			# 	air_entry = 2
 		else:
 			air_time += delta
-	debug_text += " AIRTIME: " + str(round(air_time*100)/100) + "\n"
+	debug_text += "AIRTIME: " + str(round(air_time*100)/100) + "\n"
 
 
 ## Calculates [walk_time] using [delta] and [direction].
@@ -249,7 +249,7 @@ func calculate_walktime(delta: float, direction: float) -> void:
 		time_walking = minf(time_walking,0) - delta
 	elif direction == 0: # STATIONARY
 		time_walking = 0
-	debug_text += " WALKTIME: " + str(round(time_walking*100)/100) + "\n"
+	debug_text += "WALKTIME: " + str(round(time_walking*100)/100) + "\n"
 
 
 ## Returns [true] if the player can currently jump
@@ -301,15 +301,15 @@ func get_direction_y() -> float:
 
 ## Updates the debug text
 func update_debug_text() -> void:
-	debug_text += " Y-VEL: " + str(round(velocity.y)) + "\n "
-	debug_text += "X-VEL: " + str(round(velocity.x)) + "\n "
-	debug_text += "AIR-ENTRY: " + str(air_entry) + "-" + air_entry_state_names[air_entry] + "\n "
-	debug_text += "ANIM-STATE: " + str(animation_state) + "-" + animation_state_names[animation_state] + "\n "
-	debug_text += "STRIKES: " + str(air_strikes) + "/" + str(MAX_AIR_STRIKES) + " - " + str(round(strike_cooldown*100)/100) + "cd\n "
+	debug_text += "Y-VEL: " + str(round(velocity.y)) + "\n"
+	debug_text += "X-VEL: " + str(round(velocity.x)) + "\n"
+	debug_text += "AIR-ENTRY: " + str(air_entry) + "-" + air_entry_state_names[air_entry] + "\n"
+	debug_text += "ANIM-STATE: " + str(animation_state) + "-" + animation_state_names[animation_state] + "\n"
+	debug_text += "STRIKES: " + str(air_strikes) + "/" + str(MAX_AIR_STRIKES) + " - " + str(round(strike_cooldown*100)/100) + "cd\n"
 	debug_text += "J " if can_jump() else ""
 	debug_text += "S " if can_strike() else ""
 	debug_text_node.text = debug_text
-	debug_fps_node.text = " " + str(Engine.get_frames_per_second()) + "fps"
+	debug_fps_node.text = str(Engine.get_frames_per_second()) + "fps"
 
 # Aesthetics TODO: check spelling
 
@@ -381,7 +381,7 @@ func must_be_within_range(value, minimum, maximum, text="Value") -> bool:
 ##
 ## Produces error "Catbot must be grounded to [text]."
 func must_be_grounded(text="Value") -> bool:
-	if is_on_floor():
+	if (air_time <= COYOTE_TIME):
 		return true
 	else:
 		produce_error("Catbot must be grounded to " + text)
@@ -389,6 +389,7 @@ func must_be_grounded(text="Value") -> bool:
 
 # Handles the error message
 func produce_error(message :String) -> void:
+	decrease_stability(1)
 	major_error_occurred.emit("Error: " + message)
 
 # Signals
