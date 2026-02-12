@@ -3,8 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://wdi530wq65g" path="res://assets/tilemaps/test/basic 8x8.png" id="1_ptvve"]
 [ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="2_mdjjc"]
 [ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="3_tov50"]
+[ext_resource type="PackedScene" uid="uid://c5vxqu6jgkplc" path="res://src/entities/player/autoControllers/auto_horizontal_move_controller.tscn" id="4_1herk"]
 [ext_resource type="PackedScene" uid="uid://b17tqhwg0trm4" path="res://src/camera/managed_camera_2d.tscn" id="4_10qvn"]
+[ext_resource type="PackedScene" uid="uid://dy8we4rmgnm4d" path="res://src/entities/player/autoControllers/auto_jump_controller.tscn" id="5_58yhq"]
 [ext_resource type="PackedScene" uid="uid://gqsv2xy2b8wk" path="res://src/camera/fixed_point_camera_area.tscn" id="5_roflr"]
+[ext_resource type="PackedScene" uid="uid://drpa7rlvmpksj" path="res://src/entities/player/autoControllers/auto_strike_controller.tscn" id="6_1pvxm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nlf1t"]
 texture = ExtResource("1_ptvve")
@@ -43,6 +46,12 @@ tile_set = SubResource("TileSet_7oecd")
 position = Vector2(70, 39)
 
 [node name="CameraManager" parent="playerCat" unique_id=1843718177 instance=ExtResource("3_tov50")]
+
+[node name="AutoHorizontalMoveController" parent="playerCat" unique_id=1219527993 instance=ExtResource("4_1herk")]
+
+[node name="AutoJumpController" parent="playerCat" unique_id=1824418607 instance=ExtResource("5_58yhq")]
+
+[node name="AutoStrikeController" parent="playerCat" unique_id=1563770025 instance=ExtResource("6_1pvxm")]
 
 [node name="ManagedCamera2D" parent="." unique_id=206397294 instance=ExtResource("4_10qvn")]
 

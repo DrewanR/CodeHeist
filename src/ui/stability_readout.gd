@@ -1,18 +1,20 @@
 extends Label
 
 @export var parent :generic_entity
-@export var pre_text  :String
+@export var pre_text  :String = "SB: "
 @export var post_text :String
+
+@export var show_max :bool = true
 
 var hp :int
 var max_hp :int
 
 func _ready() -> void:
-	parent.damage_received.connect(_on_damage_received)
-	parent.healing_received.connect(_on_healing_received)
-	parent.hp_changed.connect(_on_hp_change)
+	parent.stability_decreased.connect(_on_damage_received)
+	parent.stability_increased.connect(_on_healing_received)
+	parent.stability_changed.connect(_on_hp_change)
 	
-	parent.max_hp_changed.connect(_on_max_hp_change)
+	parent.max_stability_changed.connect(_on_max_hp_change)
 	
 	hp = parent.hp
 	max_hp = parent.max_hp
@@ -40,4 +42,7 @@ func _on_max_hp_change(amount, new_value):
 
 
 func update_text():
-	text = pre_text + str(hp) + "/" + str(max_hp) + post_text
+	if show_max:
+		text = pre_text + str(hp) + "/" + str(max_hp) + post_text
+	else:
+		text = pre_text + str(hp) + post_text

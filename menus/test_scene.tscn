@@ -39,16 +39,20 @@ size_flags_horizontal = 8
 layout_mode = 2
 size_flags_vertical = 0
 bbcode_enabled = true
-text = "This is a quick prototype for testing physics with controls hardwired. 
-Everything is still a work in progress. 
+text = "This is a quick prototype for testing physics with controls hardwired.
+Everything is still a work in progress.
 
-[b]Controls[/b] 
-Arrow keys: Movement 
-[Z] / [SPACE]: Primary action (Jump) 
-[X]: Secondary action (Strike) 
+[b]Controls[/b]
+Arrow keys: Movement
+[Z] / [SPACE]: Primary action (Jump)
+[X]: Secondary action (Strike)
+[b]Debug Controls[/b]
+[+] [-]: Damage / Heal 
+[{]: Simulate error
+[}]: Recover stability
 
-[b]Test Levels[/b] 
-Click buttons to access "
+[b]Test Levels[/b]
+Click buttons to access"
 fit_content = true
 horizontal_alignment = 2
 
@@ -59,11 +63,15 @@ size_flags_horizontal = 8
 [node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=290945238]
 layout_mode = 2
 size_flags_horizontal = 8
+focus_neighbor_right = NodePath("../Button2")
+focus_next = NodePath("../Button2")
 text = "test_level_00"
 
 [node name="Button2" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=2121196275]
 layout_mode = 2
 size_flags_horizontal = 8
+focus_neighbor_left = NodePath("../Button")
+focus_previous = NodePath("../Button")
 text = "test_level_01"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button" to="Icon" method="_on_button_pressed"]
