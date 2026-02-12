@@ -95,7 +95,6 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump
 	calculate_walktime(delta, direction)
-	jump_logic(delta)
 
 	# Ground physics
 	running_logic(delta, direction)
@@ -150,22 +149,6 @@ func running_logic(delta: float, direction: float) -> void:
 	#elif direction:
 	#	velocity.x += direction * SPEED * delta * 0.5
 	velocity.x += direction * SPEED * delta
-
-
-## Jumping and the floaty part of jumps. [br]
-##
-## Contains the logic for:
-##   Impulse jumps,
-##   Air hovering
-##
-## [br] Uses [direction] for ledge kicks
-## Uses [delta] to process the floaty part of jumps
-# TODO: test, extract
-func jump_logic(delta: float) -> void:
-	if Input.is_action_just_pressed("primary_action") and can_jump(): # JUMP
-		jump()
-	elif is_air_hovering(): # That thing where holding down the button can adjust the height
-		air_hover(delta)
 
 ## Jumps. [br]
 ##

@@ -7,6 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://cml4xcp4b3ew5" path="res://assets/ui/debug_text_s2_large.tres" id="5_fijc8"]
 [ext_resource type="PackedScene" uid="uid://34fb21mylwqj" path="res://src/ui/simple_stability_readout.tscn" id="6_cgwl0"]
 [ext_resource type="Script" uid="uid://didm82qgyk32t" path="res://src/ui/simple_error_list.gd" id="7_itvx8"]
+[ext_resource type="Script" uid="uid://6ealpq445xne" path="res://src/entities/player/autoController/jump_controller.gd" id="8_bmgbs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w0fkd"]
 radius = 3.0
@@ -128,7 +129,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxody"]
 radius = 3.0
 
-[node name="catBot" type="CharacterBody2D" unique_id=1345683778]
+[node name="CatBot" type="CharacterBody2D" unique_id=1345683778]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_w0fkd")
@@ -208,22 +209,17 @@ post_text = "SB"
 show_max = false
 
 [node name="SimpleErrorList" type="TextEdit" parent="BasicUI/MarginContainer" unique_id=1901138789 node_paths=PackedStringArray("parent")]
-custom_minimum_size = Vector2(400, 200)
+custom_minimum_size = Vector2(420, 200)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 focus_mode = 0
 text = "CatBot(tm) system log, hover mouse over to view!"
 placeholder_text = "CatBot(tm) system log, hover mouse over to view!"
-indent_wrapped_lines = true
+wrap_mode = 1
 virtual_keyboard_enabled = false
 script = ExtResource("7_itvx8")
 parent = NodePath("../../..")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1725447709]
-visible = false
-enabled = false
-position_smoothing_speed = 25.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1905074853]
 root_node = NodePath("../CollisionShape2D")
@@ -239,6 +235,9 @@ monitorable = false
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_cxody")
 debug_color = Color(0.732089, 0, 0.189313, 0.42)
+
+[node name="AutoJumpController" type="Node" parent="." unique_id=1092563139]
+script = ExtResource("8_bmgbs")
 
 [connection signal="damage_received" from="." to="." method="_on_damage_received"]
 [connection signal="healing_received" from="." to="." method="_on_healing_received"]
