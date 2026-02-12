@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://didm82qgyk32t" path="res://src/ui/simple_error_list.gd" id="7_itvx8"]
 [ext_resource type="Script" uid="uid://6ealpq445xne" path="res://src/entities/player/autoController/jump_controller.gd" id="8_bmgbs"]
 [ext_resource type="Script" uid="uid://dprosb4h254q1" path="res://src/entities/player/autoController/strike_controller.gd" id="9_bwo5v"]
+[ext_resource type="Script" uid="uid://b178dvv52cole" path="res://src/entities/player/autoController/horizontal_movement_controller.gd" id="10_riwm7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w0fkd"]
 radius = 3.0
@@ -242,6 +243,10 @@ script = ExtResource("8_bmgbs")
 
 [node name="AutoStrikeController" type="Node" parent="." unique_id=2108310874]
 script = ExtResource("9_bwo5v")
+
+[node name="AutoHorizontalMoveController" type="Node" parent="." unique_id=1507451603]
+script = ExtResource("10_riwm7")
+invert_movement = true
 
 [connection signal="damage_received" from="." to="." method="_on_damage_received"]
 [connection signal="healing_received" from="." to="." method="_on_healing_received"]

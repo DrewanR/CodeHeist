@@ -102,7 +102,6 @@ func _physics_process(delta: float) -> void:
 
 	# Ground physics
 	calculate_walktime(delta, direction)
-	running_logic(delta, direction)
 	horizontal_physics(delta, direction)
 
 	# Other
@@ -147,13 +146,17 @@ func horizontal_physics(_delta: float, direction: float) -> void:
 
 ## Movement logic. [br]
 ##
-## Uses [direction] horizontal input
-func running_logic(delta: float, direction: float) -> void:
-	#if direction and is_on_floor():
-	#	velocity.x += direction * SPEED * delta
-	#elif direction:
-	#	velocity.x += direction * SPEED * delta * 0.5
-	velocity.x += direction * SPEED * delta
+## Uses [direction] horizontal input,
+## [runspeed] determines the speed
+func run(delta: float, direction: float, run_speed: float = 1) -> void:
+	# Checks for errors
+	if !(must_be_within_range(direction, -1.0, 1.0, "Direction")): # Checks direction is valid
+		return
+	elif !(must_be_within_range(run_speed, -1.0, 1.0, "Direction")): # Checks runspeed is valid
+		velocity.x += direction * SPEED * delta * 0.75 # Still running if not
+	else:
+		velocity.x += direction * SPEED * delta * run_speed
+
 
 ## Jumps. [br]
 ##
@@ -179,8 +182,10 @@ func jump(strength := 1.0) -> void:
 		return
 
 
+## Adds a little bit of floatiness to a jump.
 func air_hover(delta :float) -> void:
 	velocity.y += JUMP_VELOCITY * 2 * delta
+
 
 ## Handels strike logic.
 ## This used to also handle controlling the strike.
@@ -233,10 +238,6 @@ func calculate_airtime(delta: float) -> void:
 		if air_time < 0:
 			air_time = 0
 			air_entry = 1 if abs(velocity.x) < MAX_SPEED * 0.25 else 2
-			# if (abs(velocity.x) < MAX_SPEED) and air_entry != 6:
-			# 	air_entry = 1
-			# elif air_entry != 6:
-			# 	air_entry = 2
 		else:
 			air_time += delta
 	debug_text += "AIRTIME: " + str(round(air_time*100)/100) + "\n"
