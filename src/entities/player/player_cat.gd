@@ -5,7 +5,7 @@ class_name player_cat extends generic_entity
 
 # Meta constants (constants used for constants)
 const SLIPMOD := 3.0 ## Meta constant that controls the slipiness of the physics, higher values result in slower acc and dec
-const JUMP_VELOCITY := -200.0 ## The vertical impulse given by a jump.
+const JUMP_VELOCITY := -210.0 ## The vertical impulse given by a jump.
 const MAX_SPEED := 160.0 ## The threshold at which the player is considered to be going at max speed.
 
 # Health
@@ -21,7 +21,7 @@ const LEDGE_KICK_IMPULSE_S := Vector2(MAX_SPEED*1.8, JUMP_VELOCITY*0.8) ## The i
 const COYOTE_TIME := 0.125 ## The amount of time (in seconds) after leaving the ground in which the player can jump.
 const COYOTE_TIME_LK := 0.075 ## The amount of time (in seconds) after leaving the ground in which the player can jump if a ledge kick is possible
 const LEDGE_KICK_TIME := 0.175 ## The allowed time (in seconds) in which a ledge kick can be done.
-const FALLING_THRESHOLDS := [-200,-50 , 50 , 300, 1000] ## The thresholds separating the falling states.
+const FALLING_THRESHOLDS := [-250,-50 , 50 , 300, 1000] ## The thresholds separating the falling states.
 const CLIMBING_ANIMATION_THRESHOLD := -15 ## The switch point between climbing animations.
 const FRICTION_CONST := 0.15/SLIPMOD ## The strength at which friction acts.
 const CLIMBING_COEFFICIENT := 0.5/SLIPMOD ## The "friction" experienced when climbing.
@@ -34,6 +34,13 @@ const STRIKE_VELOCITY := Vector2(190,-100) ## The impulse given by strikes.
 # Variables
 #===========================================
 
+# Cat code dependant modifiers
+
+## Used to balance air hovers by boosting jump strength if air hover isnt used. [br]
+## Warning: for this project, it is considered best practice for the node
+##          controlling jumping to modify this variable.
+@export var using_air_hover := true
+
 # Physics variable
 var air_time: float = 0.0 ## +ve: seconds in the air, -ve: seconds grounded.
 var air_entry: int = 0 ## How the player entered the air
@@ -42,7 +49,7 @@ var first_ascent: bool = false ## True during the players initial ascent.
 var animation_state: int = 0 ## Current animation state, view constant for definitions.
 var time_walking: float = 0.0 ## The amount of time the player has been walking in their current direction.
 var previous_velocity: Vector2 = Vector2(0,0) ## Velocity at the end of the previous frame.
-var facing_right: bool = true ## True if facing right at the end of the previous tick, note: 0v = right.
+var is_facing_right: bool = true ## True if facing right at the end of the previous tick, note: 0v = right.
 var air_strikes: int = 0 ## Number of strikes in current instance of air time.
 var strike_cooldown: float = 0.0 ## The amount of cool-down left until next strike.
 var wall_time: float = 0.0 ## +ve: seconds on the wall, -ve seconds off the wall.
@@ -104,7 +111,7 @@ func _physics_process(delta: float) -> void:
 	strikes(delta, direction)
 
 	previous_velocity = velocity
-	facing_right = velocity.x >= 0
+	is_facing_right = velocity.x >= 0
 	move_and_slide()
 
 	# Animations
@@ -130,7 +137,7 @@ func _physics_process(delta: float) -> void:
 ## Handles vertical physics... pretty much just gravity
 func vertical_physics(delta: float) -> void:
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta if using_air_hover else get_gravity() * delta * 0.8
 
 
 ## Handles horizontal physics, which is pretty much just friction and air resistance
@@ -166,13 +173,15 @@ func jump(strength := 1.0) -> void:
 	else:
 		air_entry = 3
 		air_time = 0
-		velocity.y = JUMP_VELOCITY * strength
+		# Modifies jump strength depending on if air hover is used, this is to prevent punishing
+		#	players who do not use air hovers
+		velocity.y = JUMP_VELOCITY * strength * 0.95 if using_air_hover else JUMP_VELOCITY * strength * 1.1
 		first_ascent = true
 		return
 
 
 func air_hover(delta :float) -> void:
-	velocity.y += JUMP_VELOCITY * 2.5 * delta
+	velocity.y += JUMP_VELOCITY * 2 * delta
 
 ## Attack logic, including spawning of the attack nodes. [br]
 ##
@@ -239,13 +248,13 @@ func calculate_walktime(delta: float, direction: float) -> void:
 func can_jump() -> bool:
 	return air_time <= COYOTE_TIME
 
-## Returns [true] if the cat can ATTACK ALL MORTAL ENYAMIES NYAH HAH HA
+## Returns [true] if the cat can attack
 func can_strike() -> bool:
 	return air_strikes < MAX_AIR_STRIKES and strike_cooldown <= STRIKE_COOLDOWN_THRESHOLD
 
 ## Returns [true] if the player is air hovering
 func is_air_hovering() -> bool:
-	return air_time < 0.6 and air_time > 0 and Input.is_action_pressed("primary_action") #and first_ascent #and (air_entry in [3,4,5])
+	return velocity.y < 0 and air_time > 0 and Input.is_action_pressed("primary_action") #and first_ascent #and (air_entry in [3,4,5])
 
 ## Returns [true] if
 ##   [value_a] and [value_b] are both positive or both negative;

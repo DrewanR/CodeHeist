@@ -117,6 +117,7 @@ debug_stabalise={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=850.0
 
 [rendering]
 

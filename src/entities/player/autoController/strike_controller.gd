@@ -1,16 +1,8 @@
 extends auto_controller
 
-## If [true] this controller will only send jump calls if catBot can jump [br]
+## If [true] this controller will only send strike calls if catBot can strike [br]
 ## Note: this controller should be used in a "safe" configuration where possible
-@export var jump_when_grounded_only := true 
-
-## If [true] this controller will handle jump adjustmust. [br]
-## Warning: this controller only updates cat_bot.using_air_hover in _ready()
-@export var handle_jump_adjustment := true
-
-func _ready() -> void:
-	cat_bot.using_air_hover = handle_jump_adjustment
-	print("Autocontroller set cat_bot.using_air_hover to " + str(cat_bot.using_air_hover))
+@export var strike_only_when_possible := true 
 
 func _process(delta: float) -> void:
 	jump_logic(delta)
