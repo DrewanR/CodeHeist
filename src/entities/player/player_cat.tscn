@@ -201,11 +201,11 @@ label_settings = ExtResource("5_fijc8")
 
 [node name="SimpleSBReadout" parent="BasicUI/MarginContainer/HUD/Stats" unique_id=1137967255 node_paths=PackedStringArray("parent") instance=ExtResource("6_cgwl0")]
 layout_mode = 2
-text = "1SB"
+text = "1SP"
 label_settings = ExtResource("5_fijc8")
 parent = NodePath("../../../../..")
 pre_text = ""
-post_text = "SB"
+post_text = "SP"
 show_max = false
 
 [node name="SimpleErrorList" type="TextEdit" parent="BasicUI/MarginContainer" unique_id=1901138789 node_paths=PackedStringArray("parent")]

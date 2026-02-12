@@ -24,6 +24,9 @@ func _process(delta: float) -> void:
 	if focus >= 0:
 		focus -= delta
 		alpha = lerp(alpha, 255.0, 0.15)
+	elif focus >= -5:
+		focus -= delta
+		alpha = lerp(alpha, 100.0, 0.05)
 	else:
 		alpha = lerp(alpha, 0.0, 0.05)
 	
@@ -34,9 +37,7 @@ func _process(delta: float) -> void:
 
 
 func _on_mouse_entered() -> void:
-	print("over")
 	mouse_over = true
 
 func _on_mouse_exited() -> void:
-	print("out")
 	mouse_over = false

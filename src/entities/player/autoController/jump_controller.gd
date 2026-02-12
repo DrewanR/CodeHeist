@@ -1,6 +1,4 @@
-extends Node
-
-@onready var cat_bot = get_parent()
+extends auto_controller
 
 func _process(delta: float) -> void:
 	jump_logic(delta)
@@ -13,7 +11,6 @@ func _process(delta: float) -> void:
 ##
 ## [br] Uses [direction] for ledge kicks
 ## Uses [delta] to process the floaty part of jumps
-# TODO: test, extract
 func jump_logic(delta: float) -> void:
 	if Input.is_action_just_pressed("primary_action") and cat_bot.can_jump(): # JUMP
 		cat_bot.jump()
