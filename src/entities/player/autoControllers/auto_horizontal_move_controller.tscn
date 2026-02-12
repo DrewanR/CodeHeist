@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c5vxqu6jgkplc"]
+
+[ext_resource type="Script" uid="uid://b178dvv52cole" path="res://src/entities/player/autoControllers/horizontal_movement_controller.gd" id="1_seqyl"]
+
+[node name="AutoHorizontalMoveController" type="Node" unique_id=1219527993]
+script = ExtResource("1_seqyl")

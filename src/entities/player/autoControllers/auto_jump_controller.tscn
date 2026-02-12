@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dy8we4rmgnm4d"]
+
+[ext_resource type="Script" uid="uid://6ealpq445xne" path="res://src/entities/player/autoControllers/jump_controller.gd" id="1_bc6ha"]
+
+[node name="AutoJumpController" type="Node" unique_id=1824418607]
+script = ExtResource("1_bc6ha")

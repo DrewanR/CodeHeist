@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://drpa7rlvmpksj"]
+
+[ext_resource type="Script" uid="uid://dprosb4h254q1" path="res://src/entities/player/autoControllers/strike_controller.gd" id="1_sx4o4"]
+
+[node name="AutoStrikeController" type="Node" unique_id=1563770025]
+script = ExtResource("1_sx4o4")
