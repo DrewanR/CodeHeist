@@ -100,15 +100,13 @@ func _physics_process(delta: float) -> void:
 	calculate_airtime(delta)
 	vertical_physics(delta)
 
-	# Handle jump
-	calculate_walktime(delta, direction)
-
 	# Ground physics
+	calculate_walktime(delta, direction)
 	running_logic(delta, direction)
 	horizontal_physics(delta, direction)
 
 	# Other
-	strikes(delta, direction)
+	strike_logic(delta, direction)
 
 	previous_velocity = velocity
 	is_facing_right = velocity.x >= 0
@@ -165,8 +163,9 @@ func running_logic(delta: float, direction: float) -> void:
 func jump(strength := 1.0) -> void:
 	# Checks for errors
 	if !(
-			must_be_within_range(strength, -1.0, 1.0, "Jump strength") and
-			must_be_grounded("Jump")
+			must_be_within_range(strength, -1.0, 1.0, "Jump strength") and # Checks that strength is valid
+			must_be_grounded("Jump") and # Checks if grounded
+			can_jump() # Back-up, legacy test
 		):
 		return
 	# Preceding if none occur
@@ -183,18 +182,29 @@ func jump(strength := 1.0) -> void:
 func air_hover(delta :float) -> void:
 	velocity.y += JUMP_VELOCITY * 2 * delta
 
+## Handels strike logic.
+## This used to also handle controlling the strike.
+func strike_logic(delta:float, _direction:float):
+	strike_cooldown = max(0, strike_cooldown - delta)
+
+
 ## Attack logic, including spawning of the attack nodes. [br]
 ##
-## Contains logic for:
-##   attacks
-##
 ## Uses [direction] for velocity impulse
-func strikes(delta:float, direction: float) -> void:
-	if Input.is_action_just_pressed("secondary_action") and can_strike():
+func strike(direction: float = get_direction_x()) -> void:
+	if !(
+			must_be_less_than(air_strikes, MAX_AIR_STRIKES, false, "Air swipes", "to Swipe") and # Checks maximum strikes 
+			can_strike() # Legacy tests, plus checking cooldown, which fails quietly
+		):
+		return
+	else:
+		# Flips sprite if needed
 		flip_sprite(direction, true)
+		# Updates cooldown variables
 		air_strikes += 1
 		strike_cooldown += STRIKE_COOLDOWN_COST
-
+		
+		# Handles physics
 		if is_on_floor():
 			velocity = STRIKE_VELOCITY * Vector2(direction, 1 + get_direction_y())
 			air_entry = 6
@@ -202,11 +212,10 @@ func strikes(delta:float, direction: float) -> void:
 		else:
 			velocity = STRIKE_VELOCITY * Vector2(direction*1.25, 1 + get_direction_y() * 0.75)
 		
+		# Spawns attack node
 		current_attachments.append(strike_attachment_node.instantiate())
 		current_attachments[-1].set_facing(!sprite_node.flip_h)
 		add_child(current_attachments[-1])
-	else:
-		strike_cooldown = max(0, strike_cooldown - delta)
 
 # Utilities
 
@@ -379,7 +388,21 @@ func must_be_grounded(text="Value") -> bool:
 		produce_error("Catbot must be grounded to " + text)
 		return false
 
-# Handles the error message
+## Returns true if [value] is less than [maximum]. [br]
+##   Allows values equal to [maximum] when [allow_equal_to] is [true].
+##
+## Produces error "[text] should be less than (or equal to) [maximum] [message_postpend]"
+func must_be_less_than(value, maximum, allow_equal_to=true, text="Value", message_postpend=""):
+	if (value <= maximum and allow_equal_to) or (value < maximum and !allow_equal_to):
+		return true
+	else:
+		if allow_equal_to:
+			produce_error(text + " should be less than or equal to " + str(maximum) + " " + message_postpend)
+		else:
+			produce_error(text + " should be less than " + str(maximum) + " " + message_postpend)
+		return false 
+
+## Handles the error message
 func produce_error(message :String) -> void:
 	decrease_stability(1)
 	major_error_occurred.emit("Error: " + message)
