@@ -1,4 +1,4 @@
-extends generic_entity
+class_name player_cat extends generic_entity
 
 # Constants
 #===========================================
@@ -10,7 +10,8 @@ const MAX_SPEED := 160.0 ## The threshold at which the player is considered to b
 
 # Health
 const MAX_HP := 3 ## The max hp available
-const STARTING_HP := 2 ## The starting hp
+const STARTING_HP := 3 ## The starting hp
+const MAX_STABILITY := 2 ## Maximum errors before damage is dealt
 
 # Physics Constants
 const SPEED := (MAX_SPEED*10)/SLIPMOD ## Players horizontal speed value. /!\ Effected by delta
@@ -58,14 +59,14 @@ var debug_text: String = "DEBUG"
 # Signals
 #===========================================
 
-signal major_error(text :String)
+signal major_error_occurred(text :String)
 
 # Setup
 #===========================================
 
 ## Node variables
-@onready var debug_text_node = $DebugInformation/PlayerData
-@onready var debug_fps_node = $DebugInformation/TempFPS
+@onready var debug_text_node = $BasicUI/MarginContainer/PlayerData
+@onready var debug_fps_node = $BasicUI/MarginContainer/TempFPS
 @onready var sprite_node = $Sprite2D
 @onready var animation_player_node = $AnimationPlayer
 
@@ -74,6 +75,11 @@ func _ready() -> void:
 	max_hp = MAX_HP
 	hp_changed.emit(0, hp)
 	max_hp_changed.emit(0, max_hp)
+	
+	stability = MAX_STABILITY
+	max_stability = MAX_STABILITY
+	stability_changed.emit(0, stability)
+	max_stability_changed.emit(0, max_stability)
 
 # Main Processes
 #===========================================
@@ -115,6 +121,10 @@ func _physics_process(delta: float) -> void:
 		damage(1)
 	if Input.is_action_just_pressed("debug_heal"):
 		heal(1)
+	if Input.is_action_just_pressed("debug_destablise"):
+		must_be_within_range(2,0,1)
+	if Input.is_action_just_pressed("debug_stabalise"):
+		increase_stability(1)
 
 # Physics
 
@@ -152,7 +162,7 @@ func running_logic(delta: float, direction: float) -> void:
 ## Uses [delta] to process the floaty part of jumps
 # TODO: test, extract
 func jump_logic(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and can_jump(): # JUMP
+	if Input.is_action_just_pressed("primary_action") and can_jump(): # JUMP
 		jump()
 	elif is_air_hovering(): # That thing where holding down the button can adjust the height
 		air_hover(delta)
@@ -188,7 +198,7 @@ func air_hover(delta :float) -> void:
 ##
 ## Uses [direction] for velocity impulse
 func strikes(delta:float, direction: float) -> void:
-	if Input.is_action_just_pressed("action") and can_strike():
+	if Input.is_action_just_pressed("secondary_action") and can_strike():
 		flip_sprite(direction, true)
 		air_strikes += 1
 		strike_cooldown += STRIKE_COOLDOWN_COST
@@ -228,7 +238,7 @@ func calculate_airtime(delta: float) -> void:
 			# 	air_entry = 2
 		else:
 			air_time += delta
-	debug_text += " AIRTIME: " + str(round(air_time*100)/100) + "\n"
+	debug_text += "AIRTIME: " + str(round(air_time*100)/100) + "\n"
 
 
 ## Calculates [walk_time] using [delta] and [direction].
@@ -239,7 +249,7 @@ func calculate_walktime(delta: float, direction: float) -> void:
 		time_walking = minf(time_walking,0) - delta
 	elif direction == 0: # STATIONARY
 		time_walking = 0
-	debug_text += " WALKTIME: " + str(round(time_walking*100)/100) + "\n"
+	debug_text += "WALKTIME: " + str(round(time_walking*100)/100) + "\n"
 
 
 ## Returns [true] if the player can currently jump
@@ -252,7 +262,7 @@ func can_strike() -> bool:
 
 ## Returns [true] if the player is air hovering
 func is_air_hovering() -> bool:
-	return air_time < 0.6 and air_time > 0 and Input.is_action_pressed("jump") #and first_ascent #and (air_entry in [3,4,5])
+	return air_time < 0.6 and air_time > 0 and Input.is_action_pressed("primary_action") #and first_ascent #and (air_entry in [3,4,5])
 
 ## Returns [true] if
 ##   [value_a] and [value_b] are both positive or both negative;
@@ -261,7 +271,10 @@ func is_air_hovering() -> bool:
 ## Returns [false] if
 ##   [value_a] and [value_b] are 0, when [both_cant_be_zero] is [true]
 func is_same_sign(value_a: float, value_b: float, a_can_be_zero = false,  b_can_be_zero = false, both_cant_be_zero = false) -> bool:
-	return ((a_can_be_zero and value_a == 0) or (b_can_be_zero and value_b == 0) or ((value_a * value_b) > 0)) and !(both_cant_be_zero and value_a == 0 and value_b == 0)
+	return (
+		(a_can_be_zero and value_a == 0) or
+		(b_can_be_zero and value_b == 0) or
+		((value_a * value_b) > 0)) and !(both_cant_be_zero and value_a == 0 and value_b == 0)
 
 ## Returns the current airstate according to the defined [FALLING_THRESHOLDS]
 func get_airstate() -> int:
@@ -288,15 +301,15 @@ func get_direction_y() -> float:
 
 ## Updates the debug text
 func update_debug_text() -> void:
-	debug_text += " Y-VEL: " + str(round(velocity.y)) + "\n "
-	debug_text += "X-VEL: " + str(round(velocity.x)) + "\n "
-	debug_text += "AIR-ENTRY: " + str(air_entry) + "-" + air_entry_state_names[air_entry] + "\n "
-	debug_text += "ANIM-STATE: " + str(animation_state) + "-" + animation_state_names[animation_state] + "\n "
-	debug_text += "STRIKES: " + str(air_strikes) + "/" + str(MAX_AIR_STRIKES) + " - " + str(round(strike_cooldown*100)/100) + "cd\n "
+	debug_text += "Y-VEL: " + str(round(velocity.y)) + "\n"
+	debug_text += "X-VEL: " + str(round(velocity.x)) + "\n"
+	debug_text += "AIR-ENTRY: " + str(air_entry) + "-" + air_entry_state_names[air_entry] + "\n"
+	debug_text += "ANIM-STATE: " + str(animation_state) + "-" + animation_state_names[animation_state] + "\n"
+	debug_text += "STRIKES: " + str(air_strikes) + "/" + str(MAX_AIR_STRIKES) + " - " + str(round(strike_cooldown*100)/100) + "cd\n"
 	debug_text += "J " if can_jump() else ""
 	debug_text += "S " if can_strike() else ""
 	debug_text_node.text = debug_text
-	debug_fps_node.text = str(Engine.get_frames_per_second()) + " "
+	debug_fps_node.text = str(Engine.get_frames_per_second()) + "fps"
 
 # Aesthetics TODO: check spelling
 
@@ -368,7 +381,7 @@ func must_be_within_range(value, minimum, maximum, text="Value") -> bool:
 ##
 ## Produces error "Catbot must be grounded to [text]."
 func must_be_grounded(text="Value") -> bool:
-	if is_on_floor():
+	if (air_time <= COYOTE_TIME):
 		return true
 	else:
 		produce_error("Catbot must be grounded to " + text)
@@ -376,7 +389,8 @@ func must_be_grounded(text="Value") -> bool:
 
 # Handles the error message
 func produce_error(message :String) -> void:
-	major_error.emit("Error: " + message)
+	decrease_stability(1)
+	major_error_occurred.emit("Error: " + message)
 
 # Signals
 #===========================================
