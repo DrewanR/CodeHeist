@@ -12,4 +12,6 @@ There will likely be some amount of information on taking part in the study here
 2. ???
 3. Profit
 
+Warning: The web version of this game can expirience performance issues on certain browsers such as firefox, I have been unable to determine the cause, and suspect it might be engine related.
+
 ### Offline Downloads
