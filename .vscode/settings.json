@@ -9,6 +9,7 @@
         "AIRBOUND",
         "airstate",
         "Catbot",
-        "lerp"
+        "lerp",
+        "platformer"
     ]
 }
