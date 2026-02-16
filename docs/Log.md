@@ -47,3 +47,7 @@ I also decided to combine the general dissertation log with this to have one mar
 > ![alt text](devlogFig3.3.png)
 >
 > ***Figure 3.3*** *The intermediary ui, including some errors generated from disabling the safety on the auto controllers.*
+
+## Week 04
+
+- Finished playerCat documentation (for now), including class diagrams where applicable.
