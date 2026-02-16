@@ -42,7 +42,12 @@ The other is by adjustment of the jump height by holding down the button. In thi
 
 ### Swiping
 
+This was added as a example secondary action. This was be done endless on the ground, or twice in midair. In summary, this works similarly to jumping, except rather than checking whether the player is grounded, it will compare `air_strikes` (a variable which is incremented for every strike, and reset to 0 once grounded) to the constant `MAX_AIR_STRIKES`.
 
+Two things occur when a strike is successfully triggered:
+
+1. The player gets a impulse of velocity (determined by constant `STRIKE_VELOCITY`).
+2. An attack node is spawned as a child of the player that exists on the damage collision layer to damage enemies for a brief moment.
 
 ## Stage 1: Tradition
 
