@@ -182,21 +182,21 @@ Using jumping as an example, the jumping logic, originally contained entirely wi
 >
 > Extract of "jump_controller.md"
 >
-> Note: this is the most coplex controller script due to jump containing extra parameters.
+> Note: this is the most complex controller script due to jump containing extra parameters.
 
 When combined with movement and striking, it effectively creates a relationship shown below where the child nodes call functions in the parent. To avoid repeating code, the class `auto_controller` was created, which handled getting the reference to it's parent.
 
 > ![Class diagramming describing a relationship between the autocontrollers and player_cat](playerCatStage2_diagram_p1.svg)
 >
-> Class diagram dipicting the relationship between nodes.
+> Class diagram depicting the relationship between nodes.
 
-Also shown in (jump function), a built-in error handelling system was created. This was required as gdscript has no built in error handling system as it can usually be assumed that all data is valid. This is not a typical scenario. All of the functions that are exposed to player inputs (jumps, strikes, movement etc.) contain validators. These are bespoke functions that return true if the data is valid, but will also send and relavent signals upon an error occuring. All the functions use the same structure: validors then functionality.
+Also shown in (jump function), a built-in error handling system was created. This was required as gdscript has no built in error handling system as it can usually be assumed that all data is valid. This is not a typical scenario. All of the functions that are exposed to player inputs (jumps, strikes, movement etc.) contain validators. These are bespoke functions that return true if the data is valid, but will also send and relevant signals upon an error occurring. All the functions use the same structure: validators then functionality.
 
-Errors and damage are handled in a very similar manner. When one occurs, either `hp` (for damage) or `stability` (upon an error), are decreased, and the corrosponding signal is emitted. This signal is used to update ui elements and carry both the change in value and the new value. Errors also carry an error message.
+Errors and damage are handled in a very similar manner. When one occurs, either `hp` (for damage) or `stability` (upon an error), are decreased, and the corresponding signal is emitted. This signal is used to update ui elements and carry both the change in value and the new value. Errors also carry an error message.
 
 > ![](playerCatStage2_diagram_p2.svg)
 >
-> Simplified diagram dipicting the communications between methods and nodes on a non-grouneded jump call.
+> Simplified diagram depicting the communications between methods and nodes on a non-grounded jump call.
 
 \*Note: similar to python, variables and methods in godot are public by default.
 
