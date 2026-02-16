@@ -32,13 +32,13 @@ This is the primary system where a second layer of constants were used, in the c
 
 ### Jumping and vertical movement
 
-Every frame, when not grounded (determined by `is_on_floor()`, a method provided by the `characterBody2D` class), the a value is added `velocity.y`\*. This represents gravity as is defined globally in the game's internal setting for all physics objects to follow. As well as this, `delta` is added to `air_time` to represent how long the character has been airborne.
+Every frame, when not grounded (determined by `is_on_floor()`, a method provided by the `characterBody2D` class), the a value is added to `velocity.y`\*. This represents gravity as is defined globally in the game's internal setting for all physics objects to follow. As well as this, `delta` is added to `air_time` to represent how long the character has been airborne.
 
 Jumping is logically very simple, press button when grounded to gain vertical velocity. However there are two thing that can be done to make jumping feel nicer. Firstly coyote time, described as [find citation explaining this]. This was implemented by replacing the `is_on_floor()` in the `can_jump()` function with `(air_time <= COYOTE_TIME)`.
 
 The other is by adjustment of the jump height by holding down the button. In this project this is called air hovering. #TODO: explain.
 
-\*This value is added because in godot's 2D engine, the y-axis is inverted.
+\*This value is added rather than subtracted because in godot's 2D engine, the y-axis is inverted.
 
 ### Swiping
 
@@ -53,8 +53,151 @@ Two things occur when a strike is successfully triggered:
 
 The original system, as stated before, was copied from another project the author developed. This character copied was far more complex than what was required for this project which resulted in some elements getting removed such as wall climbing and jumping. The constants and animations associated with these systems were, however, kept in the script in case these mechanics were reintroduced later.
 
+The `_physics_process()` in this stage functioned shown below alongside a flowchart explaining the process. In summary, it does the following in order every frame:
+
+1. Handles vertical movement
+2. Handles jump logic
+3. Handles horizontal physics
+4. Handles any other actions
+5. Moves
+6. Handles animations
+
+Vertical (steps 1 & 2) and horizontal logic (step 3) are separated in order as an artefact of this architecture being developed for a platform where collision had to be handled manually. This architecture was continued in future, even when this was no longer necessary as it is logical, easy to understand order to perform these steps in. This function, beyond removing functions such as `jump_logic()`, remained mostly unchanged in later stages of development.
+
+```
+# Main Processes
+#===========================================
+
+func _physics_process(delta: float) -> void:
+	var direction := get_direction_x()
+	debug_text = ""
+	animation_state = 0
+
+	# Air physics
+	calculate_airtime(delta)
+	vertical_physics(delta)
+
+	# Handle jump
+	calculate_walktime(delta, direction)
+	jump_logic(delta)
+
+	# Ground physics
+	running_logic(delta, direction)
+	horizontal_physics(delta, direction)
+
+	# Other
+	strikes(delta, direction)
+
+	previous_velocity = velocity
+	facing_right = velocity.x >= 0
+	move_and_slide()
+
+	# Animations
+	flip_sprite(direction, false)
+	calculation_animation_state(direction, delta)
+	animation()
+	update_debug_text()
+
+	# Sets velocity.x to 0 if it is low enough
+	velocity.x *= 1 if (abs(velocity.x) >= delta*5) else 0
+
+	# Debug
+	if Input.is_action_just_pressed("debug_damage"):
+		damage(1)
+	if Input.is_action_just_pressed("debug_heal"):
+		heal(1)
+```
+
+> ![](playerCatStage1_diagram.svg)
+>
+> Flow chart summarizing the the main loop used by CatBot
+
+It is also worth mentioning that `player_cat` is a child class of `generic_entity`. This class does not affect the physics logic for the player, instead providing general utilities such as `is_type()` (and associated methods/variables) and defining damage functions and signals. This relationship will be described in proper detail in stage 2 as it's functionality was extended to include the stability system in that stage.
+
 ## Stage 2: Modularization
 
-Stage 2 of the process is where catBot started to match it's final form.
+Stage 2 of the process is where catBot started to match it's final form. In this stage, the functions which controlled catBot were removed and placed in nodes that can be instanced as a child of catBot in a scene in order to perform the same function.
+
+> ![CatBot Instanced in a scene](devlogFig3.2.png)
+>
+> Node setup to instance catBot in a scene at this stage.
+
+Using jumping as an example, the jumping logic, originally contained entirely within `jump_logic()`, into one function for the performing of the action (i.e. modifying the velocity), `jump()`, and another that calls the first, `jump_logic()`.  From here, a node can be created, `AutoJumpController` in this example, which the logic function can be moved to\*.
+
+> ```
+> ## Jumps. [br]
+> ##
+> ## [strength] determines the strength of the jump as a fraction of [JUMP_VELOCITY]
+> ## between -1.0 and 1.0.
+> # TODO: test
+> func jump(strength := 1.0) -> void:
+> 	# Checks for errors
+> 	if !(
+> 			must_be_within_range(strength, -1.0, 1.0, "Jump strength") and # Checks that strength is valid
+> 			must_be_grounded("Jump") and # Checks if grounded
+> 			can_jump() # Back-up, legacy test
+> 		):
+> 		return
+> 	# Preceding if none occur
+> 	else:
+> 		air_entry = 3
+> 		air_time = 0
+> 		# Modifies jump strength depending on if air hover is used, this is to prevent punishing
+> 		#	players who do not use air hovers
+> 		velocity.y = JUMP_VELOCITY * strength * 0.95 if using_air_hover else JUMP_VELOCITY * strength * 1.1
+> 		first_ascent = true
+> 		return
+> ```
+>
+> Jump function (in "playerCat.gd")
+
+> ```
+> extends auto_controller
+> 
+> [...]
+> 
+> func _process(delta: float) -> void:
+> 	jump_logic(delta)
+> 
+> ## Jumping and the floaty part of jumps. [br]
+> ##
+> ## Contains the logic for:
+> ##   Impulse jumps,
+> ##   Air hovering
+> ##
+> ## [br] Uses [direction] for ledge kicks
+> ## Uses [delta] to process the floaty part of jumps
+> func jump_logic(delta: float) -> void:
+> 	if jump_when_grounded_only:
+> 		if Input.is_action_just_pressed("primary_action") and cat_bot.can_jump(): # JUMP
+> 			cat_bot.jump()
+> 		elif cat_bot.is_air_hovering() and handle_jump_adjustment: # That thing where holding down the button can adjust the height
+> 			cat_bot.air_hover(delta)
+> 	else:
+> 		if Input.is_action_just_pressed("primary_action"): # JUMP
+> 			cat_bot.jump()
+> 		elif cat_bot.is_air_hovering() and handle_jump_adjustment: # That thing where holding down the button can adjust the height
+> 			cat_bot.air_hover(delta)
+> ```
+>
+> Extract of "jump_controller.md"
+>
+> Note: this is the most coplex controller script due to jump containing extra parameters.
+
+When combined with movement and striking, it effectively creates a relationship shown below where the child nodes call functions in the parent. To avoid repeating code, the class `auto_controller` was created, which handled getting the reference to it's parent.
+
+> ![Class diagramming describing a relationship between the autocontrollers and player_cat](playerCatStage2_diagram_p1.svg)
+>
+> Class diagram dipicting the relationship between nodes.
+
+Also shown in (jump function), a built-in error handelling system was created. This was required as gdscript has no built in error handling system as it can usually be assumed that all data is valid. This is not a typical scenario. All of the functions that are exposed to player inputs (jumps, strikes, movement etc.) contain validators. These are bespoke functions that return true if the data is valid, but will also send and relavent signals upon an error occuring. All the functions use the same structure: validors then functionality.
+
+Errors and damage are handled in a very similar manner. When one occurs, either `hp` (for damage) or `stability` (upon an error), are decreased, and the corrosponding signal is emitted. This signal is used to update ui elements and carry both the change in value and the new value. Errors also carry an error message.
+
+> ![](playerCatStage2_diagram_p2.svg)
+>
+> Simplified diagram dipicting the communications between methods and nodes on a non-grouneded jump call.
+
+\*Note: similar to python, variables and methods in godot are public by default.
 
 ## Stage 3: Cat Code
