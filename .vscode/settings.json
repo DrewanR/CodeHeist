@@ -2,6 +2,7 @@
     "cSpell.ignoreWords": [
         "COOLDOWN",
         "SLIPMOD",
+        "autocontrollers",
         "slipiness",
         "walktime"
     ],
@@ -9,6 +10,7 @@
         "AIRBOUND",
         "airstate",
         "Catbot",
-        "lerp"
+        "lerp",
+        "platformer"
     ]
 }
