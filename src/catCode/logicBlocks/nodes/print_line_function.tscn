@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bt0jsuso54toa"]
+
+[ext_resource type="Script" uid="uid://7x5171m8a27s" path="res://src/catCode/logicBlocks/scripts/print_line_function.gd" id="1_1pf55"]
+
+[node name="PrintLineFunction" type="Node" unique_id=689348759]
+script = ExtResource("1_1pf55")
+block_ref = "print"
+params = Array[String](["line"])
+block_name = "print"
+block_category = "output"
