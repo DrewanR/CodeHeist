@@ -1,0 +1,102 @@
+<mxfile host="65bd71144e">
+    <diagram id="4nwGFU8yRgFiSO9AD_ve" name="Page-1">
+        <mxGraphModel dx="1207" dy="1312" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-55" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-580" y="-90" width="1080" height="470" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endSize=15;endArrow=block;endFill=0;" parent="1" source="MVqjwlPJZZNIYt-0IRVe-1" target="MVqjwlPJZZNIYt-0IRVe-8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-1" value="&lt;i&gt;logicBlock&lt;/i&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="200" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-2" value="+ block_name :String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="30" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-11" value="+ block_category :String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="60" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-12" value="+ ui_block :PackedScene" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontStyle=2" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="90" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-4" value="" style="line;strokeWidth=1;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="120" width="200" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-7" value="+ send_error (text := ...)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="130" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-15" value="+ is_type(_type :String)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="160" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-17" value="" style="line;strokeWidth=1;html=1;dashed=1;" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="190" width="200" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-16" value="+&amp;nbsp;is_reference(ref :String)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontStyle=2" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="200" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-18" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontStyle=2" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="230" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-19" value="+ get_primary_reference()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontStyle=2" parent="MVqjwlPJZZNIYt-0IRVe-1" vertex="1">
+                    <mxGeometry y="260" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-8" value="Node" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="-70" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-13" value="&lt;div&gt;Corrosponding&lt;/div&gt;graphicalBlock" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="360" y="125" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-14" value="Reference to,&lt;div&gt;only set in child classes&lt;br&gt;&lt;div&gt;(not instantiated)&lt;/div&gt;&lt;/div&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;endSize=12;" parent="1" source="MVqjwlPJZZNIYt-0IRVe-12" target="MVqjwlPJZZNIYt-0IRVe-13" edge="1">
+                    <mxGeometry y="-25" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-31" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endSize=12;endArrow=open;endFill=0;" parent="1" source="MVqjwlPJZZNIYt-0IRVe-20" target="MVqjwlPJZZNIYt-0IRVe-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-20" value="&lt;i&gt;functionBlock&lt;/i&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-240" y="40" width="200" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-32" value="+&amp;nbsp;block_ref :String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="30" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-33" value="+&amp;nbsp;params :Array[String]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="60" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-34" value="+&amp;nbsp;parent :Node" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="90" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-36" value="" style="line;strokeWidth=1;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="120" width="200" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-35" value="&lt;b&gt;&lt;i&gt;+&amp;nbsp;execute()*&lt;/i&gt;&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="130" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-38" value="+ is_reference(reference :String)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="160" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-39" value="..." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="190" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-40" value="+ get_primary_reference()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="MVqjwlPJZZNIYt-0IRVe-20" vertex="1">
+                    <mxGeometry y="220" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-37" value="*For testing reasons, this is not a true abstract method, however its default implementation just throws an (in-game) error." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="-580" y="350" width="1080" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-53" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endSize=12;endArrow=open;endFill=0;" parent="1" source="MVqjwlPJZZNIYt-0IRVe-50" target="MVqjwlPJZZNIYt-0IRVe-20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-50" value="printLine" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-560" y="40" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="MVqjwlPJZZNIYt-0IRVe-54" value="&lt;div style=&quot;line-height: 150%;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp;Implements using script (.gd):&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;execute()&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp;Implements within scene (.tcsn):&lt;/font&gt;&lt;/div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;block_ref = &quot;print&quot;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;params = Array[String]([&quot;line&quot;])&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;block_name = &quot;print&quot;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;block_category = &quot;output&quot;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; white-space: pre;&quot;&gt;&#9;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;rounded=0;strokeColor=default;fontColor=#F0F0F0;" parent="1" vertex="1">
+                    <mxGeometry x="-560" y="80" width="200" height="170" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

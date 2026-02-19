@@ -25,7 +25,7 @@ I also decided to combine the general dissertation log with this to have one mar
 
 # Week 03
 
-> ![Screenshot of catBot showing it's node structure](devlogFig3.1.png)
+> ![Screenshot of catBot showing it's node structure](assets/devlogFig3.1.png)
 >
 > ***Figure 3.1*** *The node structure of catBot at the end of this stage of development, including node structure of the intermediary ui.*
 
@@ -40,14 +40,20 @@ I also decided to combine the general dissertation log with this to have one mar
 
 **Created release alpha version 0.3:** This was done because this was the first major milestone of development. A branch was created at the end of the week for future reference.
 
-> ![Screenshot](devlogFig3.2.png)
+> ![Screenshot](assets/devlogFig3.2.png)
 >
 > ***Figure 3.2*** *Node structure of an instanced catBot*
 
-> ![alt text](devlogFig3.3.png)
+> ![Screenshot](assets/devlogFig3.3.png)
 >
 > ***Figure 3.3*** *The intermediary ui, including some errors generated from disabling the safety on the auto controllers.*
 
 ## Week 04
 
 - Finished playerCat documentation (for now), including class diagrams where applicable.
+- Developed the (somewhat) abstract classes for catCode and created catCode manager.
+- Implement the first logical block. [See figure 4.1]
+
+> ![Class diagram](assets/catCodeClassDiagrams.svg)
+>
+> ***Figure 4.1*** *Partial class diagram for catCode. Showing implementation of the basic function. Certain methods have been omitted. Abstract classes and methods have been shown in italix.*
