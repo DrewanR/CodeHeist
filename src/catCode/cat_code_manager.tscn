@@ -8,7 +8,7 @@
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
-editor = NodePath("")
+editor = NodePath("testUI/HSplitContainer/basicTextualEdit")
 text_output = NodePath("testUI/HSplitContainer/basicOutput")
 
 [node name="testUI" type="CanvasLayer" parent="." unique_id=184729069]
@@ -22,8 +22,9 @@ grow_vertical = 2
 split_offsets = PackedInt32Array(488)
 split_offset = 488
 
-[node name="basicTextualEdit" parent="testUI/HSplitContainer" unique_id=383483393 instance=ExtResource("2_sbfq2")]
+[node name="basicTextualEdit" parent="testUI/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_sbfq2")]
 layout_mode = 2
+parent = NodePath("../../..")
 
 [node name="basicOutput" parent="testUI/HSplitContainer" unique_id=561888404 instance=ExtResource("2_ngf15")]
 custom_minimum_size = Vector2(320, 0)

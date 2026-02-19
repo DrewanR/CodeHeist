@@ -31,25 +31,43 @@ var instruction_list :Array[logic_block] = []
 var instruction_dict :Dictionary[String, logic_block] = {}
 # Both were used as please cats have mercy, this is already hell to deal with.
 
+## Compiled code. [br]
+## Note: This function should never compile code
+var compiled_code :Array[instruction_line] = []
+
+## Signal emitted upon updating the instructions
+signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[String, logic_block])
+
 func _ready() -> void:
 	print_line("CatCodeManager Started!")
 	update_instructions()
+	editor.code_recompiled.connect(_on_compiled_code_recieved)
 	
 	print_line("---")
 	print_instruction_list()
 	print_line("---")
 	print_instruction_dictionary()
 	print_line("---")
-	
-	instruction_list[0].execute()
-	instruction_dict["print"].execute()
-	
+	print_line("Debug: Press [Z] to run!")
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("primary_action"):
+		run()
+
+func run():
+	print_line("Running...")
+	editor.compile()
+	for line in compiled_code:
+		print("! Running " + line.primary_block.block_name)
+		line.primary_block.execute()
 
 ## Updates the blocks in both the instruciton dicitonary and list
-func update_instructions(source := self):
+func update_instructions(source := self) -> void:
+	# Updates instruction list
 	print("- Updating the instruction set...")
 	instruction_list = get_logic_blocks(source)
+	
+	# Creates new dictionary from the instruction list
 	print("-   Updating dictionary...")
 	for this_block in instruction_list:
 		# Case 1: only one reference
@@ -59,6 +77,9 @@ func update_instructions(source := self):
 		# Case 2: multiple references
 		else:
 			pass # TODO: cry
+	
+	# Emits signal to update nodes of a new instruction set
+	instructions_updated.emit(instruction_list, instruction_dict)
 
 
 ## Logic blocks are stored as children of this node, this function fetches theme all. [br]
@@ -96,3 +117,6 @@ func print_instruction_dictionary() -> void:
 	for this_key in keys:
 		var this_item = instruction_dict[this_key]
 		print_line("[" + this_key + "] " + this_item.name + ": " + this_item.get_primary_reference())
+
+func _on_compiled_code_recieved(new_code):
+	compiled_code = new_code
