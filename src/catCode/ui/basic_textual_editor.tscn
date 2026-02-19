@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ocldpbbvpw8g"]
+
+[ext_resource type="Script" uid="uid://crj3wwg4yhnrm" path="res://src/catCode/ui/basic_textual_editor.gd" id="1_2pqce"]
+
+[node name="basicTextualEdit" type="TextEdit" unique_id=383483393]
+custom_minimum_size = Vector2(320, 500)
+text = "# PROCESS
+>IF(z_just_pressed
+>>print(z just pressed
+>ENDIF"
+minimap_draw = true
+script = ExtResource("1_2pqce")

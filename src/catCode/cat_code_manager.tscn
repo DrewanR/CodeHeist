@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://djx3mjpar6s08" path="res://src/catCode/cat_code_manager.gd" id="1_ycvx2"]
 [ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="2_ngf15"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="2_sbfq2"]
 [ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="3_fu1vx"]
 [ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="3_yf6h5"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
-editor = NodePath("testUI/HSplitContainer/basicTextualEdit")
+editor = NodePath("")
 text_output = NodePath("testUI/HSplitContainer/basicOutput")
 
 [node name="testUI" type="CanvasLayer" parent="." unique_id=184729069]
@@ -21,14 +22,8 @@ grow_vertical = 2
 split_offsets = PackedInt32Array(488)
 split_offset = 488
 
-[node name="basicTextualEdit" type="TextEdit" parent="testUI/HSplitContainer" unique_id=297784955]
-custom_minimum_size = Vector2(320, 500)
+[node name="basicTextualEdit" parent="testUI/HSplitContainer" unique_id=383483393 instance=ExtResource("2_sbfq2")]
 layout_mode = 2
-text = "# PROCESS
->IF(z_just_pressed
->>print(z just pressed
->ENDIF"
-minimap_draw = true
 
 [node name="basicOutput" parent="testUI/HSplitContainer" unique_id=561888404 instance=ExtResource("2_ngf15")]
 custom_minimum_size = Vector2(320, 0)
