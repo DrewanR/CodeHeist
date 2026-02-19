@@ -50,16 +50,24 @@ func _ready() -> void:
 	print_line("---")
 	print_line("Debug: Press [Z] to run!")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("primary_action"):
 		run()
 
 func run():
 	print_line("Running...")
 	editor.compile()
+	# Iterates across every line
 	for line in compiled_code:
-		print("! Running " + line.primary_block.block_name)
-		line.primary_block.execute()
+		# Executing if executable
+		if line.is_executable():
+			print("! Running " + line.primary_block.block_name)
+			if line.valid_parameters() and line.uses_parameters():
+				line.primary_block.execute(line.parameters)
+			elif line.valid_parameters():
+				line.primary_block.execute()
+			else:
+				print_line("> /!\\ Invalid parameter count...")
 
 ## Updates the blocks in both the instruciton dicitonary and list
 func update_instructions(source := self) -> void:

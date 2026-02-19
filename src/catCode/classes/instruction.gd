@@ -18,3 +18,9 @@ func _init(_indent :int, _primary_block :logic_block, _parameters :Array = []) -
 
 func is_executable():
 	return executable
+
+func valid_parameters():
+	return (primary_block.get_parameter_count() == len(parameters))
+
+func uses_parameters():
+	return primary_block.has_parameters()

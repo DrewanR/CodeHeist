@@ -1,4 +1,4 @@
 extends function_block
 
-func execute():
-	parent.print_line("Meow Meow Meow!")
+func execute(text := [""]):
+	parent.print_line(text[0])

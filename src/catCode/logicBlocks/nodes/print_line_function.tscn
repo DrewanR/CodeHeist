@@ -5,6 +5,6 @@
 [node name="PrintLineFunction" type="Node" unique_id=689348759]
 script = ExtResource("1_1pf55")
 block_ref = "print"
-params = Array[String](["line"])
+params = Array[String](["text"])
 block_name = "print"
 block_category = "output"

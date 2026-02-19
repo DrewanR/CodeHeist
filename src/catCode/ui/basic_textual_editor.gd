@@ -27,10 +27,10 @@ func compile() -> Array[instruction_line]:
 	var new_code :Array[instruction_line] = []
 	
 	new_code.append(
-		instruction_line.new(0, instruction_list[0])
+		instruction_line.new(0, instruction_list[0], ["Nyah Meow Purr!!!"])
 	)
 	new_code.append(
-		instruction_line.new(0, instruction_list[0])
+		instruction_line.new(0, instruction_list[0], ["meow meow meow!!!"])
 	)
 	
 	code_recompiled.emit(new_code)
