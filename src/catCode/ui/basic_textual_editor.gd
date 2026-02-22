@@ -26,18 +26,29 @@ func _ready() -> void:
 func compile() -> Array[instruction_line]:
 	var new_code :Array[instruction_line] = []
 	
-	new_code.append(
-		instruction_line.new(0, instruction_dict["print"], ["Nyah Meow Purr!!!"])
-	)
-	new_code.append(
-		instruction_line.new(0, instruction_dict["print"], ["meow meow meow!!!"])
-	)
-	new_code.append(
-		instruction_line.new(0, instruction_dict["print2"], ["Meow" , 5])
-	)
+	print("- Compiling Code:")
+	for text_line in text.split("\n"):
+		var parsed_line = parse_line(text_line)
+		
+		if parsed_line != null: new_code.append(parsed_line)
 	
 	code_recompiled.emit(new_code)
 	return new_code
+
+
+func parse_line(text_line :String) -> instruction_line:
+	var split_text = text_line.split("(")
+	
+	var command = split_text[0].remove_chars("\t ")
+	var indent = split_text[0].count("\t")
+	
+	if instruction_dict.has(command):
+		print("- + command: '" + str(command) + "', indent: " + str(indent) + ", params: ")
+		return instruction_line.new(indent, instruction_dict[command], split_text[1].left(-1).split(","))
+	else:
+		print("- ! command: '" + str(command) + "' not found.")
+		return null
+
 
 func update_instructions(new_list, new_dict):
 	instruction_list = new_list

@@ -4,33 +4,43 @@
 [ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="2_ngf15"]
 [ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="2_sbfq2"]
 [ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="3_fu1vx"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="3_lr5ad"]
 [ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="3_yf6h5"]
 [ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="6_1edkn"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
-editor = NodePath("testUI/HSplitContainer/basicTextualEdit")
-text_output = NodePath("testUI/HSplitContainer/basicOutput")
+editor = NodePath("testUI/MarginContainer/HSplitContainer/basicTextualEdit")
+text_output = NodePath("testUI/MarginContainer/HSplitContainer/basicOutput")
 
 [node name="testUI" type="CanvasLayer" parent="." unique_id=184729069]
 
-[node name="HSplitContainer" type="HSplitContainer" parent="testUI" unique_id=886225117]
+[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=871543388]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=886225117]
+layout_mode = 2
 split_offsets = PackedInt32Array(488)
 split_offset = 488
 
-[node name="basicTextualEdit" parent="testUI/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_sbfq2")]
+[node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_sbfq2")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lr5ad")
 text = "print(meow)
 print(nyah)
-print(purr)"
-parent = NodePath("../../..")
+	print(purr)
+		print(hiss)"
+parent = NodePath("../../../..")
 
-[node name="basicOutput" parent="testUI/HSplitContainer" unique_id=561888404 instance=ExtResource("2_ngf15")]
+[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("2_ngf15")]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_yf6h5")
