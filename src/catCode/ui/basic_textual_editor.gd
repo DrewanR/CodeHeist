@@ -20,7 +20,6 @@ var instruction_dict :Dictionary[String, logic_block] = {}
 func _ready() -> void:
 	parent.instructions_updated.connect(update_instructions)
 
-
 ## Compiles the current code [br]
 ## Emits [signal code_recompiled] and returns the new compiled code
 func compile() -> Array[instruction_line]:
@@ -42,16 +41,28 @@ func parse_line(text_line :String) -> instruction_line:
 	var command = split_text[0].remove_chars("\t ")
 	var indent = split_text[0].count("\t")
 	
-	if instruction_dict.has(command) and len(split_text) > 1:
-		print("- + command: '" + str(command) + "', indent: " + str(indent) + ", params: " + str(split_text[1].left(-1).split(",")))
-		return instruction_line.new(indent, instruction_dict[command], split_text[1].left(-1).split(","))
-	elif instruction_dict.has(command):
-		print("- + command: '" + str(command) + "', indent: " + str(indent))
-		return instruction_line.new(indent, instruction_dict[command])
-	else:
+	if not instruction_dict.has(command): # First, returns if there is not a corropsonding instruction
 		print("- ! command: '" + str(command) + "' not found.")
 		return null
+	var block := instruction_dict[command]
+	if block.block_type == "conditional_block":
+		if block.is_using_boolean_operator():
+			print("- + structural: '" + str(command) + "', indent: " + str(indent))
+			return instruction_line.new(indent, block, [get_operator(str(split_text[1].left(-1)))])
+		else:
+			print("- + structural: '" + str(command) + "', indent: " + str(indent))
+			return instruction_line.new(indent, block)
+	else:
+		if len(split_text) > 1:
+			print("- +   function: '" + str(command) + "', indent: " + str(indent) + ", params: " + str(split_text[1].left(-1).split(",")))
+			return instruction_line.new(indent, block, split_text[1].left(-1).split(","))
+		else:
+			print("- +   function: '" + str(command) + "', indent: " + str(indent))
+			return instruction_line.new(indent, block)
 
+
+func get_operator(op_code :String) -> boolean_operator:
+	return instruction_dict[op_code]
 
 func update_instructions(new_list, new_dict):
 	instruction_list = new_list

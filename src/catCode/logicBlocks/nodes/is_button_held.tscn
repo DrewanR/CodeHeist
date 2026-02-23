@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ckqy5mt8iujwr"]
+
+[ext_resource type="Script" uid="uid://da7r4gqik3kid" path="res://src/catCode/logicBlocks/scripts/is_button_held_operator.gd" id="1_xhg1q"]
+
+[node name="IsButtonHeldOperator" type="Node" unique_id=2042108197]
+script = ExtResource("1_xhg1q")
+block_ref = "isButtonHeld"
+params = Array[String](["button"])
+block_name = "is button held down"
+block_category = "input"

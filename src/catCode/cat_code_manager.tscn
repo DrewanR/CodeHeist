@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="8_4cxkd"]
 [ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="9_lyom6"]
 [ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="10_eo6u7"]
+[ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="11_nbq0e"]
+[ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="12_ee857"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
@@ -37,6 +39,7 @@ split_offset = 488
 [node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_sbfq2")]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_lr5ad")
+theme_override_font_sizes/font_size = 14
 text = "print(start)
 if (true)
 	print(if true)
@@ -57,8 +60,8 @@ parent = NodePath("../../../..")
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_yf6h5")
+theme_override_font_sizes/font_size = 12
 editable = false
-minimap_draw = true
 
 [node name="PrintLineFunction" parent="." unique_id=689348759 instance=ExtResource("3_fu1vx")]
 
@@ -69,3 +72,10 @@ minimap_draw = true
 [node name="ElseConditional" parent="." unique_id=1778036990 instance=ExtResource("9_lyom6")]
 
 [node name="ElseIfConditional" parent="." unique_id=299415310 instance=ExtResource("10_eo6u7")]
+
+[node name="IsButtonHeldOperator" parent="." unique_id=1713190488 instance=ExtResource("11_nbq0e")]
+
+[node name="booleanValueTrue" parent="." unique_id=1696839635 instance=ExtResource("12_ee857")]
+
+[node name="booleanValueFalse" parent="." unique_id=412036009 instance=ExtResource("12_ee857")]
+value = true

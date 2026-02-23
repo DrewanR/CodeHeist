@@ -51,11 +51,11 @@ func _ready() -> void:
 	update_instructions()
 	editor.code_recompiled.connect(_on_compiled_code_recieved)
 	
-	print_line("---")
+	print_line("-----\nINSTRUCTION LIST")
 	print_instruction_list()
-	print_line("---")
+	print_line("-----\nINSTRUCTION DICTIONARY")
 	print_instruction_dictionary()
-	print_line("---")
+	print_line("-----")
 	print_line("Debug: Press [Z] to run!")
 
 func _process(_delta: float) -> void:
@@ -73,8 +73,9 @@ func run():
 	while line_number < len(compiled_code):
 		var line = compiled_code[line_number]
 		print("----")
-		print(indent_stack)
-		print(line)
+		print("  Current Stack: " + str(indent_stack))
+		print("  " + str(line))
+		
 		# Functions: ALL
 		if (
 			line.is_executable_function() and # The current line is executable
@@ -89,6 +90,7 @@ func run():
 				line.primary_block.execute()
 			else:
 				print_line("> /!\\ Invalid parameter count...")
+		
 		# Conditionals: IF
 		elif (
 			line.is_selective_element() and # Is a selective block
@@ -98,7 +100,7 @@ func run():
 			):
 			print("! Reached an if statement of indent " + str(line.indent))
 			line_number += 1
-			if line.primary_block.evaluate():
+			if line.primary_block.evaluate(line.parameters):
 				print("  True")
 				indent_stack.push_back(
 					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.DO)
@@ -108,6 +110,7 @@ func run():
 				indent_stack.push_back(
 					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.SKIP)
 				)
+		
 		# Conditionals: ELSE IF TODO: Test
 		elif (
 			line.is_selective_element() and # Is a selective block
@@ -124,27 +127,34 @@ func run():
 			# Scenario 2: Currently in "DO" state
 			else:
 				indent_stack.back().state = PASS_STATES.SKIP_ALL
+		
 		# Conditionals: ELSE
 		elif (
 			line.is_selective_element() and # Is a selective block
 			line.primary_block.block_ref == "else" and # And is an else statement
-			len(indent_stack) > 1 and # Indent stack is large enough for an else state to be possible
-			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
-			indent_stack[-2].indent == line.indent # The indents match
+			(
+				len(indent_stack) > 1 and # Indent stack is large enough for an else state to be possible
+				indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
+				indent_stack[-2].indent == line.indent # The indents match
+			)
 		):
 			print("! Reached an else statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
+		
 		# Skip conditions
 		elif (
 			indent_stack.back().state in [PASS_STATES.SKIP, PASS_STATES.SKIP_ALL] and
 			indent_stack.back().indent == line.indent
 		):
 			line_number += 1
-			print("skipped")
-		# End indent block
-		elif len(indent_stack) > 1:
+			print("  Skipping " + line.primary_block.block_name)
+		
+		# End indent block, pops the current stack layer
+		elif len(indent_stack) > 1 and indent_stack.back().state == PASS_STATES.DO:
 			indent_stack.pop_back()
+		
+		# And if none of the above is true, the line is skipped
 		else:
 			line_number += 1
 

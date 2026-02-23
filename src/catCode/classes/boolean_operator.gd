@@ -1,4 +1,4 @@
-@abstract class_name function_block extends logic_block
+@abstract class_name boolean_operator extends logic_block
 
 @export var block_ref :String ## Textual reference to block (identifier)
 
@@ -9,13 +9,14 @@
 func _ready() -> void:
 	if parent == null:
 		parent = get_parent()
-	block_type = "function_block"
+	block_type = "booleanOperator"
 
-	name = "logicBlock_function_" + block_name.to_camel_case()
+	name = "logicBlock_booleanOperator_" + block_name.to_camel_case()
 
-## Executes the function
-func execute():
+## Evaluates the conditional
+func evaluate(_args :Array = []) -> bool:
 	send_error(block_ref + " has not been implemented.")
+	return false
 
 ## Returns true if [param reference] refers to this block
 func is_reference(reference :String) -> bool:

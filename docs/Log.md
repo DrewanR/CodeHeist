@@ -68,7 +68,5 @@ I also decided to combine the general dissertation log with this to have one mar
 
 ## Week 05
 
-- Implemented textual **conditional blocks**, with hardwired output as well as a the **indent stack**.
-    - `if` if
-    - `elif` else if
-    - `else` else
+- Implemented textual **conditional blocks** `if`, `elif`, `else`, with hardwired output as well as a the **indent stack**.
+- Implemented `boolean_operator` and `boolean_value` which allows `true` and `false` blocks.

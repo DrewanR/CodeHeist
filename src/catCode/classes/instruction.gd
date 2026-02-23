@@ -13,6 +13,7 @@ func _init(_indent :int, _primary_block :logic_block, _parameters :Array = []) -
 	parameters = _parameters
 	
 	iterative_element = false
+	selective_element = false
 
 	match primary_block.block_type:
 		"function_block":

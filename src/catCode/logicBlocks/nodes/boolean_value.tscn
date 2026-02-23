@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b4ovl2l62g44b"]
+
+[ext_resource type="Script" uid="uid://cj6a2wf7u1c70" path="res://src/catCode/logicBlocks/scripts/boolean_value.gd" id="1_krtr3"]
+
+[node name="booleanValue" type="Node" unique_id=2042108197]
+script = ExtResource("1_krtr3")
+block_category = "value"
