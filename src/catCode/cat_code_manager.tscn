@@ -7,6 +7,9 @@
 [ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="3_lr5ad"]
 [ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="3_yf6h5"]
 [ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="6_1edkn"]
+[ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="8_4cxkd"]
+[ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="9_lyom6"]
+[ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="10_eo6u7"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
@@ -34,10 +37,20 @@ split_offset = 488
 [node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_sbfq2")]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_lr5ad")
-text = "print(meow)
-print(nyah)
-	print(purr)
-		print(hiss)"
+text = "print(start)
+if (true)
+	print(if true)
+	if (true)
+		print(if true true)
+	else
+		print(if true false)
+else
+	print(if false)
+	if (true)
+		print(if false true)
+	else
+		print(if false false)
+print(end)"
 parent = NodePath("../../../..")
 
 [node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("2_ngf15")]
@@ -50,3 +63,9 @@ minimap_draw = true
 [node name="PrintLineFunction" parent="." unique_id=689348759 instance=ExtResource("3_fu1vx")]
 
 [node name="Print2Function" parent="." unique_id=864944594 instance=ExtResource("6_1edkn")]
+
+[node name="IfConditional" parent="." unique_id=2042108197 instance=ExtResource("8_4cxkd")]
+
+[node name="ElseConditional" parent="." unique_id=1778036990 instance=ExtResource("9_lyom6")]
+
+[node name="ElseIfConditional" parent="." unique_id=299415310 instance=ExtResource("10_eo6u7")]

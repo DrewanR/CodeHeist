@@ -35,6 +35,14 @@ var instruction_dict :Dictionary[String, logic_block] = {}
 ## Note: This function should never compile code
 var compiled_code :Array[instruction_line] = []
 
+## Enum for the states of how a code will be treated: [br]
+## DO: will result in the code being exectured,
+## SKIP_1: will skip until the next control statement of proper indent,
+## SKIP_ALL: will skip to the end of the indent.
+enum PASS_STATES { DO, SKIP, SKIP_ALL}
+## Enum for the type of layer in the indentStack
+enum STACK_LAYER_TYPE { NONE, CONDITIONAL, ITERATIVE }
+
 ## Signal emitted upon updating the instructions
 signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[String, logic_block])
 
@@ -57,17 +65,72 @@ func _process(_delta: float) -> void:
 func run():
 	print_line("Running...")
 	editor.compile()
+	## Indent stack, used to control indents and skipping, 
+	var indent_stack := [stateStackLayer.new(0, STACK_LAYER_TYPE.NONE, PASS_STATES.DO)]
 	# Iterates across every line
-	for line in compiled_code:
-		# Executing if executable
-		if line.is_executable():
+	#for line in compiled_code:
+	var line_number = 0
+	while line_number < len(compiled_code):
+		var line = compiled_code[line_number]
+		print("----")
+		print(indent_stack)
+		print(line)
+		# Functions: ALL
+		if (
+			line.is_executable_function() and # The current line is executable
+			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
+			indent_stack.back().indent == line.indent # The indents match
+			):
 			print("! Running " + line.primary_block.block_name)
+			line_number += 1
 			if line.valid_parameters() and line.uses_parameters():
 				line.primary_block.execute(line.parameters)
 			elif line.valid_parameters():
 				line.primary_block.execute()
 			else:
 				print_line("> /!\\ Invalid parameter count...")
+		# Conditionals: IF
+		elif (
+			line.is_selective_element() and # Is a selective block
+			line.primary_block.block_ref == "if" and # And is an if statement
+			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
+			indent_stack.back().indent == line.indent # The indents match
+			):
+			print("! Reached an if statement of indent " + str(line.indent))
+			line_number += 1
+			if line.primary_block.evaluate():
+				print("  True")
+				indent_stack.push_back(
+					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.DO)
+				)
+			else:
+				print("  False")
+				indent_stack.push_back(
+					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.SKIP)
+				)
+		# Conditionals: ELSE
+		elif (
+			line.is_selective_element() and # Is a selective block
+			line.primary_block.block_ref == "else" and # And is an else statement
+			len(indent_stack) > 1 and # Indent stack is large enough for an else state to be possible
+			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
+			indent_stack[-2].indent == line.indent # The indents match
+		):
+			print("! Reached an else statement of indent " + str(line.indent))
+			line_number += 1
+			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
+		# Skip conditions
+		elif (
+			indent_stack.back().state in [PASS_STATES.SKIP, PASS_STATES.SKIP_ALL] and
+			indent_stack.back().indent == line.indent
+		):
+			line_number += 1
+			print("skipped")
+		# End indent block
+		elif len(indent_stack) > 1:
+			indent_stack.pop_back()
+		else:
+			line_number += 1
 
 ## Updates the blocks in both the instruciton dicitonary and list
 func update_instructions(source := self) -> void:
@@ -82,7 +145,7 @@ func update_instructions(source := self) -> void:
 		if this_block.get_reference_count() == 1:
 			instruction_dict.set(this_block.get_primary_reference(), this_block)
 			print("-     " + this_block.get_primary_reference() +" added to instruction dictionary")
-		# Case 2: multiple references
+		# Case 2: multiple references. currently unused
 		else:
 			pass # TODO: cry
 	
@@ -128,3 +191,17 @@ func print_instruction_dictionary() -> void:
 
 func _on_compiled_code_recieved(new_code):
 	compiled_code = new_code
+
+
+class stateStackLayer:
+	var indent :int
+	var type :STACK_LAYER_TYPE
+	var state :PASS_STATES
+	
+	func _init(_indent :int, _type :STACK_LAYER_TYPE, entry_state :PASS_STATES) -> void:
+		indent = _indent
+		type = _type
+		state = entry_state
+	
+	func _to_string() -> String:
+		return str(indent) + ": " + str(type) + " " + str(state)

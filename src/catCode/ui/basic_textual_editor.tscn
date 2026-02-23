@@ -4,9 +4,5 @@
 
 [node name="basicTextualEdit" type="TextEdit" unique_id=383483393]
 custom_minimum_size = Vector2(320, 500)
-text = "# PROCESS
->IF(z_just_pressed
->>print(z just pressed
->ENDIF"
 minimap_draw = true
 script = ExtResource("1_2pqce")

@@ -22,18 +22,6 @@ func send_error(text := "An error occurred"):
 func is_type(_type :String) -> bool:
 	return _type == block_type
 
-## Returns true if [param reference] refers to this block
-@abstract
-func is_reference(ref :String) -> bool
-
-## Returns the number off parameters 
-@abstract
-func get_parameter_count() -> int
-
-## Returns true is this function has any parameters
-@abstract
-func has_parameters() -> bool
-
 ## Returns the number of identifiers for this block
 @abstract
 func get_reference_count() -> int

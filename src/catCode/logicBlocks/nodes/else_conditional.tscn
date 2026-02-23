@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dch0lgl1no7hr"]
+
+[ext_resource type="Script" uid="uid://bfsre7qceve4q" path="res://src/catCode/logicBlocks/scripts/if_conditional.gd" id="1_bex2t"]
+
+[node name="ElseConditional" type="Node" unique_id=2042108197]
+script = ExtResource("1_bex2t")
+block_ref = "else"
+block_name = "else"
+block_category = "conditional"

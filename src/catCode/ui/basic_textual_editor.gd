@@ -42,9 +42,12 @@ func parse_line(text_line :String) -> instruction_line:
 	var command = split_text[0].remove_chars("\t ")
 	var indent = split_text[0].count("\t")
 	
-	if instruction_dict.has(command):
-		print("- + command: '" + str(command) + "', indent: " + str(indent) + ", params: ")
+	if instruction_dict.has(command) and len(split_text) > 1:
+		print("- + command: '" + str(command) + "', indent: " + str(indent) + ", params: " + str(split_text[1].left(-1).split(",")))
 		return instruction_line.new(indent, instruction_dict[command], split_text[1].left(-1).split(","))
+	elif instruction_dict.has(command):
+		print("- + command: '" + str(command) + "', indent: " + str(indent))
+		return instruction_line.new(indent, instruction_dict[command])
 	else:
 		print("- ! command: '" + str(command) + "' not found.")
 		return null

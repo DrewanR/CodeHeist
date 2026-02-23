@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://rwkm5vdqcwdc"]
+
+[ext_resource type="Script" uid="uid://bfsre7qceve4q" path="res://src/catCode/logicBlocks/scripts/if_conditional.gd" id="1_l7dnf"]
+
+[node name="ElseIfConditional" type="Node" unique_id=2042108197]
+script = ExtResource("1_l7dnf")
+block_ref = "elif"
+block_name = "else if"
+block_category = "conditional"
