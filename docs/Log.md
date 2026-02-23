@@ -51,9 +51,24 @@ I also decided to combine the general dissertation log with this to have one mar
 ## Week 04
 
 - Finished playerCat documentation (for now), including class diagrams where applicable.
-- Developed the (somewhat) abstract classes for catCode and created catCode manager.
-- Implement the first logical block. [See figure 4.1]
+- Developed the (somewhat) abstract classes for **catCode** and created **catCode manager**.
+- Implemented the first **logical blocks**. [See figure 4.1]
+    - `print`, `print2`
+- Implemented the first **compiler**.
+- Drafted the **conditional** cycle. [See figure 4.2]
+- Started implementing **conditional blocks**.
 
 > ![Class diagram](assets/catCodeClassDiagrams.svg)
 >
 > ***Figure 4.1*** *Partial class diagram for catCode. Showing implementation of the basic function. Certain methods have been omitted. Abstract classes and methods have been shown in italix.*
+
+> ![](assets/week4WhiteboardPhoto.png)
+>
+> ***Figure 4.2*** *Whiteboard photo of initial planning for the conditional cycle*
+
+## Week 05
+
+- Implemented textual **conditional blocks**, with hardwired output as well as a the **indent stack**.
+    - `if` if
+    - `elif` else if
+    - `else` else
