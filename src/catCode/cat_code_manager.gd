@@ -108,6 +108,22 @@ func run():
 				indent_stack.push_back(
 					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.SKIP)
 				)
+		# Conditionals: ELSE IF TODO: Test
+		elif (
+			line.is_selective_element() and # Is a selective block
+			line.primary_block.block_ref == "elif" and # And is an else statement
+			len(indent_stack) > 1 and # Indent stack is large enough for an else state to be possible
+			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
+			indent_stack[-2].indent == line.indent # The indents match
+		):
+			print("! Reached an else if statement of indent " + str(line.indent))
+			line_number += 1
+			# Scenario 1: Currently in "SKIP" state
+			if indent_stack.back().state == PASS_STATES.SKIP:
+				indent_stack.back().state = PASS_STATES.DO if line.primary_block.evaluate() else PASS_STATES.SKIP
+			# Scenario 2: Currently in "DO" state
+			else:
+				indent_stack.back().state = PASS_STATES.SKIP_ALL
 		# Conditionals: ELSE
 		elif (
 			line.is_selective_element() and # Is a selective block
