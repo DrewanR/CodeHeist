@@ -3,7 +3,7 @@ extends Node
 ## Parent node that this will control
 @export var parent :Node
 
-## Node that will implement editting of this manager
+## Node that will implement editing of this manager
 @export var editor :Node
 
 ## Node to output any text to.
@@ -23,7 +23,7 @@ extends Node
 
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
-##    that inheret the logicalBlock class. [br]
+##    that inherit the logicalBlock class. [br]
 ## These are taken from the children of this class. [br][br]
 ## [br]View [docs/catCode.md] for more information.
 var instruction_list :Array[logic_block] = []
@@ -36,7 +36,7 @@ var instruction_dict :Dictionary[String, logic_block] = {}
 var compiled_code :Array[instruction_line] = []
 
 ## Enum for the states of how a code will be treated: [br]
-## DO: will result in the code being exectured,
+## DO: will result in the code being executed,
 ## SKIP_1: will skip until the next control statement of proper indent,
 ## SKIP_ALL: will skip to the end of the indent.
 enum PASS_STATES { DO, SKIP, SKIP_ALL}
@@ -49,7 +49,7 @@ signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[S
 func _ready() -> void:
 	print_line("CatCodeManager Started!")
 	update_instructions()
-	editor.code_recompiled.connect(_on_compiled_code_recieved)
+	editor.code_recompiled.connect(_on_compiled_code_received)
 	
 	print_line("-----\nINSTRUCTION LIST")
 	print_instruction_list()
@@ -72,9 +72,8 @@ func run():
 	var line_number = 0
 	while line_number < len(compiled_code):
 		var line = compiled_code[line_number]
-		print("----")
-		print("  Current Stack: " + str(indent_stack))
-		print("  " + str(line))
+		#print("--Current Stack: " + str(indent_stack))
+		#print("  " + str(line))
 		
 		# Functions: ALL
 		if (
@@ -101,17 +100,17 @@ func run():
 			print("! Reached an if statement of indent " + str(line.indent))
 			line_number += 1
 			if line.primary_block.evaluate(line.parameters):
-				print("  True")
+				#print("  True")
 				indent_stack.push_back(
 					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.DO)
 				)
 			else:
-				print("  False")
+				#print("  False")
 				indent_stack.push_back(
 					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.SKIP)
 				)
 		
-		# Conditionals: ELSE IF TODO: Test
+		# Conditionals: ELIF TODO: Test
 		elif (
 			line.is_selective_element() and # Is a selective block
 			line.primary_block.block_ref == "elif" and # And is an else statement
@@ -123,7 +122,7 @@ func run():
 			line_number += 1
 			# Scenario 1: Currently in "SKIP" state
 			if indent_stack.back().state == PASS_STATES.SKIP:
-				indent_stack.back().state = PASS_STATES.DO if line.primary_block.evaluate() else PASS_STATES.SKIP
+				indent_stack.back().state = PASS_STATES.DO if line.primary_block.evaluate(line.parameters) else PASS_STATES.SKIP
 			# Scenario 2: Currently in "DO" state
 			else:
 				indent_stack.back().state = PASS_STATES.SKIP_ALL
@@ -158,7 +157,7 @@ func run():
 		else:
 			line_number += 1
 
-## Updates the blocks in both the instruciton dicitonary and list
+## Updates the blocks in both the instruction dictionary and list
 func update_instructions(source := self) -> void:
 	# Updates instruction list
 	print("- Updating the instruction set...")
@@ -215,7 +214,7 @@ func print_instruction_dictionary() -> void:
 		var this_item = instruction_dict[this_key]
 		print_line("[" + this_key + "] " + this_item.name + ": " + this_item.get_primary_reference())
 
-func _on_compiled_code_recieved(new_code):
+func _on_compiled_code_received(new_code):
 	compiled_code = new_code
 
 

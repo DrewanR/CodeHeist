@@ -41,12 +41,14 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_lr5ad")
 theme_override_font_sizes/font_size = 14
 text = "print(start)
-if (true)
+if (false)
 	print(if true)
 	if (true)
 		print(if true true)
 	else
 		print(if true false)
+elif (true)
+	print(option 2)
 else
 	print(if false)
 	if (true)

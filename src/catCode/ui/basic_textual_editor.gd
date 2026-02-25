@@ -10,12 +10,15 @@ signal code_recompiled(new_compiled_code :Array[instruction_line])
 
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
-##    that inheret the logicalBlock class. [br]
+##    that inherit the logicalBlock class. [br]
 ## These are taken from the children of this class. [br][br]
 ## [br]View [docs/catCode.md] for more information.
 var instruction_list :Array[logic_block] = []
 ## Dictionary containing the same information.
 var instruction_dict :Dictionary[String, logic_block] = {}
+
+## This is used as a fallback for invalid operators. This should be false.
+var false_fallback := preload("res://src/catCode/logicBlocks/nodes/boolean_value.tscn")
 
 func _ready() -> void:
 	parent.instructions_updated.connect(update_instructions)
@@ -41,28 +44,31 @@ func parse_line(text_line :String) -> instruction_line:
 	var command = split_text[0].remove_chars("\t ")
 	var indent = split_text[0].count("\t")
 	
-	if not instruction_dict.has(command): # First, returns if there is not a corropsonding instruction
+	if not instruction_dict.has(command): # First, returns if there is not a corresponding instruction
 		print("- ! command: '" + str(command) + "' not found.")
 		return null
 	var block := instruction_dict[command]
 	if block.block_type == "conditional_block":
-		if block.is_using_boolean_operator():
-			print("- + structural: '" + str(command) + "', indent: " + str(indent))
+		if block.is_using_boolean_operator() and len(split_text) > 1:
+			print("- + conditio: '" + str(command) + "', indent: " + str(indent) + ", ops: " + str(split_text[1].left(-1)))
 			return instruction_line.new(indent, block, [get_operator(str(split_text[1].left(-1)))])
 		else:
-			print("- + structural: '" + str(command) + "', indent: " + str(indent))
+			print("- + conditio: '" + str(command) + "', indent: " + str(indent))
 			return instruction_line.new(indent, block)
 	else:
 		if len(split_text) > 1:
-			print("- +   function: '" + str(command) + "', indent: " + str(indent) + ", params: " + str(split_text[1].left(-1).split(",")))
+			print("- + function: '" + str(command) + "', indent: " + str(indent) + ", params: " + str(split_text[1].left(-1).split(",")))
 			return instruction_line.new(indent, block, split_text[1].left(-1).split(","))
 		else:
-			print("- +   function: '" + str(command) + "', indent: " + str(indent))
+			print("- + function: '" + str(command) + "', indent: " + str(indent))
 			return instruction_line.new(indent, block)
 
 
 func get_operator(op_code :String) -> boolean_operator:
-	return instruction_dict[op_code]
+	if instruction_dict.has(op_code):
+		return instruction_dict[op_code]
+	else:
+		return false_fallback.instantiate()
 
 func update_instructions(new_list, new_dict):
 	instruction_list = new_list
@@ -71,5 +77,5 @@ func update_instructions(new_list, new_dict):
 func update_instruction_dict(_instruction_dict):
 	instruction_dict = _instruction_dict
 
-func update_instruction_list(_instuction_list):
-	instruction_list = _instuction_list
+func update_instruction_list(_instruction_list):
+	instruction_list = _instruction_list
