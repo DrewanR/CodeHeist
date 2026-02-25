@@ -41,7 +41,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_lr5ad")
 theme_override_font_sizes/font_size = 14
 text = "print(start)
-if (false)
+if (isButtonHeld(up))
 	print(if true)
 	if (true)
 		print(if true true)

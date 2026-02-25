@@ -73,7 +73,7 @@ func run():
 	while line_number < len(compiled_code):
 		var line = compiled_code[line_number]
 		#print("--Current Stack: " + str(indent_stack))
-		#print("  " + str(line))
+		print("  " + str(line))
 		
 		# Functions: ALL
 		if (

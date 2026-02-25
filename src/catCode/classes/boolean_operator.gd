@@ -37,3 +37,6 @@ func get_reference_count() -> int:
 # Returns the primary identify for this  block
 func get_primary_reference() -> String:
 	return block_ref
+
+func _to_string() -> String:
+	return block_ref

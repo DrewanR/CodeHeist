@@ -39,7 +39,7 @@ func compile() -> Array[instruction_line]:
 
 
 func parse_line(text_line :String) -> instruction_line:
-	var split_text = text_line.split("(")
+	var split_text = text_line.split("(", true, 1)
 	
 	var command = split_text[0].remove_chars("\t ")
 	var indent = split_text[0].count("\t")
@@ -51,7 +51,7 @@ func parse_line(text_line :String) -> instruction_line:
 	if block.block_type == "conditional_block":
 		if block.is_using_boolean_operator() and len(split_text) > 1:
 			print("- + conditio: '" + str(command) + "', indent: " + str(indent) + ", ops: " + str(split_text[1].left(-1)))
-			return instruction_line.new(indent, block, [get_operator(str(split_text[1].left(-1)))])
+			return instruction_line.new(indent, block, get_operator(str(split_text[1].left(-1))))
 		else:
 			print("- + conditio: '" + str(command) + "', indent: " + str(indent))
 			return instruction_line.new(indent, block)
@@ -64,11 +64,20 @@ func parse_line(text_line :String) -> instruction_line:
 			return instruction_line.new(indent, block)
 
 
-func get_operator(op_code :String) -> boolean_operator:
-	if instruction_dict.has(op_code):
-		return instruction_dict[op_code]
+## Parses the op_code into a full boolean operator
+func get_operator(op_code :String) -> Array:
+	print("      parsing " + op_code)
+	var split_op_code = op_code.split("(", true, 1)
+	if len(split_op_code) > 1 and instruction_dict.has(split_op_code[0]):
+		print("        got: " + split_op_code[0])
+		print("             " + str(split_op_code[1].left(-1).split(",")))
+		return [instruction_dict[split_op_code[0]], split_op_code[1].left(-1).split(",")]
+	elif instruction_dict.has(split_op_code[0]):
+		print("        got: " + split_op_code[0])
+		return [instruction_dict[split_op_code[0]]]
 	else:
-		return false_fallback.instantiate()
+		print("        invalid, replacing with false.")
+		return [false_fallback.instantiate()]
 
 func update_instructions(new_list, new_dict):
 	instruction_list = new_list
