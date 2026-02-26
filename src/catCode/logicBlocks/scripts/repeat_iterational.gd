@@ -9,7 +9,7 @@ func evaluate(args := [null]):
 		return false
 	else:
 		print("    Rep: " + str(args[1].rep))
-		if (args[1].rep <= args[0]):
+		if (args[1].rep <= int(args[0])):
 			print("    Continuing loop")
 			return true
 		else:

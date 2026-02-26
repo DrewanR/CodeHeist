@@ -5,5 +5,6 @@
 [node name="RepeatIterational" type="Node" unique_id=2042108197]
 script = ExtResource("1_4u0uo")
 block_ref = "repeat"
+await_new_frame = true
 block_name = "repeat"
 block_category = "loops"

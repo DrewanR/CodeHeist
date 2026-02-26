@@ -168,12 +168,15 @@ func run():
 			print("! Re-reached a repeat statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().rep += 1 # Increment accumulator
-			if line.primary_block.evaluate([3, indent_stack.back()]):
+			if line.primary_block.evaluate([line.parameters[0], indent_stack.back()]):
 				print("  Loop continuing...")
 				indent_stack.back().state = PASS_STATES.DO
 			else:
 				print("  Loop ending...")
 				indent_stack.back().state = PASS_STATES.SKIP_ALL
+			
+			if line.primary_block.should_wait_from_next_frame(): # Waits for next frame if instructed to do so
+				await get_tree().process_frame
 		
 		# Iterables: ENDLOOP
 		elif (
@@ -181,6 +184,7 @@ func run():
 			line.indent + 1 == indent_stack.back().indent # Indent is 1 less than before.
 		):
 			print("! End of loop section reached")
+			
 			if indent_stack.back().state == PASS_STATES.DO: # If in do state, continues within the loop
 				print("    Jumping back to start")
 				line_number = indent_stack.back().entry
