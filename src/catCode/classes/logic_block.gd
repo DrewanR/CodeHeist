@@ -29,3 +29,11 @@ func get_reference_count() -> int
 # Returns the primary identify for this  block
 @abstract
 func get_primary_reference() -> String
+
+# Utilities
+#===========
+
+## Converts to string. [br]
+## Note: If a boolean operator is put into this method, it will be evaluated.
+func convert_to_string(arg) -> String:
+	return str(arg)

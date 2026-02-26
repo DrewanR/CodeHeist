@@ -66,13 +66,13 @@ func run():
 	print_line("Running...")
 	editor.compile()
 	## Indent stack, used to control indents and skipping, 
-	var indent_stack := [stateStackLayer.new(0, STACK_LAYER_TYPE.NONE, PASS_STATES.DO)]
+	var indent_stack := [stateStackLayer.new(0, STACK_LAYER_TYPE.NONE, PASS_STATES.DO, 0)]
 	# Iterates across every line
 	#for line in compiled_code:
 	var line_number = 0
 	while line_number < len(compiled_code):
 		var line = compiled_code[line_number]
-		#print("--Current Stack: " + str(indent_stack))
+		print("--Current Stack: " + str(indent_stack))
 		print("  " + str(line))
 		
 		# Functions: ALL
@@ -102,12 +102,12 @@ func run():
 			if line.primary_block.evaluate(line.parameters):
 				#print("  True")
 				indent_stack.push_back(
-					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.DO)
+					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.DO, line_number)
 				)
 			else:
 				#print("  False")
 				indent_stack.push_back(
-					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.SKIP)
+					stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.CONDITIONAL, PASS_STATES.SKIP, line_number)
 				)
 		
 		# Conditionals: ELIF TODO: Test
@@ -120,6 +120,7 @@ func run():
 		):
 			print("! Reached an else if statement of indent " + str(line.indent))
 			line_number += 1
+			indent_stack.back().acc += 1
 			# Scenario 1: Currently in "SKIP" state
 			if indent_stack.back().state == PASS_STATES.SKIP:
 				indent_stack.back().state = PASS_STATES.DO if line.primary_block.evaluate(line.parameters) else PASS_STATES.SKIP
@@ -139,7 +140,53 @@ func run():
 		):
 			print("! Reached an else statement of indent " + str(line.indent))
 			line_number += 1
+			indent_stack.back().acc += 1
 			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
+		
+		# Iterables: REPEAT (initiation)
+		elif (
+			line.is_iterative_element() and # Is an iterative block
+			line.primary_block.block_ref == "repeat" and # And is a repeat statement
+			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
+			indent_stack.back().indent == line.indent # The indents match
+		):
+			print("! Reached a repeat statement of indent " + str(line.indent))
+			# Do not incrment line
+			indent_stack.push_back(
+				stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.ITERATIVE, PASS_STATES.DO, line_number)
+			)
+			#indent_stack.back().entry = line_number - 1
+		
+		# Iterables: REPEAT (evaluation)
+		elif (
+			line.is_iterative_element() and # Is an iterative block
+			line.primary_block.block_ref == "repeat" and # And is a repeat statement
+			len(indent_stack) > 1 and # Indent stack is large enough for this state to be possible
+			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
+			indent_stack[-2].indent == line.indent # The indents match
+		):
+			print("! Re-reached a repeat statement of indent " + str(line.indent))
+			line_number += 1
+			indent_stack.back().rep += 1 # Increment accumulator
+			if line.primary_block.evaluate([3, indent_stack.back()]):
+				print("  Loop continuing...")
+				indent_stack.back().state = PASS_STATES.DO
+			else:
+				print("  Loop ending...")
+				indent_stack.back().state = PASS_STATES.SKIP_ALL
+		
+		# Iterables: ENDLOOP
+		elif (
+			indent_stack.back().type == STACK_LAYER_TYPE.ITERATIVE and # Is in the iterative block.
+			line.indent + 1 == indent_stack.back().indent # Indent is 1 less than before.
+		):
+			print("! End of loop section reached")
+			if indent_stack.back().state == PASS_STATES.DO: # If in do state, continues within the loop
+				print("    Jumping back to start")
+				line_number = indent_stack.back().entry
+			else: # Else: ends the loop
+				print("    Proceding onwards")
+				indent_stack.pop_back()
 		
 		# Skip conditions
 		elif (
@@ -222,11 +269,15 @@ class stateStackLayer:
 	var indent :int
 	var type :STACK_LAYER_TYPE
 	var state :PASS_STATES
+	var rep :int
+	var entry :int
 	
-	func _init(_indent :int, _type :STACK_LAYER_TYPE, entry_state :PASS_STATES) -> void:
+	func _init(_indent :int, _type :STACK_LAYER_TYPE, entry_state :PASS_STATES, _entry :int) -> void:
 		indent = _indent
 		type = _type
 		state = entry_state
+		entry = _entry
+		rep = 0
 	
 	func _to_string() -> String:
-		return str(indent) + ": " + str(type) + " " + str(state)
+		return "<" + str(indent) + ": t:" + str(type) + " s:" + str(state) + " r:" + str(rep) + " s:" + str(entry) + ">"

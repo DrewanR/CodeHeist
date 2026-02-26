@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="10_eo6u7"]
 [ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="11_nbq0e"]
 [ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="12_ee857"]
+[ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="13_sk7gm"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
@@ -41,20 +42,8 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_lr5ad")
 theme_override_font_sizes/font_size = 14
 text = "print(start)
-if (isButtonHeld(up))
-	print(if true)
-	if (true)
-		print(if true true)
-	else
-		print(if true false)
-elif (true)
-	print(option 2)
-else
-	print(if false)
-	if (true)
-		print(if false true)
-	else
-		print(if false false)
+repeat(3)
+	print(meow)
 print(end)"
 parent = NodePath("../../../..")
 
@@ -81,3 +70,5 @@ editable = false
 
 [node name="booleanValueFalse" parent="." unique_id=412036009 instance=ExtResource("12_ee857")]
 value = true
+
+[node name="RepeatIterational" parent="." unique_id=1820639347 instance=ExtResource("13_sk7gm")]

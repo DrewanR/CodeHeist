@@ -3,23 +3,22 @@ class_name instruction_line
 var indent :int
 var primary_block :logic_block
 var parameters :Array
-var executable_function :bool
-var iterative_element :bool
-var selective_element :bool
+var executable_function :bool = false
+var iterative_element :bool = false
+var selective_element :bool = false
 
 func _init(_indent :int, _primary_block :logic_block, _parameters :Array = []) -> void:
 	indent = _indent
 	primary_block = _primary_block
 	parameters = _parameters
 	
-	iterative_element = false
-	selective_element = false
-
 	match primary_block.block_type:
 		"function_block":
 			executable_function = true
 		"conditional_block":
 			selective_element = true
+		"iterative_block":
+			iterative_element = true
 
 
 func is_executable_function():
