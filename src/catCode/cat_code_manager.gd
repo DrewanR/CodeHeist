@@ -146,7 +146,7 @@ func run():
 		# Iterables: REPEAT (initiation)
 		elif (
 			line.is_iterative_element() and # Is an iterative block
-			line.primary_block.block_ref == "repeat" and # And is a repeat statement
+			line.primary_block.block_ref in ["repeat", "repeatForever"] and # And is a repeat statement
 			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack.back().indent == line.indent # The indents match
 		):
@@ -160,7 +160,7 @@ func run():
 		# Iterables: REPEAT (evaluation)
 		elif (
 			line.is_iterative_element() and # Is an iterative block
-			line.primary_block.block_ref == "repeat" and # And is a repeat statement
+			line.primary_block.block_ref in ["repeat", "repeatForever"] and # And is a repeat statement
 			len(indent_stack) > 1 and # Indent stack is large enough for this state to be possible
 			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack[-2].indent == line.indent # The indents match

@@ -1,6 +1,6 @@
 extends iteration_block
 
-var false_fallback := preload("res://src/catCode/logicBlocks/nodes/boolean_value.tscn")
+@export var params :Array[String] = []
 
 ## Returns true if loop should continue
 func evaluate(args := [null]):

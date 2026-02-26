@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="11_nbq0e"]
 [ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="12_ee857"]
 [ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="13_sk7gm"]
+[ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="14_r7q5r"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
@@ -72,3 +73,5 @@ editable = false
 value = true
 
 [node name="RepeatIterational" parent="." unique_id=1820639347 instance=ExtResource("13_sk7gm")]
+
+[node name="ForeverIterational" parent="." unique_id=1624908876 instance=ExtResource("14_r7q5r")]
