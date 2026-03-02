@@ -28,7 +28,7 @@ func is_reference(reference :String) -> bool:
 func is_using_boolean_operator() -> bool:
 	return uses_boolean_operator
 
-func should_wait_from_next_frame() -> bool:
+func should_wait_for_next_frame() -> bool:
 	return await_new_frame
 
 ## Returns the number of identifiers for this block

@@ -175,7 +175,7 @@ func run():
 				print("  Loop ending...")
 				indent_stack.back().state = PASS_STATES.SKIP_ALL
 			
-			if line.primary_block.should_wait_from_next_frame(): # Waits for next frame if instructed to do so
+			if line.primary_block.should_wait_for_next_frame(): # Waits for next frame if instructed to do so
 				await get_tree().process_frame
 		
 		# Iterables: ENDLOOP

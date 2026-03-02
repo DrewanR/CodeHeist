@@ -1,6 +1,6 @@
 extends iteration_block
 
-@export var params :Array[String] = []
+@export var params :Array = []
 
 ## Returns true if loop should continue
 func evaluate(args := [null]):

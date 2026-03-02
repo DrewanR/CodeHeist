@@ -1,0 +1,126 @@
+<mxfile host="65bd71144e">
+    <diagram id="_CW8ZOkGRdlhEe7XOo1M" name="Page-1">
+        <mxGraphModel dx="446" dy="246" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="Calls methods&lt;br&gt;within" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;startSize=10;endSize=10;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;dashed=1;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&amp;nbsp;Editor&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;endFill=0;startSize=10;endSize=10;" parent="1" source="2" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="520" y="250"/>
+                            <mxPoint x="520" y="250"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="Compile Requests" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;startSize=10;endSize=10;dashed=1;" parent="1" source="2" target="4" edge="1">
+                    <mxGeometry x="-0.1667" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="520" y="290"/>
+                            <mxPoint x="520" y="290"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="Instruction Set" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;endFill=0;startSize=10;endSize=10;" parent="1" source="2" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="520" y="270"/>
+                            <mxPoint x="520" y="270"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="Errors/Print/Other text outputs" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;endFill=0;startSize=10;endSize=10;" parent="1" source="2" target="13" edge="1">
+                    <mxGeometry x="0.3143" relative="1" as="geometry">
+                        <mxPoint x="380" y="350" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="380" y="410"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="&amp;nbsp;Text Output&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;endFill=0;startSize=10;endSize=10;" parent="1" source="2" target="13" edge="1">
+                    <mxGeometry x="0.2727" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="420" y="370"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="&amp;nbsp;Parent&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;endFill=0;startSize=10;endSize=10;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="240" y="270"/>
+                            <mxPoint x="240" y="270"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="&amp;nbsp;Error Output&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;endFill=0;startSize=10;endSize=10;" parent="1" source="2" target="13" edge="1">
+                    <mxGeometry x="0.3846" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="400" y="390"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;Children&amp;nbsp;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;endArrow=diamond;endFill=1;startSize=10;endSize=10;" parent="1" source="2" target="22" edge="1">
+                    <mxGeometry x="0.2002" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="340" y="370"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="Block information&lt;br&gt;and methods" style="edgeStyle=elbowEdgeStyle;html=1;elbow=vertical;endSize=10;startSize=10;endArrow=open;endFill=0;dashed=1;" edge="1" parent="1" source="22" target="2">
+                    <mxGeometry x="-0.3333" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="360" y="400"/>
+                            <mxPoint x="260" y="400"/>
+                            <mxPoint x="360" y="400"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="CodeManager" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="240" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&amp;nbsp;Child&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=diamond;endFill=1;endSize=10;startSize=10;" parent="1" source="3" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="240" y="250"/>
+                            <mxPoint x="240" y="250"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="PlayerCat" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="240" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Compiled Code" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;endFill=0;startSize=10;endSize=10;" parent="1" source="4" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="520" y="310"/>
+                            <mxPoint x="520" y="310"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="CodeEditor" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="240" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Log" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="&lt;p style=&quot;line-height: 70%;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;Instruction&lt;br&gt;List&lt;/font&gt;&lt;/p&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="200" width="60" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="&lt;p style=&quot;line-height: 70%;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;Instruction&lt;br&gt;Dictionary&lt;/font&gt;&lt;/p&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="200" width="60" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="LogicalBlocks&lt;br&gt;(Functions, Variables, Blocks, etc.)" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="350" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
