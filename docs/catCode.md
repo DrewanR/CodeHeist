@@ -1,5 +1,7 @@
 Note: In the godot style guide difference cases in variables correlate to different things, as a general rule of thumb `camelCase` refers to nodes, whereas `snake_case` refers to classes and variables. Where possible, this convention has been followed.
 
+Note: all code blocks are reference to by their reference.
+
 # Cat Code
 
 CatCode was planned as a Scratch-like programming language specially designed to interface with playerCat.
@@ -59,13 +61,21 @@ Parameters are specified in the `params` array semantically, however only consid
 
 ### Conditional_block
 
-The conditional_block superclass was constructed for `if`, `elif` and `else` statements. Ultimately all of these methods could be defined using the `if_conditional`, however this class was kept in case future statements were added that could not be done using this subclass.
+The `conditional_block` superclass was constructed for `if`, `elif` and `else` statements. Ultimately all of these methods could be defined using the `if_conditional`, however this class was kept in case future statements were added that could not be done using this subclass.
 
 The logic for conditional blocks are mostly handled by the code manager, except for evaluation which is handled by a subclass. The `evaluate()` method, when `uses_boolean_operator()` is true, uses the boolean operator specified within the first slot (index 0) of `args` array with any other parameters provided in the second slot.
 
 ### Boolean_operator
 
+The `boolean_operator` superclass does not provide much function by itself. Instead it's blocks are designed to be used by `conditional_blocks` and other statements that can be evaluated. A boolean operator has a single function: return true or false when `evaluate()` is called based on the arguments. These blocks, more than others, make use of the @export annotation, such are `value` for `boolean_value` or the permitted buttons for `is_button_held`
+
 ### Iteration_block
+
+The `iteration_block` superclass was constructed for `repeat` and `repeatForever` blocks. Due to time constraints `repeat_until` was not implemented, however it is expected that this would take a similar structure and implementation to `if`. Similar to conditional blocks, the implementation, execution and logic behind these is handled by the compiler.
+
+The only attribute unique to the `iteration_block` is `await_new_frame`, which denotes whether the interpreter will wait until the next frame before repeating. It was decided that for most, if not all, player use of this block, this will be the case. This is also how scratch and many other visual programming languages for learners works and aligns closer to what people expect when they place a loop (rather than the alternative scenario where everything happens at once). 
+
+**TODO: Check factuality**
 
 ## Creating an Instruction Set
 
@@ -103,6 +113,104 @@ Finally, the `instructions_updated(new_list :Array[logic_block], new_dict :Dicti
 
 ## Compiling code
 
+Code is compiled by the editor. This was done so that the editor can be swapped out and to obey object orientated programming best practice.
+
+**TODO finish**
+
+### Compiled Code
+
+The "compiled code" comes in the form of an array of `instruction` class instances. This class stores a reference to the logical block, indent and parameters for a given line, alongside some methods, such as `is_executable_function()`, which aid with execution. Each element of the array corresponds to one line of code.
+
+The quirks of this system are listed below:
+- Boolean operators are stored in the parameters of conditional statements in the following format: `[<boolean operator ref>, [<boolean operator arguments>]]`
+
 ## Interpreting Code
+
+Interpreting the code is handled by the codeManager. At it's core, the interpreter will run be code line by line, modifying its behavior depending on it's state. There are two elements that effect the state: 1, selection statements (`if`, `elif`, `else` etc.) and, 2, iteration blocks (`repeat`). Each indent falls into either states or is at root, henceforth known as indent types to prevent confusion with pass states.
+
+This, alongside the current indent and pass state, is stored in a stack\* called the `indent_stack`. This stack stores instances of the internal `stateStackLayer` class, the full definition shown in figure idk. In another language such as C# this data could be represented as a struct. Due to the limited number of pass states and layer types, both `type` and `state` are stored using enums. This stack system is analogous to the call stack structure that appears in numerous programming languages.
+
+To explain how `compiled_code` and the `indent_stack` are used, the code interpreter will be explained in the three isolated scenarios: 1, sequential interpretation, 2, conditional structures, 3, iterative structures; followed by the final combination, including nested iteration and selection.
+
+> ```
+> ## Enum for the states of how a code will be treated: [br]
+> ## DO: will result in the code being executed,
+> ## SKIP_1: will skip until the next control statement of proper indent,
+> ## SKIP_ALL: will skip to the end of the indent.
+> enum PASS_STATES { DO, SKIP, SKIP_ALL}
+> ## Enum for the type of layer in the indentStack
+> enum STACK_LAYER_TYPE { NONE, CONDITIONAL, ITERATIVE }
+>
+> ...
+>
+> class stateStackLayer:
+>	var indent :int
+>	var type :STACK_LAYER_TYPE
+>	var state :PASS_STATES
+>	var rep :int
+>	var entry :int
+>	
+>	func _init(_indent :int, _type :STACK_LAYER_TYPE, entry_state :PASS_STATES, _entry :int) -> void:
+>		indent = _indent
+>		type = _type
+>		state = entry_state
+>		entry = _entry
+>		rep = 0
+>	
+>	func _to_string() -> String:
+>		return "<" + str(indent) + ": t:" + str(type) + " s:" + str(state) + " r:" + str(rep) + " s:" + str(entry) + ">"
+> ```
+>
+> Figure idk extract from `cat_code_manager.md` showing the definition of the enums `PASS_STATES` and `STACK_LAYER_TYPES` as well as the full definition of the `stateStackLayer`
+
+\*Godot does not have dedicated stack data structures, however the array implements the methods `push_back()`, `back()` and `pop_back()` that allows interaction with an array as if it were a stack. For clarity, top of the stack refers to the same index as back of the array.
+
+### Sequential interpretation
+
+This is the simplest of our scenarios. In this scenario, there are a series of instructions that must be interpreted in order.
+
+**TODO finish**
+
+### Conditional structures
+
+This scenario represents a structure consisting of `if`, `else` and `elif` statements. This was what the pass states were created for. In essences there are 5 states: evaluate, do, skip, skip all, and end as shown in figure idk-3. Because evaluate and end are purely function and do not persist for more than one loop, therefore do not possess pass states.
+
+> ![](assets/selectionStateDiagram.svg)
+>
+> Figure idk-3: State diagram for interpreting
+
+When an `if` statement is reached, whilst in a `DO` pass state, two things happen. First, the statement is evaluated and then a new stack layer is added to the `indent_Stack` of an indent one higher than the current layer. If the result is true, the pass state will be set to `DO`, else, it will be set to `SKIP`.
+
+Following this, when checking for an `elif` or `else`, the code manager will check the second item from the top of the stack (index -2)\*\* and then will act accordingly if the indent and state of that layer is correct. If it reaches an `else` statement of appropriate indent, it will switch to the opposite pass state, `DO` for `SKIP` and `SKIP_ALL` for `DO` respectively. `elif` is more complex having three potential outcomes. First, if the current pass state is `SKIP`, it will evaluate the line's operator, setting the top stack layer to `DO` if the operator is true, `SKIP` if not. If the current pass state is `DO`, it will set it to `SKIP_ALL`.
+
+There is no true "end" statement, instead it will assume it is the end of a block when the indent of the next line is lower than the current stack and it is not an appropriate statement. If this is the case, the current top of the stack will be "popped" using the `pop_back()` method. This is one of the cases where the `line_number` is **not** incremented in case as this process needs to be repeated for every indent until the indent is once more where it is meant to be.
+
+This logic did not need to be modified to allow the use of nested structures due to the use of the indent stack.
+
+> **TODO:** Decide if this is worth the trauma or drawing.
+>
+> Figure idk-6: Flow chart showing one cycle of a conditional structure.
+
+As stated before, `boolean_operators` are handled by the relevant `iterable_blocks` similar to how `function_blocks` handle parameters with the first index being the `logic_block` and the second containing the parameters. For example, `if(isButtonHeld(up))` will have the following `line` value:
+
+```
+instruction{
+	...
+	primary_block = if
+	parameters = [isButtonHeld, "up"]
+	...
+}
+```
+To evaluate this, one would call the following method: `line.primary_block.evaluate(parameters)`, similar to a function call. It is within the `evaluate()` function defined within `if` that `isButtonHeld.evaluate(["up"])` is called.
+
+\*\*To prevent errors, this test is only done if the size of the stack is greater than 2. This is possible because it is impossible for an selection `elif` or `else` statement to be reached by default (assuming correct code) as they must appear after an if, which will always increase the stack size to a value of 2 or higher.
+
+### Iterative structures
+
+**TODO finish**
+
+### The full picture
+
+**TODO finish**
 
 ## The Graphical Editor
