@@ -167,9 +167,45 @@ To explain how `compiled_code` and the `indent_stack` are used, the code interpr
 
 ### Sequential interpretation
 
-This is the simplest of our scenarios. In this scenario, there are a series of instructions that must be interpreted in order.
+This is the simplest of our scenarios. In this scenario, there are a series of instructions that must be interpreted in order. To do this, `line` is set to the current line using `line_number`. It is first checked that the current `state` is `PASS_STATE.DO` (henceforth referred to `DO`) in the top layer of `indent_stack`. If current pass state is `SKIP` or `SKIP_ALL`, the line will be skipped. As well as this, the indent of `line` is compared to the indent in the indent stack, skipping if it is not equal. For clarity, this pair of checks will be referred to as `is_state_indent_valid(n)`, where `n` refers the index of the `state_stack_layer` getting checked. This method does not exist in the code to aid debugging through exposing all the factors considered in an if statement.
 
-**TODO finish**
+> ```
+> class_name instruction_line
+> 
+> var indent :int
+> var primary_block :logic_block
+> var parameters :Array
+> var executable_function :bool = false
+> var iterative_element :bool = false
+> var selective_element :bool = false
+> 
+> func _init(_indent :int, _primary_block:logic_block, _parameters :Array = []) -> void:
+> 	indent = _indent
+> 	primary_block = _primary_block
+> 	parameters = _parameters
+> 	
+> 	match primary_block.block_type:
+> 		"function_block":
+> 			executable_function = true
+> 		"conditional_block":
+> 			selective_element = true
+> 		"iterative_block":
+> 			iterative_element = true
+> ...
+> 
+> func valid_parameters():
+> 	return (primary_block.get_parameter_count() == len(parameters))
+> 
+> func uses_parameters():
+> 	return primary_block.has_parameters()
+> ...
+> ```
+>
+> Figure idk-413 extract of the `instruction` class, `line` is an instance of this.
+
+To execute a function `line.primary_block.execute()` is called. `primary_block` contains a reference to a given line's `logic_block`, which is how `.execute()` can be called. If there are parameters, `execute(line.params)` is called instead. Parameters are stored in an array to provide a standardized header for this function regardless of parameter count.
+
+Finally, `line_number` is incremented by 1. This is done by nearly all line types, so it will only be noted in future scenarios and logic if this is *not* the case.
 
 ### Conditional structures
 
