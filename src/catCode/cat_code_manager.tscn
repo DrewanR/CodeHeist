@@ -1,77 +1,8 @@
 [gd_scene format=3 uid="uid://d1mjc7o4kc5ew"]
 
 [ext_resource type="Script" uid="uid://djx3mjpar6s08" path="res://src/catCode/cat_code_manager.gd" id="1_ycvx2"]
-[ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="2_ngf15"]
-[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="2_sbfq2"]
-[ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="3_fu1vx"]
-[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="3_lr5ad"]
-[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="3_yf6h5"]
-[ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="6_1edkn"]
-[ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="8_4cxkd"]
-[ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="9_lyom6"]
-[ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="10_eo6u7"]
-[ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="11_nbq0e"]
-[ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="12_ee857"]
-[ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="13_sk7gm"]
-[ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="14_r7q5r"]
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output")]
 script = ExtResource("1_ycvx2")
-editor = NodePath("testUI/MarginContainer/HSplitContainer/basicTextualEdit")
-text_output = NodePath("testUI/MarginContainer/HSplitContainer/basicOutput")
-
-[node name="testUI" type="CanvasLayer" parent="." unique_id=184729069]
-
-[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=871543388]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=886225117]
-layout_mode = 2
-split_offsets = PackedInt32Array(488)
-split_offset = 488
-
-[node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_sbfq2")]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_lr5ad")
-theme_override_font_sizes/font_size = 14
-text = "print(start)
-repeat(3)
-	print(meow)
-print(end)"
-parent = NodePath("../../../..")
-
-[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("2_ngf15")]
-custom_minimum_size = Vector2(320, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_yf6h5")
-theme_override_font_sizes/font_size = 12
-editable = false
-
-[node name="PrintLineFunction" parent="." unique_id=689348759 instance=ExtResource("3_fu1vx")]
-
-[node name="Print2Function" parent="." unique_id=864944594 instance=ExtResource("6_1edkn")]
-
-[node name="IfConditional" parent="." unique_id=2042108197 instance=ExtResource("8_4cxkd")]
-
-[node name="ElseConditional" parent="." unique_id=1778036990 instance=ExtResource("9_lyom6")]
-
-[node name="ElseIfConditional" parent="." unique_id=299415310 instance=ExtResource("10_eo6u7")]
-
-[node name="IsButtonHeldOperator" parent="." unique_id=1713190488 instance=ExtResource("11_nbq0e")]
-
-[node name="booleanValueTrue" parent="." unique_id=1696839635 instance=ExtResource("12_ee857")]
-
-[node name="booleanValueFalse" parent="." unique_id=412036009 instance=ExtResource("12_ee857")]
-value = true
-
-[node name="RepeatIterational" parent="." unique_id=1820639347 instance=ExtResource("13_sk7gm")]
-
-[node name="ForeverIterational" parent="." unique_id=1624908876 instance=ExtResource("14_r7q5r")]
+editor = NodePath("")
+text_output = NodePath("")

@@ -74,5 +74,33 @@ focus_neighbor_left = NodePath("../Button")
 focus_previous = NodePath("../Button")
 text = "test_level_01"
 
+[node name="Button3" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=1615558631]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath("../Button")
+focus_previous = NodePath("../Button")
+text = "test_level_03"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=72884772]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "
+[b]Test IDE[/b]
+Basic IDE for testing catCode"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=516576645]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button4" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2" unique_id=128879042]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "test_level_00"
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button" to="Icon" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button2" to="Icon" method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button3" to="Icon" method="_on_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button4" to="Icon" method="_on_button_4_pressed"]

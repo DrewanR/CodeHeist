@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://4tjuro70dg3"]
+
+[ext_resource type="PackedScene" uid="uid://d1mjc7o4kc5ew" path="res://src/catCode/cat_code_manager.tscn" id="1_rfngg"]
+[ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="2_jksdj"]
+[ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="3_fc42l"]
+[ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="4_cjhb2"]
+[ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="5_7wmfx"]
+[ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="6_oxn82"]
+[ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="7_7oud1"]
+[ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="8_md34c"]
+[ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="9_5a8ao"]
+[ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="10_1tos2"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="11_7wmfx"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="12_oxn82"]
+[ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="13_7oud1"]
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="14_md34c"]
+
+[node name="TestBasicIde" type="Node2D" unique_id=759264037]
+
+[node name="testUI" type="CanvasLayer" parent="." unique_id=743464664]
+
+[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=1090640253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=1802660511]
+layout_mode = 2
+split_offsets = PackedInt32Array(488)
+split_offset = 488
+
+[node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("11_7wmfx")]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_oxn82")
+theme_override_font_sizes/font_size = 14
+text = "print(start)
+repeat(3)
+	print(meow)
+print(end)"
+parent = NodePath("../../../../CatCodeManager")
+
+[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("13_7oud1")]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("14_md34c")
+theme_override_font_sizes/font_size = 12
+editable = false
+
+[node name="CatCodeManager" parent="." unique_id=2046772742 node_paths=PackedStringArray("parent", "editor", "text_output") instance=ExtResource("1_rfngg")]
+parent = NodePath("..")
+editor = NodePath("../testUI/MarginContainer/HSplitContainer/basicTextualEdit")
+text_output = NodePath("../testUI/MarginContainer/HSplitContainer/basicOutput")
+
+[node name="booleanValue" parent="CatCodeManager" unique_id=2042108197 instance=ExtResource("2_jksdj")]
+
+[node name="ElseConditional2" parent="CatCodeManager" unique_id=1836580713 instance=ExtResource("3_fc42l")]
+
+[node name="ElseIfConditional2" parent="CatCodeManager" unique_id=1263066424 instance=ExtResource("4_cjhb2")]
+
+[node name="IfConditional2" parent="CatCodeManager" unique_id=432496340 instance=ExtResource("5_7wmfx")]
+
+[node name="IsButtonHeldOperator2" parent="CatCodeManager" unique_id=1525557601 instance=ExtResource("6_oxn82")]
+
+[node name="Print2Function2" parent="CatCodeManager" unique_id=689348759 instance=ExtResource("7_7oud1")]
+
+[node name="PrintLineFunction2" parent="CatCodeManager" unique_id=291488780 instance=ExtResource("8_md34c")]
+
+[node name="ForeverIterational2" parent="CatCodeManager" unique_id=862364691 instance=ExtResource("9_5a8ao")]
+
+[node name="RepeatIterational2" parent="CatCodeManager" unique_id=717508803 instance=ExtResource("10_1tos2")]

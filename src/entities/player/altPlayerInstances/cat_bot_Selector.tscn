@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://so4qwlev1fa2"]
+
+[ext_resource type="Script" uid="uid://dyy2325o5pr8a" path="res://src/entities/player/altPlayerInstances/cat_bot_selector.gd" id="1_bj0er"]
+
+[node name="CatBotSelector" type="Control" unique_id=353269680]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bj0er")
+options = {
+"Blank": "player_cat",
+"Full auto": "altPlayerInstances/cat_bot_full_auto"
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827295498]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=2139508289]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -29.0
+offset_right = 87.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer" unique_id=286917338]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer" unique_id=194207955]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=977845627]
+layout_mode = 2
+text = "Select catBot instance:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1872693224]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1409516216]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1195466758]
+layout_mode = 2
+text = "Spawn"
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
