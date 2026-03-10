@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://c2d7ybqqo8sft"]
+
+[ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_mfjf1"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="2_jh4xs"]
+[ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="2_ln0o4"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="3_0jnp7"]
+[ext_resource type="PackedScene" uid="uid://c5vxqu6jgkplc" path="res://src/entities/player/autoControllers/auto_horizontal_move_controller.tscn" id="3_eskys"]
+[ext_resource type="PackedScene" uid="uid://dy8we4rmgnm4d" path="res://src/entities/player/autoControllers/auto_jump_controller.tscn" id="4_yf38l"]
+[ext_resource type="PackedScene" uid="uid://drpa7rlvmpksj" path="res://src/entities/player/autoControllers/auto_strike_controller.tscn" id="5_3ia3n"]
+[ext_resource type="PackedScene" uid="uid://d1mjc7o4kc5ew" path="res://src/catCode/cat_code_manager.tscn" id="6_k65lm"]
+[ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="7_rhehe"]
+[ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="8_jh4xs"]
+[ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="9_0jnp7"]
+[ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="10_p2y0w"]
+[ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="11_2usi5"]
+[ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="12_avru2"]
+[ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="13_10ey4"]
+[ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="14_kah58"]
+[ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="15_oyjsq"]
+
+[node name="CatBot_FullAuto_w_CM" unique_id=1345683778 instance=ExtResource("1_mfjf1")]
+
+[node name="basicTextualEdit" parent="BasicUI/MarginContainer" parent_id_path=PackedInt32Array(1751148385) index="3" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_jh4xs")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_0jnp7")
+theme_override_font_sizes/font_size = 14
+text = "print(start)
+repeat(3)
+	print(meow)
+print(end)"
+parent = NodePath("../../../CatCodeManager")
+
+[node name="CameraManager" parent="." index="5" unique_id=1223681043 instance=ExtResource("2_ln0o4")]
+
+[node name="AutoHorizontalMoveController" parent="." index="6" unique_id=1219527993 instance=ExtResource("3_eskys")]
+
+[node name="AutoJumpController" parent="." index="7" unique_id=1824418607 instance=ExtResource("4_yf38l")]
+
+[node name="AutoStrikeController" parent="." index="8" unique_id=1563770025 instance=ExtResource("5_3ia3n")]
+
+[node name="CatCodeManager" parent="." index="9" unique_id=2046772742 node_paths=PackedStringArray("parent", "editor", "text_output", "error_output") instance=ExtResource("6_k65lm")]
+parent = NodePath("..")
+editor = NodePath("../BasicUI/MarginContainer/basicTextualEdit")
+text_output = NodePath("../BasicUI/MarginContainer/SimpleLog")
+error_output = NodePath("..")
+show_instruction_set = false
+
+[node name="booleanValue" parent="CatCodeManager" index="0" unique_id=2042108197 instance=ExtResource("7_rhehe")]
+
+[node name="ElseConditional2" parent="CatCodeManager" index="1" unique_id=1657332749 instance=ExtResource("8_jh4xs")]
+
+[node name="ElseIfConditional2" parent="CatCodeManager" index="2" unique_id=1606323313 instance=ExtResource("9_0jnp7")]
+
+[node name="IfConditional2" parent="CatCodeManager" index="3" unique_id=1129904436 instance=ExtResource("10_p2y0w")]
+
+[node name="IsButtonHeldOperator2" parent="CatCodeManager" index="4" unique_id=231060803 instance=ExtResource("11_2usi5")]
+
+[node name="Print2Function2" parent="CatCodeManager" index="5" unique_id=689348759 instance=ExtResource("12_avru2")]
+
+[node name="PrintLineFunction2" parent="CatCodeManager" index="6" unique_id=2086815940 instance=ExtResource("13_10ey4")]
+
+[node name="ForeverIterational2" parent="CatCodeManager" index="7" unique_id=452388789 instance=ExtResource("14_kah58")]
+
+[node name="RepeatIterational2" parent="CatCodeManager" index="8" unique_id=1096907487 instance=ExtResource("15_oyjsq")]

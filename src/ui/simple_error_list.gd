@@ -12,6 +12,7 @@ var alpha = 0.0
 
 func _ready() -> void:
 	parent.major_error_occurred.connect(_new_error)
+	parent.log_message.connect(_new_log_line)
 
 
 func _process(delta: float) -> void:
@@ -41,6 +42,8 @@ func print_line(message) -> void:
 func _new_error(message) -> void:
 	print_line(message)
 
+func _new_log_line(message) -> void:
+	print_line(message)
 
 func _on_mouse_entered() -> void:
 	mouse_over = true

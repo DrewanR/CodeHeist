@@ -11,8 +11,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bj0er")
 options = {
-"Blank": "player_cat",
-"Full auto": "altPlayerInstances/cat_bot_full_auto"
+"Blank": "res://src/entities/player/player_cat.tscn",
+"Full auto": "res://src/entities/player/altPlayerInstances/cat_bot_full_auto.tscn",
+"Full auto w/ Text Code": "res://src/entities/player/altPlayerInstances/cat_bot_full_auto_with_text_code_manager.tscn"
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827295498]

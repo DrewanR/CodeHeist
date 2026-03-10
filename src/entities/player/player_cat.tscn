@@ -160,17 +160,9 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 6
 
-[node name="PlayerData" type="Label" parent="BasicUI/MarginContainer" unique_id=926159387]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "DEBUG
-bottom text"
-label_settings = ExtResource("3_w0fkd")
-
 [node name="TempFPS" type="Label" parent="BasicUI/MarginContainer" unique_id=481506965]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "69 "
 label_settings = ExtResource("3_w0fkd")
@@ -207,14 +199,22 @@ pre_text = ""
 post_text = "SP"
 show_max = false
 
-[node name="SimpleErrorList" type="TextEdit" parent="BasicUI/MarginContainer" unique_id=1901138789 node_paths=PackedStringArray("parent")]
+[node name="PlayerData" type="Label" parent="BasicUI/MarginContainer/HUD" unique_id=926159387]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "DEBUG
+bottom text"
+label_settings = ExtResource("3_w0fkd")
+
+[node name="SimpleLog" type="TextEdit" parent="BasicUI/MarginContainer" unique_id=1901138789 node_paths=PackedStringArray("parent")]
 custom_minimum_size = Vector2(420, 200)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 focus_mode = 0
 text = "CatBot(tm) system log, hover mouse over to view!"
-placeholder_text = "CatBot(tm) system log, hover mouse over to view!"
 wrap_mode = 1
 virtual_keyboard_enabled = false
 script = ExtResource("7_itvx8")
@@ -238,7 +238,7 @@ debug_color = Color(0.732089, 0, 0.189313, 0.42)
 [connection signal="damage_received" from="." to="." method="_on_damage_received"]
 [connection signal="healing_received" from="." to="." method="_on_healing_received"]
 [connection signal="hp_changed" from="." to="." method="_on_hp_changed"]
-[connection signal="mouse_entered" from="BasicUI/MarginContainer/SimpleErrorList" to="BasicUI/MarginContainer/SimpleErrorList" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="BasicUI/MarginContainer/SimpleErrorList" to="BasicUI/MarginContainer/SimpleErrorList" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="BasicUI/MarginContainer/SimpleLog" to="BasicUI/MarginContainer/SimpleLog" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BasicUI/MarginContainer/SimpleLog" to="BasicUI/MarginContainer/SimpleLog" method="_on_mouse_exited"]
 [connection signal="area_entered" from="killer" to="." method="_on_killer_area_entered"]
 [connection signal="body_entered" from="killer" to="." method="_on_killer_body_entered"]

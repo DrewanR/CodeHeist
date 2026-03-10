@@ -21,6 +21,9 @@ extends Node
 ## NOTE: If left blank, this will default to the [text_output] node
 @export var error_output :Node = text_output
 
+## Show instruction set on boot
+@export var show_instruction_set := true
+
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
 ##    that inherit the logicalBlock class. [br]
@@ -51,11 +54,12 @@ func _ready() -> void:
 	update_instructions()
 	editor.code_recompiled.connect(_on_compiled_code_received)
 	
-	print_line("-----\nINSTRUCTION LIST")
-	print_instruction_list()
-	print_line("-----\nINSTRUCTION DICTIONARY")
-	print_instruction_dictionary()
-	print_line("-----")
+	if (show_instruction_set):
+		print_line("-----\nINSTRUCTION LIST")
+		print_instruction_list()
+		print_line("-----\nINSTRUCTION DICTIONARY")
+		print_instruction_dictionary()
+		print_line("-----")
 	print_line("Debug: Press [Z] to run!")
 
 func _process(_delta: float) -> void:

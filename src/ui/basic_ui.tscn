@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://c0ybv8ymuaorn"]
+
+[ext_resource type="LabelSettings" uid="uid://767687giqxrr" path="res://assets/ui/debug_text_s2.tres" id="1_lsses"]
+[ext_resource type="PackedScene" uid="uid://y4i1f2i4m7vs" path="res://src/ui/simple_hp_readout.tscn" id="2_5cyww"]
+[ext_resource type="LabelSettings" uid="uid://cml4xcp4b3ew5" path="res://assets/ui/debug_text_s2_large.tres" id="3_t5gq6"]
+[ext_resource type="PackedScene" uid="uid://34fb21mylwqj" path="res://src/ui/simple_stability_readout.tscn" id="4_uwfos"]
+[ext_resource type="Script" uid="uid://didm82qgyk32t" path="res://src/ui/simple_error_list.gd" id="5_0hdyy"]
+
+[node name="BasicUI" type="CanvasLayer" unique_id=543981455]
+layer = 100
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=740102978]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="PlayerData" type="Label" parent="MarginContainer" unique_id=1538824616]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "DEBUG
+bottom text"
+label_settings = ExtResource("1_lsses")
+
+[node name="TempFPS" type="Label" parent="MarginContainer" unique_id=1108027489]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "69 "
+label_settings = ExtResource("1_lsses")
+horizontal_alignment = 2
+
+[node name="HUD" type="VBoxContainer" parent="MarginContainer" unique_id=99813773]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="Stats" type="HBoxContainer" parent="MarginContainer/HUD" unique_id=1820527239]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="SimpleHPReadout" parent="MarginContainer/HUD/Stats" unique_id=1137967255 node_paths=PackedStringArray("parent") instance=ExtResource("2_5cyww")]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "HP:1/3"
+label_settings = ExtResource("3_t5gq6")
+parent = NodePath("")
+pre_text = "HP:"
+
+[node name="Label" type="Label" parent="MarginContainer/HUD/Stats" unique_id=1783496419]
+layout_mode = 2
+text = "+"
+label_settings = ExtResource("3_t5gq6")
+
+[node name="SimpleSBReadout" parent="MarginContainer/HUD/Stats" unique_id=1385700193 node_paths=PackedStringArray("parent") instance=ExtResource("4_uwfos")]
+layout_mode = 2
+text = "1SP"
+label_settings = ExtResource("3_t5gq6")
+parent = NodePath("")
+pre_text = ""
+post_text = "SP"
+show_max = false
+
+[node name="SimpleErrorList" type="TextEdit" parent="MarginContainer" unique_id=1037181977 node_paths=PackedStringArray("parent")]
+custom_minimum_size = Vector2(420, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_mode = 0
+text = "CatBot(tm) system log, hover mouse over to view!"
+placeholder_text = "CatBot(tm) system log, hover mouse over to view!"
+wrap_mode = 1
+virtual_keyboard_enabled = false
+script = ExtResource("5_0hdyy")
+parent = NodePath("")
+
+[connection signal="mouse_entered" from="MarginContainer/SimpleErrorList" to="MarginContainer/SimpleErrorList" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/SimpleErrorList" to="MarginContainer/SimpleErrorList" method="_on_mouse_exited"]

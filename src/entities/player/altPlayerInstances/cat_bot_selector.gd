@@ -1,6 +1,6 @@
 extends Control
 
-@export var options = {}
+@export var options :Dictionary[String,String] = {}
 
 var paths = []
 
@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _on_button_pressed() -> void:
 	print("Load " + paths[button.selected])
-	var scene = load("res://src/entities/player/" + paths[button.selected] + ".tscn")
+	var scene = load(paths[button.selected])
 	var instance = scene.instantiate()
 	add_child(instance)
 	

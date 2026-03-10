@@ -67,12 +67,13 @@ var debug_text: String = "DEBUG"
 #===========================================
 
 signal major_error_occurred(text :String)
+signal log_message(text :String)
 
 # Setup
 #===========================================
 
 ## Node variables
-@onready var debug_text_node = $BasicUI/MarginContainer/PlayerData
+@onready var debug_text_node = $BasicUI/MarginContainer/HUD/PlayerData
 @onready var debug_fps_node = $BasicUI/MarginContainer/TempFPS
 @onready var sprite_node = $Sprite2D
 @onready var animation_player_node = $AnimationPlayer
@@ -407,6 +408,10 @@ func must_be_less_than(value, maximum, allow_equal_to=true, text="Value", messag
 func produce_error(message :String) -> void:
 	decrease_stability(1)
 	major_error_occurred.emit("Error: " + message)
+
+## Prints, for compatilbity with codeManager
+func print_line(text :String):
+	log_message.emit(text)
 
 # Signals
 #===========================================
