@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	else:
 		alpha = lerp(alpha, 0.0, 0.05)
 	
-	if mouse_over:
+	if mouse_over or get_tree().paused:
 		focus = FOCUS_ON_MOUSE
 	
 	modulate = Color8(255, 255, 255, round(alpha))

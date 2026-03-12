@@ -37,3 +37,11 @@ func get_primary_reference() -> String
 ## Note: If a boolean operator is put into this method, it will be evaluated.
 func convert_to_string(arg) -> String:
 	return str(arg)
+
+## Convets to a float. [br]
+## returning a 0 if blank or invalid.
+func convert_to_float(arg) -> float:
+	if arg.is_valid_float():
+		return float(arg)
+	else:
+		return 0.0

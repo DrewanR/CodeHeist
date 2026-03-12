@@ -8,6 +8,9 @@ signal code_recompiled(new_compiled_code :Array[instruction_line])
 ## You know it, you hate it, the usual hack
 @export var parent :Node
 
+## If true, the code will compile whenever focus is lost
+@export var compile_on_lost_focus := true
+
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
 ##    that inherit the logicalBlock class. [br]
@@ -35,6 +38,7 @@ func compile() -> Array[instruction_line]:
 		if parsed_line != null: new_code.append(parsed_line)
 	
 	code_recompiled.emit(new_code)
+	print("- Code compiled.")
 	return new_code
 
 
@@ -88,3 +92,50 @@ func update_instruction_dict(_instruction_dict):
 
 func update_instruction_list(_instruction_list):
 	instruction_list = _instruction_list
+
+# Focus and lost focus code
+#============================
+
+const FOCUS_ON_OUTPUT = 5
+const FOCUS_ON_MOUSE = 0.05
+
+## If true, this node will become transparent when focus is lost.
+@export var fade_on_lost_focus = false
+
+var focus = FOCUS_ON_OUTPUT
+var mouse_over = false
+
+var alpha = 0.0
+
+func _process(delta: float) -> void:
+	if focus >= 0:
+		focus -= delta
+		alpha = lerp(alpha, 255.0, 0.15)
+	elif focus >= -5:
+		focus -= delta
+		alpha = lerp(alpha, 100.0, 0.05)
+	else:
+		alpha = lerp(alpha, 0.0, 0.05)
+	
+	if mouse_over:
+		focus = FOCUS_ON_MOUSE
+	
+	modulate = Color8(255, 255, 255, round(alpha))
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		focus_lost()
+
+func focus_lost():
+	release_focus()
+	mouse_over = false
+	compile()
+	get_tree().paused = false
+
+func _on_mouse_entered() -> void:
+	mouse_over = true
+
+func _on_mouse_exited() -> void:
+	focus_lost()
+
+func _on_focus_entered() -> void:
+	get_tree().paused = true

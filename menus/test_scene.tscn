@@ -98,7 +98,7 @@ size_flags_horizontal = 8
 [node name="Button4" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2" unique_id=128879042]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "test_level_00"
+text = "text_IDE"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button" to="Icon" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button2" to="Icon" method="_on_button_2_pressed"]

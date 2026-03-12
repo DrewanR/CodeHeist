@@ -200,7 +200,6 @@ post_text = "SP"
 show_max = false
 
 [node name="PlayerData" type="Label" parent="BasicUI/MarginContainer/HUD" unique_id=926159387]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -209,6 +208,7 @@ bottom text"
 label_settings = ExtResource("3_w0fkd")
 
 [node name="SimpleLog" type="TextEdit" parent="BasicUI/MarginContainer" unique_id=1901138789 node_paths=PackedStringArray("parent")]
+process_mode = 3
 custom_minimum_size = Vector2(420, 200)
 layout_mode = 2
 size_flags_horizontal = 8

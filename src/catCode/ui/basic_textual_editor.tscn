@@ -3,5 +3,14 @@
 [ext_resource type="Script" uid="uid://crj3wwg4yhnrm" path="res://src/catCode/ui/basic_textual_editor.gd" id="1_2pqce"]
 
 [node name="basicTextualEdit" type="TextEdit" unique_id=383483393]
+process_mode = 3
 custom_minimum_size = Vector2(320, 500)
+text = "if(isButtonJustPressed(x))
+	swipe()
+if(isButtonJustPressed(z))
+	jump()"
 script = ExtResource("1_2pqce")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

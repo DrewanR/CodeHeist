@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dcbd422tsefck"]
+
+[ext_resource type="Script" uid="uid://bbwohxldmvo06" path="res://src/catCode/logicBlocks/scripts/jump_function.gd" id="1_7t8kw"]
+
+[node name="JumpFunction" type="Node" unique_id=689348759]
+script = ExtResource("1_7t8kw")
+block_ref = "jump"
+params = Array[String](["strength"])
+block_name = "jump"
+block_category = "action"

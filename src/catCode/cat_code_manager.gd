@@ -24,6 +24,15 @@ extends Node
 ## Show instruction set on boot
 @export var show_instruction_set := true
 
+## Autorun states
+enum RUN_OPTIONS { NEVER, READY, PROCESS, PRIMARY_ACTION, SECONDARY_ACTION}
+@export var when_to_run: RUN_OPTIONS
+
+## Compile options,
+## Default will compile 
+enum COMPILE_OPTIONS { NEVER, RUN, DEFAULT}
+@export var when_to_compile: COMPILE_OPTIONS = COMPILE_OPTIONS.DEFAULT
+
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
 ##    that inherit the logicalBlock class. [br]
@@ -40,7 +49,7 @@ var compiled_code :Array[instruction_line] = []
 
 ## Enum for the states of how a code will be treated: [br]
 ## DO: will result in the code being executed,
-## SKIP_1: will skip until the next control statement of proper indent,
+## SKIP_1: will skip until the next control statement of proper indent,s
 ## SKIP_ALL: will skip to the end of the indent.
 enum PASS_STATES { DO, SKIP, SKIP_ALL}
 ## Enum for the type of layer in the indentStack
@@ -50,6 +59,9 @@ enum STACK_LAYER_TYPE { NONE, CONDITIONAL, ITERATIVE }
 signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[String, logic_block])
 
 func _ready() -> void:
+	if when_to_compile == COMPILE_OPTIONS.DEFAULT:
+		when_to_compile == COMPILE_OPTIONS.NEVER if when_to_run == RUN_OPTIONS.PROCESS else COMPILE_OPTIONS.RUN
+	
 	print_line("CatCodeManager Started!")
 	update_instructions()
 	editor.code_recompiled.connect(_on_compiled_code_received)
@@ -60,20 +72,36 @@ func _ready() -> void:
 		print_line("-----\nINSTRUCTION DICTIONARY")
 		print_instruction_dictionary()
 		print_line("-----")
-	print_line("Debug: Press [Z] to run!")
+	
+	match when_to_run:
+		RUN_OPTIONS.READY:
+			run()
+		RUN_OPTIONS.PRIMARY_ACTION:
+			print_line("Press [Z] to run!")
+		RUN_OPTIONS.SECONDARY_ACTION:
+			print_line("Press [X] to run!")
+	
+	editor.compile()
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("primary_action"):
+	if when_to_run == RUN_OPTIONS.PROCESS:
+		run()
+	elif when_to_run == RUN_OPTIONS.SECONDARY_ACTION and Input.is_action_just_pressed("secondary_action"):
+		run()
+	elif when_to_run == RUN_OPTIONS.PRIMARY_ACTION and Input.is_action_just_pressed("primary_action"):
 		run()
 
 func run():
-	print_line("Running...")
-	editor.compile()
+	if when_to_run != RUN_OPTIONS.PROCESS: print_line("Running...")
+	if when_to_compile == COMPILE_OPTIONS.RUN: editor.compile()
+	#editor.compile()
+	
 	## Indent stack, used to control indents and skipping, 
 	var indent_stack := [stateStackLayer.new(0, STACK_LAYER_TYPE.NONE, PASS_STATES.DO, 0)]
 	# Iterates across every line
 	#for line in compiled_code:
 	var line_number = 0
+	print("Running...")
 	while line_number < len(compiled_code):
 		var line = compiled_code[line_number]
 		print("--Current Stack: " + str(indent_stack))
@@ -85,7 +113,7 @@ func run():
 			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack.back().indent == line.indent # The indents match
 			):
-			print("! Running " + line.primary_block.block_name)
+			#print("! Running " + line.primary_block.block_name)
 			line_number += 1
 			if line.valid_parameters() and line.uses_parameters():
 				line.primary_block.execute(line.parameters)
@@ -101,7 +129,7 @@ func run():
 			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack.back().indent == line.indent # The indents match
 			):
-			print("! Reached an if statement of indent " + str(line.indent))
+			#print("! Reached an if statement of indent " + str(line.indent))
 			line_number += 1
 			if line.primary_block.evaluate(line.parameters):
 				#print("  True")
@@ -122,7 +150,7 @@ func run():
 			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack[-2].indent == line.indent # The indents match
 		):
-			print("! Reached an else if statement of indent " + str(line.indent))
+			#print("! Reached an else if statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().acc += 1
 			# Scenario 1: Currently in "SKIP" state
@@ -142,7 +170,7 @@ func run():
 				indent_stack[-2].indent == line.indent # The indents match
 			)
 		):
-			print("! Reached an else statement of indent " + str(line.indent))
+			#print("! Reached an else statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().acc += 1
 			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
@@ -154,7 +182,7 @@ func run():
 			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack.back().indent == line.indent # The indents match
 		):
-			print("! Reached a repeat statement of indent " + str(line.indent))
+			#print("! Reached a repeat statement of indent " + str(line.indent))
 			# Do not incrment line
 			indent_stack.push_back(
 				stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.ITERATIVE, PASS_STATES.DO, line_number)
@@ -205,11 +233,13 @@ func run():
 			print("  Skipping " + line.primary_block.block_name)
 		
 		# End indent block, pops the current stack layer
-		elif len(indent_stack) > 1 and indent_stack.back().state == PASS_STATES.DO:
+		elif len(indent_stack) > 1 and indent_stack.back().type == STACK_LAYER_TYPE.CONDITIONAL:
+			print("  Popping...")
 			indent_stack.pop_back()
 		
 		# And if none of the above is true, the line is skipped
 		else:
+			print("  Advancing...")
 			line_number += 1
 
 ## Updates the blocks in both the instruction dictionary and list
@@ -288,4 +318,4 @@ class stateStackLayer:
 		rep = 0
 	
 	func _to_string() -> String:
-		return "<" + str(indent) + ": t:" + str(type) + " s:" + str(state) + " r:" + str(rep) + " s:" + str(entry) + ">"
+		return "<" + str(indent) + ": " + STACK_LAYER_TYPE.keys()[type][0] + " state:" + str(state) + " rep:" + str(rep) + " entry:" + str(entry) + ">"

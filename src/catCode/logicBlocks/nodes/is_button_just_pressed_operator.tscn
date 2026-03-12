@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c6yxftaraoskd"]
+
+[ext_resource type="Script" uid="uid://doer3ae5r155d" path="res://src/catCode/logicBlocks/scripts/is_button_just_pressed_operator.gd" id="1_3kobk"]
+
+[node name="IsButtonJustPressedOperator" type="Node" unique_id=2042108197]
+script = ExtResource("1_3kobk")
+block_ref = "isButtonJustPressed"
+params = Array[String](["button"])
+block_name = "is button just pressed"
+block_category = "input"

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://e2ocpuivbbwf"]
+
+[ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_52uuq"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="2_wqs4g"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="3_ma6bf"]
+[ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="4_q3x3t"]
+[ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="6_2xdss"]
+
+[node name="CatBot_MoveOnly_w_TCM" unique_id=1345683778 instance=ExtResource("1_52uuq")]
+using_air_hover = false
+
+[node name="basicTextualEdit" parent="BasicUI/MarginContainer" parent_id_path=PackedInt32Array(1751148385) index="3" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_wqs4g")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_ma6bf")
+theme_override_font_sizes/font_size = 14
+text = "if(isButtonJustPressed(x))
+	swipe()
+if(isButtonJustPressed(z))
+	jump()
+if(isButtonHeld(right))
+	moveX(1)
+if(isButtonHeld(left))
+	moveX(-1)"
+parent = NodePath("../../../Complete-CatCodeManager")
+
+[node name="CameraManager" parent="." index="5" unique_id=1223681043 instance=ExtResource("4_q3x3t")]
+
+[node name="Complete-CatCodeManager" parent="." index="6" unique_id=2046772742 node_paths=PackedStringArray("parent", "editor", "text_output") instance=ExtResource("6_2xdss")]
+parent = NodePath("..")
+editor = NodePath("../BasicUI/MarginContainer/basicTextualEdit")
+text_output = NodePath("../BasicUI/MarginContainer/SimpleLog")
+when_to_run = 2

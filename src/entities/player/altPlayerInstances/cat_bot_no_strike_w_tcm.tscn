@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b8rq1jtuk0xes"]
+
+[ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_x4dmc"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="2_pkqko"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="3_i7o3y"]
+[ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="4_jpieg"]
+[ext_resource type="PackedScene" uid="uid://c5vxqu6jgkplc" path="res://src/entities/player/autoControllers/auto_horizontal_move_controller.tscn" id="5_ywkt6"]
+[ext_resource type="PackedScene" uid="uid://dy8we4rmgnm4d" path="res://src/entities/player/autoControllers/auto_jump_controller.tscn" id="6_2iod7"]
+[ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="8_m6hwa"]
+
+[node name="CatBot_NoStrike_w_TCM" unique_id=1345683778 instance=ExtResource("1_x4dmc")]
+
+[node name="basicTextualEdit" parent="BasicUI/MarginContainer" parent_id_path=PackedInt32Array(1751148385) index="3" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("2_pkqko")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_i7o3y")
+theme_override_font_sizes/font_size = 14
+parent = NodePath("../../../Complete-CatCodeManager")
+
+[node name="CameraManager" parent="." index="5" unique_id=1223681043 instance=ExtResource("4_jpieg")]
+
+[node name="AutoHorizontalMoveController" parent="." index="6" unique_id=1219527993 instance=ExtResource("5_ywkt6")]
+
+[node name="AutoJumpController" parent="." index="7" unique_id=1824418607 instance=ExtResource("6_2iod7")]
+
+[node name="Complete-CatCodeManager" parent="." index="8" unique_id=2046772742 node_paths=PackedStringArray("parent", "editor", "text_output") instance=ExtResource("8_m6hwa")]
+parent = NodePath("..")
+editor = NodePath("../BasicUI/MarginContainer/basicTextualEdit")
+text_output = NodePath("../BasicUI/MarginContainer/SimpleLog")
