@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c67x8bopyhobv"]
+
+[ext_resource type="Script" uid="uid://cnqc03kssu1py" path="res://src/catCode/logicBlocks/scripts/strike_function.gd" id="1_nonuf"]
+
+[node name="StrikeFunction" type="Node" unique_id=689348759]
+script = ExtResource("1_nonuf")
+block_ref = "swipe"
+params = Array[String](["direction"])
+block_name = "swipe"
+block_category = "action"

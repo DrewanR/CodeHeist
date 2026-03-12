@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bqqr342cmjyir"]
+
+[ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_q075b"]
+[ext_resource type="PackedScene" uid="uid://c5vxqu6jgkplc" path="res://src/entities/player/autoControllers/auto_horizontal_move_controller.tscn" id="2_wogt0"]
+[ext_resource type="PackedScene" uid="uid://dy8we4rmgnm4d" path="res://src/entities/player/autoControllers/auto_jump_controller.tscn" id="3_bab1l"]
+[ext_resource type="PackedScene" uid="uid://drpa7rlvmpksj" path="res://src/entities/player/autoControllers/auto_strike_controller.tscn" id="4_vo87c"]
+[ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="5_wogt0"]
+
+[node name="CatBot_FullAuto" unique_id=1345683778 instance=ExtResource("1_q075b")]
+
+[node name="CameraManager" parent="." index="5" unique_id=1223681043 instance=ExtResource("5_wogt0")]
+
+[node name="AutoHorizontalMoveController" parent="." index="6" unique_id=1219527993 instance=ExtResource("2_wogt0")]
+
+[node name="AutoJumpController" parent="." index="7" unique_id=1824418607 instance=ExtResource("3_bab1l")]
+
+[node name="AutoStrikeController" parent="." index="8" unique_id=1563770025 instance=ExtResource("4_vo87c")]

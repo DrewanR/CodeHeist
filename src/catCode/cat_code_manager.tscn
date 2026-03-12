@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1mjc7o4kc5ew"]
+
+[ext_resource type="Script" uid="uid://djx3mjpar6s08" path="res://src/catCode/cat_code_manager.gd" id="1_ycvx2"]
+
+[node name="CatCodeManager" type="Node" unique_id=2046772742]
+script = ExtResource("1_ycvx2")

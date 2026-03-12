@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://4tjuro70dg3"]
+
+[ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="5_5nll7"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="11_7wmfx"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="12_oxn82"]
+[ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="13_7oud1"]
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="14_md34c"]
+
+[node name="TestBasicIde" type="Node2D" unique_id=759264037]
+
+[node name="testUI" type="CanvasLayer" parent="." unique_id=743464664]
+
+[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=1090640253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=1802660511]
+layout_mode = 2
+split_offsets = PackedInt32Array(488)
+split_offset = 488
+
+[node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("11_7wmfx")]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_oxn82")
+theme_override_font_sizes/font_size = 14
+text = "if (isButtonHeld(z))
+	print(z)
+if (isButtonHeld(x))
+	print(x)"
+parent = NodePath("../../../../Complete-CatCodeManager")
+
+[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("13_7oud1")]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("14_md34c")
+theme_override_font_sizes/font_size = 12
+editable = false
+
+[node name="Complete-CatCodeManager" parent="." unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output") instance=ExtResource("5_5nll7")]
+editor = NodePath("../testUI/MarginContainer/HSplitContainer/basicTextualEdit")
+text_output = NodePath("../testUI/MarginContainer/HSplitContainer/basicOutput")
+when_to_run = 3

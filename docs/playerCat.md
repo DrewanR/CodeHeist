@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 		heal(1)
 ```
 
-> ![](playerCatStage1_diagram.svg)
+> ![](assets/playerCatStage1_diagram.svg)
 >
 > Flow chart summarizing the the main loop used by CatBot
 
@@ -118,7 +118,7 @@ It is also worth mentioning that `player_cat` is a child class of `generic_entit
 
 Stage 2 of the process is where catBot started to match it's final form. In this stage, the functions which controlled catBot were removed and placed in nodes that can be instanced as a child of catBot in a scene in order to perform the same function.
 
-> ![CatBot Instanced in a scene](devlogFig3.2.png)
+> ![CatBot Instanced in a scene](assets/devlogFig3.2.png)
 >
 > Node setup to instance catBot in a scene at this stage.
 
@@ -186,7 +186,7 @@ Using jumping as an example, the jumping logic, originally contained entirely wi
 
 When combined with movement and striking, it effectively creates a relationship shown below where the child nodes call functions in the parent. To avoid repeating code, the class `auto_controller` was created, which handled getting the reference to it's parent.
 
-> ![Class diagramming describing a relationship between the autocontrollers and player_cat](playerCatStage2_diagram_p1.svg)
+> ![Class diagramming describing a relationship between the autocontrollers and player_cat](assets/playerCatStage2_diagram_p1.svg)
 >
 > Class diagram depicting the relationship between nodes.
 
@@ -194,10 +194,12 @@ Also shown in (jump function), a built-in error handling system was created. Thi
 
 Errors and damage are handled in a very similar manner. When one occurs, either `hp` (for damage) or `stability` (upon an error), are decreased, and the corresponding signal is emitted. This signal is used to update ui elements and carry both the change in value and the new value. Errors also carry an error message.
 
-> ![](playerCatStage2_diagram_p2.svg)
+> ![](assets/playerCatStage2_diagram_p2.svg)
 >
 > Simplified diagram depicting the communications between methods and nodes on a non-grounded jump call.
 
 \*Note: similar to python, variables and methods in godot are public by default.
 
 ## Stage 3: Cat Code
+
+Due to the method of extracting the controllers in the previous stage, not many changes were required to be made to allow control through player-created code. In the next section, the catCode system will be described in greater detail. The `functional_block`s that affect catBot, contain references to the player cat that are defined when the instruction set is generated (i.e. when the cat is instantiated). In summary, from the developer's point of view, the `cat_code_manager` as a child node to the `player_cat` and that handles the rest. 

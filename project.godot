@@ -31,6 +31,9 @@ folder_colors={
 "res://levels/": "orange",
 "res://menus/": "yellow",
 "res://src/": "green",
+"res://src/catCode/logicBlocks/nodes/": "yellow",
+"res://src/catCode/preconfigCCInstances/": "yellow",
+"res://src/entities/player/": "yellow",
 "res://src/platformer/": "green",
 "res://src/platformer/player/": "green"
 }

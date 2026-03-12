@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://diwphrghc5yir"]
+
+[ext_resource type="Script" uid="uid://b41tt1vsteo70" path="res://src/catCode/logicBlocks/scripts/print_2_function.gd" id="1_i3da2"]
+
+[node name="Print2Function" type="Node" unique_id=689348759]
+script = ExtResource("1_i3da2")
+block_ref = "print2"
+params = Array[String](["text1", "text2"])
+block_name = "print2"
+block_category = "output"

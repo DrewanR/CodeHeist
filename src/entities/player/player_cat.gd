@@ -67,12 +67,13 @@ var debug_text: String = "DEBUG"
 #===========================================
 
 signal major_error_occurred(text :String)
+signal log_message(text :String)
 
 # Setup
 #===========================================
 
 ## Node variables
-@onready var debug_text_node = $BasicUI/MarginContainer/PlayerData
+@onready var debug_text_node = $BasicUI/MarginContainer/HUD/PlayerData
 @onready var debug_fps_node = $BasicUI/MarginContainer/TempFPS
 @onready var sprite_node = $Sprite2D
 @onready var animation_player_node = $AnimationPlayer
@@ -174,7 +175,7 @@ func jump(strength := 1.0) -> void:
 	# Preceding if none occur
 	else:
 		air_entry = 3
-		air_time = 0
+		air_time = 0 if using_air_hover else COYOTE_TIME
 		# Modifies jump strength depending on if air hover is used, this is to prevent punishing
 		#	players who do not use air hovers
 		velocity.y = JUMP_VELOCITY * strength * 0.95 if using_air_hover else JUMP_VELOCITY * strength * 1.1
@@ -256,7 +257,7 @@ func calculate_walktime(delta: float, direction: float) -> void:
 
 ## Returns [true] if the player can currently jump
 func can_jump() -> bool:
-	return air_time <= COYOTE_TIME
+	return air_time < COYOTE_TIME
 
 ## Returns [true] if the cat can attack
 func can_strike() -> bool:
@@ -383,7 +384,7 @@ func must_be_within_range(value, minimum, maximum, text="Value") -> bool:
 ##
 ## Produces error "Catbot must be grounded to [text]."
 func must_be_grounded(text="Value") -> bool:
-	if (air_time <= COYOTE_TIME):
+	if (air_time < COYOTE_TIME):
 		return true
 	else:
 		produce_error("Catbot must be grounded to " + text)
@@ -407,6 +408,10 @@ func must_be_less_than(value, maximum, allow_equal_to=true, text="Value", messag
 func produce_error(message :String) -> void:
 	decrease_stability(1)
 	major_error_occurred.emit("Error: " + message)
+
+## Prints, for compatilbity with codeManager
+func print_line(text :String):
+	log_message.emit(text)
 
 # Signals
 #===========================================
