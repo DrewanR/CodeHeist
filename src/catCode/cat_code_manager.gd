@@ -33,6 +33,10 @@ enum RUN_OPTIONS { NEVER, READY, PROCESS, PRIMARY_ACTION, SECONDARY_ACTION}
 enum COMPILE_OPTIONS { NEVER, RUN, DEFAULT}
 @export var when_to_compile: COMPILE_OPTIONS = COMPILE_OPTIONS.DEFAULT
 
+## The maximum number of threads that can exist symultaneously. [br]
+## WARNING: Multiple threads are untested.
+@export var maximum_threads :int = 1
+
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
 ##    that inherit the logicalBlock class. [br]
@@ -46,6 +50,11 @@ var instruction_dict :Dictionary[String, logic_block] = {}
 ## Compiled code. [br]
 ## Note: This function should never compile code
 var compiled_code :Array[instruction_line] = []
+
+## Array for storing the thread instances,
+## These threads are used to seperate out the running of code from the manager.
+## Typically, only one thread will exist at once. All threads are destroyed when
+##    code is recompiled. 
 
 ## Enum for the states of how a code will be treated: [br]
 ## DO: will result in the code being executed,

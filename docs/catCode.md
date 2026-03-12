@@ -126,6 +126,9 @@ The quirks of this system are listed below:
 
 ## Interpreting Code
 
+**WARNING:** This does not factor in threading.
+**TODO:** Figure out how to deal with threading for explaining this... 
+
 Interpreting the code is handled by the codeManager. At it's core, the interpreter will run be code line by line, modifying its behavior depending on it's state. There are two elements that effect the state: 1, selection statements (`if`, `elif`, `else` etc.) and, 2, iteration blocks (`repeat`). Each indent falls into either states or is at root, henceforth known as indent types to prevent confusion with pass states.
 
 This, alongside the current indent and pass state, is stored in a stack\* called the `indent_stack`. This stack stores instances of the internal `stateStackLayer` class, the full definition shown in figure idk. In another language such as C# this data could be represented as a struct. Due to the limited number of pass states and layer types, both `type` and `state` are stored using enums. This stack system is analogous to the call stack structure that appears in numerous programming languages.
