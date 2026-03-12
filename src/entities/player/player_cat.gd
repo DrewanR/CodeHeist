@@ -175,7 +175,7 @@ func jump(strength := 1.0) -> void:
 	# Preceding if none occur
 	else:
 		air_entry = 3
-		air_time = 0 if using_air_hover else COYOTE_TIME
+		if using_air_hover: air_time = 0 
 		# Modifies jump strength depending on if air hover is used, this is to prevent punishing
 		#	players who do not use air hovers
 		velocity.y = JUMP_VELOCITY * strength * 0.95 if using_air_hover else JUMP_VELOCITY * strength * 1.1
