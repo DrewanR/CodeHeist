@@ -60,7 +60,7 @@ signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[S
 
 func _ready() -> void:
 	if when_to_compile == COMPILE_OPTIONS.DEFAULT:
-		when_to_compile == COMPILE_OPTIONS.NEVER if when_to_run == RUN_OPTIONS.PROCESS else COMPILE_OPTIONS.RUN
+		when_to_compile = COMPILE_OPTIONS.NEVER if when_to_run == RUN_OPTIONS.PROCESS else COMPILE_OPTIONS.RUN
 	
 	print_line("CatCodeManager Started!")
 	update_instructions()
