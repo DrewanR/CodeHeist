@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://b4lnx7g72rg2e"]
 
+[ext_resource type="Script" uid="uid://b104t56q47pf5" path="res://src/catCode/cat_thread.gd" id="1_p3scs"]
+
 [node name="CatThread" type="Node" unique_id=962090214]
+script = ExtResource("1_p3scs")
