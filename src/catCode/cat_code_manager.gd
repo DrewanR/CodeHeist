@@ -1,4 +1,3 @@
-@tool
 class_name code_manager extends Node
 
 @export_group("Relationships")
@@ -230,4 +229,3 @@ func print_instruction_dictionary() -> void:
 
 func _on_compiled_code_received(new_code):
 	compiled_code = new_code
-
