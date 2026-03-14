@@ -85,6 +85,7 @@ I also decided to combine the general dissertation log with this to have one mar
 - Linked catBot and catCode.
 - Implemented different compilation and execution options 
 - Added alternative catCode instances.
+- Threading, and **catThread**. *In progress*
 
 ### Next Steps
 
