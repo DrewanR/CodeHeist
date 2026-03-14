@@ -25,16 +25,11 @@ class_name code_manager extends Node
 ## NOTE: If left blank, this will default to the [text_output] node
 @export var error_output :Node = text_output
 
-@export_group("Aesthetics")
-
-## Show instruction set on boot
-@export var show_instruction_set := true
-
 @export_group("Execution options")
 
 ## Auto-run states
-enum RUN_OPTIONS { NEVER, READY, PROCESS, PRIMARY_ACTION, SECONDARY_ACTION}
 @export var when_to_run: RUN_OPTIONS
+enum RUN_OPTIONS { NEVER, READY, PROCESS, PRIMARY_ACTION, SECONDARY_ACTION}
 
 ## Compile options, [br]
 ## NEVER: Will never compile, use if another node handles compilation.
@@ -42,8 +37,8 @@ enum RUN_OPTIONS { NEVER, READY, PROCESS, PRIMARY_ACTION, SECONDARY_ACTION}
 ## DEFAULT: Will infer behavior from auto-run. [br]
 ## 
 ## WARNING: Compiling will kill all the current threads
-enum COMPILE_OPTIONS { NEVER, RUN, DEFAULT}
 @export var when_to_compile :COMPILE_OPTIONS = COMPILE_OPTIONS.DEFAULT
+enum COMPILE_OPTIONS { NEVER, RUN, DEFAULT}
 
 ## The maximum number of threads that can exist simultaneously. [br]
 ## WARNING: Multiple threads are untested.
@@ -53,8 +48,18 @@ enum COMPILE_OPTIONS { NEVER, RUN, DEFAULT}
 ## NEVER_REPLACE: Never override the existing threads, will disregard the new process.
 ## ALWAYS_REPLACE: Will insert the new thread, killing the lowest priority (this may
 ##                 potentially kill the new process before it starts).
-enum THREAD_OVERFLOW_BEHAVIORS { NEVER_REPLACE, ALWAYS_REPLACE}
 @export var thread_overflow_behavior := THREAD_OVERFLOW_BEHAVIORS.NEVER_REPLACE
+enum THREAD_OVERFLOW_BEHAVIORS { NEVER_REPLACE, ALWAYS_REPLACE}
+
+## The scenarios in which things are printed
+@export var debug_scenarios := {
+	"Instruction_set": DEBUG_OPTIONS.BOTH,
+	"Construction": DEBUG_OPTIONS.EXTERNAL,
+	"Thread_info": DEBUG_OPTIONS.NEVER,
+	"Line_light": DEBUG_OPTIONS.NEVER,
+	"Line_full": DEBUG_OPTIONS.NEVER
+}
+enum DEBUG_OPTIONS { NEVER, EXTERNAL, BOTH }
 
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
@@ -91,12 +96,11 @@ func _ready() -> void:
 	update_instructions()
 	editor.code_recompiled.connect(_on_compiled_code_received)
 	
-	if (show_instruction_set):
-		print_line("-----\nINSTRUCTION LIST")
-		print_instruction_list()
-		print_line("-----\nINSTRUCTION DICTIONARY")
-		print_instruction_dictionary()
-		print_line("-----")
+	debug_output("Instruction_set", "-----\nINSTRUCTION LIST")
+	print_instruction_list(debug_scenarios["Instruction_set"])
+	debug_output("Instruction_set", "-----\nINSTRUCTION DISCTIONARY")
+	print_instruction_dictionary(debug_scenarios["Instruction_set"])
+	debug_output("Instruction_set", "-----")
 	
 	match when_to_run:
 		RUN_OPTIONS.READY:
@@ -173,16 +177,16 @@ func kill_thread(index :int):
 ## Updates the blocks in both the instruction dictionary and list
 func update_instructions(source := self) -> void:
 	# Updates instruction list
-	print("- Updating the instruction set...")
+	debug_output("Construction", "- Updating the instruction set...")
 	instruction_list = get_logic_blocks(source)
 	
 	# Creates new dictionary from the instruction list
-	print("-   Updating dictionary...")
+	debug_output("Construction", "-   Updating dictionary...")
 	for this_block in instruction_list:
 		# Case 1: only one reference
 		if this_block.get_reference_count() == 1:
 			instruction_dict.set(this_block.get_primary_reference(), this_block)
-			print("-     " + this_block.get_primary_reference() +" added to instruction dictionary")
+			debug_output("Construction", "-     " + this_block.get_primary_reference() + " added to instruction dictionary")
 		# Case 2: multiple references. currently unused
 		else:
 			pass # TODO: cry
@@ -194,15 +198,15 @@ func update_instructions(source := self) -> void:
 ## Logic blocks are stored as children of this node, this function fetches theme all. [br]
 ## Due to quirks in the engine, it was determined that using names was the best way of doing this...
 func get_logic_blocks(source := self) -> Array[logic_block]:
-	print("-   Updating instruction list...")
+	debug_output("Construction", "-   Updating instruction list...")
 	var children = source.get_children()
 	var logical_children :Array[logic_block] = []
 	for child in children:
 		if child.name.split("_")[0] == "logicBlock":
-			print("-     Added " + child.name)
+			debug_output("Construction", "-     Added " + child.name)
 			logical_children.append(child)
 		else:
-			print("-     Rejected " + child.name)
+			debug_output("Construction", "-     Rejected " + child.name)
 	return logical_children
 
 
@@ -215,17 +219,33 @@ func print_line(message) -> void:
 		print("> " + message)
 
 
+func debug_output(type :String, message :String) -> void:
+	if debug_scenarios[type] == DEBUG_OPTIONS.BOTH:
+		print_line(message)
+	elif debug_scenarios[type] == DEBUG_OPTIONS.EXTERNAL:
+		print(message)
+
+
+func debug_output_fixed(output_location :DEBUG_OPTIONS, message :String) -> void:
+	if output_location == DEBUG_OPTIONS.BOTH:
+		print_line(message)
+	elif output_location == DEBUG_OPTIONS.EXTERNAL:
+		print(message)
+
+
 ## Prints the current instruction list
-func print_instruction_list() -> void:
+func print_instruction_list(output_location :DEBUG_OPTIONS = DEBUG_OPTIONS.BOTH) -> void:
 	for i in range(0, len(instruction_list)):
 		var this_item = instruction_list[i]
-		print_line("[" + str(i) + "] " + this_item.name + ": " + this_item.get_primary_reference())
+		debug_output_fixed(output_location, "[" + str(i) + "] " + this_item.name + ": " + this_item.get_primary_reference())
 
-func print_instruction_dictionary() -> void:
+
+func print_instruction_dictionary(output_location :DEBUG_OPTIONS = DEBUG_OPTIONS.BOTH) -> void:
 	var keys = instruction_dict.keys()
 	for this_key in keys:
 		var this_item = instruction_dict[this_key]
-		print_line("[" + this_key + "] " + this_item.name + ": " + this_item.get_primary_reference())
+		debug_output_fixed(output_location, "[" + this_key + "] " + this_item.name + ": " + this_item.get_primary_reference())
+
 
 func _on_compiled_code_received(new_code):
 	compiled_code = new_code

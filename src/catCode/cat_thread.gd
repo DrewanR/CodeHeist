@@ -25,6 +25,9 @@ var compiled_code :Array[instruction_line] = []
 ## The status of the current thread
 var thread_state :THREAD_STATES = THREAD_STATES.QUEUED
 
+## Print information, view cat_code_manager
+var debug_scenarios
+enum DEBUG_OPTIONS { NEVER, EXTERNAL, BOTH }
 
 ## Enum for the states of how a code will be treated: [br]
 ## DO: will result in the code being executed,
@@ -58,9 +61,11 @@ func bind(_priority :int = 0 ) -> void:
 	
 	compiled_code = manager.compiled_code
 	priority = min(_priority, 999)
-
+	
+	debug_scenarios = manager.debug_scenarios
+	
 	name = "Thread_%03d_%s" % [priority, Time.get_ticks_usec()]
-	print("# Thread created: '" + name + "'")
+	debug_output("Thread_info", "# Thread created: '" + name + "'")
 
 
 ## Executes the compiled code of this thread.
@@ -72,11 +77,11 @@ func execute() -> void:
 	# Iterates across every line
 	#for line in compiled_code:
 	var line_number = 0
-	print("Running...")
+	debug_output("Line_light", "Running...")
 	while line_number < len(compiled_code):
 		var line = compiled_code[line_number]
-		print("--Current Stack: " + str(indent_stack))
-		print("  " + str(line))
+		debug_output("Line_full","--Current Stack: " + str(indent_stack))
+		debug_output("Line_light","  " + str(line))
 		
 		# Functions: ALL
 		if (
@@ -100,7 +105,7 @@ func execute() -> void:
 			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack.back().indent == line.indent # The indents match
 			):
-			#print("! Reached an if statement of indent " + str(line.indent))
+			debug_output("Line_full","! Reached an if statement of indent " + str(line.indent))
 			line_number += 1
 			if line.primary_block.evaluate(line.parameters):
 				#print("  True")
@@ -121,7 +126,7 @@ func execute() -> void:
 			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack[-2].indent == line.indent # The indents match
 		):
-			#print("! Reached an else if statement of indent " + str(line.indent))
+			debug_output("Line_full","! Reached an else if statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().acc += 1
 			# Scenario 1: Currently in "SKIP" state
@@ -141,7 +146,7 @@ func execute() -> void:
 				indent_stack[-2].indent == line.indent # The indents match
 			)
 		):
-			#print("! Reached an else statement of indent " + str(line.indent))
+			debug_output("Line_full","! Reached an else statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().acc += 1
 			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
@@ -153,7 +158,7 @@ func execute() -> void:
 			indent_stack.back().state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack.back().indent == line.indent # The indents match
 		):
-			#print("! Reached a repeat statement of indent " + str(line.indent))
+			debug_output("Line_full","! Reached a repeat statement of indent " + str(line.indent))
 			# Do not incrment line
 			indent_stack.push_back(
 				stateStackLayer.new(line.indent+1, STACK_LAYER_TYPE.ITERATIVE, PASS_STATES.DO, line_number)
@@ -168,7 +173,7 @@ func execute() -> void:
 			indent_stack[-2].state == PASS_STATES.DO and # The stack is currently in a "do" state
 			indent_stack[-2].indent == line.indent # The indents match
 		):
-			print("! Re-reached a repeat statement of indent " + str(line.indent))
+			debug_output("Line_full","! Re-reached a repeat statement of indent " + str(line.indent))
 			line_number += 1
 			indent_stack.back().rep += 1 # Increment accumulator
 			if line.primary_block.evaluate([line.parameters[0], indent_stack.back()]):
@@ -186,13 +191,13 @@ func execute() -> void:
 			indent_stack.back().type == STACK_LAYER_TYPE.ITERATIVE and # Is in the iterative block.
 			line.indent + 1 == indent_stack.back().indent # Indent is 1 less than before.
 		):
-			print("! End of loop section reached")
+			debug_output("Line_full","! End of loop section reached")
 			
 			if indent_stack.back().state == PASS_STATES.DO: # If in do state, continues within the loop
-				print("    Jumping back to start")
+				debug_output("Line_full","    Jumping back to start")
 				line_number = indent_stack.back().entry
 			else: # Else: ends the loop
-				print("    Proceeding onwards")
+				debug_output("Line_full","    Proceeding onwards")
 				indent_stack.pop_back()
 		
 		# Skip conditions
@@ -201,19 +206,33 @@ func execute() -> void:
 			indent_stack.back().indent == line.indent
 		):
 			line_number += 1
-			print("  Skipping " + line.primary_block.block_name)
+			debug_output("Line_full","  Skipping " + line.primary_block.block_name)
 		
 		# End indent block, pops the current stack layer
 		elif len(indent_stack) > 1 and indent_stack.back().type == STACK_LAYER_TYPE.CONDITIONAL:
-			print("  Popping...")
+			debug_output("Line_full","  Popping...")
 			indent_stack.pop_back()
 		
 		# And if none of the above is true, the line is skipped
 		else:
-			print("  Advancing...")
+			debug_output("Line_full","  Advancing...")
 			line_number += 1
 
 	thread_state = THREAD_STATES.DEAD
+
+
+func debug_output(type :String, message :String) -> void:
+	if debug_scenarios[type] == DEBUG_OPTIONS.BOTH:
+		print_line(message)
+	elif debug_scenarios[type] == DEBUG_OPTIONS.EXTERNAL:
+		print(message)
+
+
+func debug_output_fixed(output_location :DEBUG_OPTIONS, message :String) -> void:
+	if output_location == DEBUG_OPTIONS.BOTH:
+		print_line(message)
+	elif output_location == DEBUG_OPTIONS.EXTERNAL:
+		print(message)
 
 
 func print_line(text :String):

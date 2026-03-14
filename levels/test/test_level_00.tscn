@@ -41,6 +41,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 tile_set = SubResource("TileSet_7oecd")
 
 [node name="ManagedCamera2D" parent="." unique_id=206397294 instance=ExtResource("4_10qvn")]
+process_priority = 1
 
 [node name="ZoomField1" parent="." unique_id=1147266080 instance=ExtResource("5_roflr")]
 position = Vector2(163, 76)
