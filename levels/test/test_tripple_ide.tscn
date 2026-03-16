@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cn4tubf45jhsd"]
+
+[ext_resource type="Script" uid="uid://dub3y3wjcoyiv" path="res://levels/test/test_tripple_ide.gd" id="1_e1ob7"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="1_tah83"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="2_kigyt"]
+[ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="3_e1ob7"]
+[ext_resource type="PackedScene" uid="uid://yfi43g18e0pe" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="3_kigyt"]
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="4_yox0k"]
+[ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="5_yiq2g"]
+
+[node name="TestBasicIde" type="Node2D" unique_id=759264037]
+script = ExtResource("1_e1ob7")
+
+[node name="testUI" type="CanvasLayer" parent="." unique_id=743464664]
+
+[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=1090640253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=1802660511]
+layout_mode = 2
+split_offsets = PackedInt32Array(320, 332)
+split_offset = 320
+
+[node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("1_tah83")]
+custom_minimum_size = Vector2(300, 500)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_kigyt")
+theme_override_font_sizes/font_size = 14
+text = "print(meow)
+print(nyah)
+print(purr)"
+parent = NodePath("../../../../Complete-CatCodeManager")
+fade_on_lost_focus = false
+
+[node name="textToGraphicalButton" type="Button" parent="testUI/MarginContainer/HSplitContainer/basicTextualEdit" unique_id=205109529]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -45.0
+offset_right = -14.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Text → Graphical"
+
+[node name="basicGraphicalEditor" parent="testUI/MarginContainer/HSplitContainer" unique_id=1640264809 node_paths=PackedStringArray("parent") instance=ExtResource("3_kigyt")]
+layout_mode = 2
+parent = NodePath("../../../../Complete-CatCodeManager")
+
+[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("3_e1ob7")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yox0k")
+theme_override_font_sizes/font_size = 12
+editable = false
+
+[node name="Complete-CatCodeManager" parent="." unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output") instance=ExtResource("5_yiq2g")]
+editor = NodePath("../testUI/MarginContainer/HSplitContainer/basicGraphicalEditor")
+text_output = NodePath("../testUI/MarginContainer/HSplitContainer/basicOutput")
+when_to_run = 3
+
+[connection signal="pressed" from="testUI/MarginContainer/HSplitContainer/basicTextualEdit/textToGraphicalButton" to="." method="_on_text_to_graphical_button_pressed"]

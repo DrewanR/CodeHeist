@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bt0jsuso54toa"]
 
 [ext_resource type="Script" uid="uid://7x5171m8a27s" path="res://src/catCode/logicBlocks/scripts/print_line_function.gd" id="1_1pf55"]
+[ext_resource type="PackedScene" uid="uid://doelngyort570" path="res://src/catCode/graphicalBlocks/graphical_block.tscn" id="2_war1a"]
 
 [node name="PrintLineFunction" type="Node" unique_id=689348759]
 script = ExtResource("1_1pf55")
@@ -8,3 +9,4 @@ block_ref = "print"
 params = Array[String](["text"])
 block_name = "print"
 block_category = "output"
+ui_block = ExtResource("2_war1a")

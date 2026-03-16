@@ -163,7 +163,6 @@ func run(delta: float, direction: float, run_speed: float = 1) -> void:
 ##
 ## [strength] determines the strength of the jump as a fraction of [JUMP_VELOCITY]
 ## between -1.0 and 1.0.
-# TODO: test
 func jump(strength := 1.0) -> void:
 	# Checks for errors
 	if !(

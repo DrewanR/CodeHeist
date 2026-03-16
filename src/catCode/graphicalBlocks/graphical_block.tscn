@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://doelngyort570"]
+
+[ext_resource type="Script" uid="uid://ce151efnja7pj" path="res://src/catCode/graphicalBlocks/graphical_block.gd" id="1_qrm6q"]
+[ext_resource type="PackedScene" uid="uid://bi3aihmb1v2p" path="res://src/catCode/graphicalComponents/block_auto_identifier.tscn" id="2_owpwl"]
+[ext_resource type="Script" uid="uid://44rg8nidbffq" path="res://src/catCode/graphicalComponents/block_auto_identifier.gd" id="3_grrut"]
+
+[node name="GraphicalNode" type="HBoxContainer" unique_id=830576542]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+script = ExtResource("1_qrm6q")
+
+[node name="DecreaseIndentButton" type="Button" parent="." unique_id=1548651920]
+layout_mode = 2
+tooltip_text = "Decrease indent"
+text = "<"
+
+[node name="IndentContainer" type="HBoxContainer" parent="." unique_id=1666816614]
+layout_mode = 2
+
+[node name="BlockBG" type="PanelContainer" parent="." unique_id=1018967638]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="BlockBG" unique_id=1690791152]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="BlockContainer" type="HBoxContainer" parent="BlockBG/MarginContainer" unique_id=630700807]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BlockAutoIdentifier" parent="BlockBG/MarginContainer/BlockContainer" unique_id=1589247872 node_paths=PackedStringArray("parent") instance=ExtResource("2_owpwl")]
+layout_mode = 2
+script = ExtResource("3_grrut")
+parent = NodePath("../../../..")
+
+[node name="IncreaseIndentButton" type="Button" parent="." unique_id=2142711239]
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "Increase indent"
+text = ">"
+
+[connection signal="pressed" from="DecreaseIndentButton" to="." method="decrease_indent"]
+[connection signal="pressed" from="IncreaseIndentButton" to="." method="increase_indent"]

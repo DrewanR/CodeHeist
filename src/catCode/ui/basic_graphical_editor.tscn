@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://yfi43g18e0pe"]
+
+[ext_resource type="Script" uid="uid://urwscuedx836" path="res://src/catCode/ui/basic_graphical_editor.gd" id="1_8ryk2"]
+
+[node name="ScrollContainer" type="ScrollContainer" unique_id=240595529]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ryk2")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1911680033]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1542234627]
+layout_mode = 2
+
+[node name="CodeContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=543115846]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=979903033]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="RevertButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1393895471]
+visible = false
+layout_mode = 2
+text = "✗Revert
+"
+
+[node name="SaveButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1939229514]
+layout_mode = 2
+text = "✔Save"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/RevertButton" to="." method="revert_code"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SaveButton" to="." method="compile"]

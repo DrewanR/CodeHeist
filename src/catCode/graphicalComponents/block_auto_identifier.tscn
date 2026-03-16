@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bi3aihmb1v2p"]
+
+[node name="BlockAutoIdentifier" type="Label" unique_id=1589247872]
+text = "BlockName"
