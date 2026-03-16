@@ -30,8 +30,10 @@ var instruction_nodes :Array[graphical_block]
 ## Node that all of the graphical_blocks will be a child of
 @onready var code_container := $MarginContainer/VBoxContainer/CodeContainer
 
-@onready var code_compile_button := $MarginContainer/HBoxContainer/SaveButton
-@onready var code_revert_button := $MarginContainer/HBoxContainer/RevertButton
+@onready var code_compile_button := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton
+@onready var code_revert_button := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/RevertButton
+
+@onready var block_menu_drop_down := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer2/BlockMenu
 
 func _ready() -> void:
 	parent.instructions_updated.connect(update_instructions)
@@ -102,6 +104,7 @@ func clear_all(will_emit_signal :bool = false):
 func update_instructions(new_list, new_dict):
 	instruction_list = new_list
 	instruction_dict = new_dict
+	refresh_command_dropdown()
 
 
 func update_instruction_dict(_instruction_dict):
@@ -112,8 +115,26 @@ func update_instruction_list(_instruction_list):
 	instruction_list = _instruction_list
 
 
+func refresh_command_dropdown():
+	block_menu_drop_down.clear()
+	for block in instruction_list:
+		block_menu_drop_down.add_item(block.block_name)
+	block_menu_drop_down.selected = 0
+
+
 func revert_code():
 	set_code(compiled_code)
+
+
+func add_line_button_pressed():
+	var prev_indent = 0 if len(draft_code) == 0 else draft_code[-1].indent
+	var new_line = instruction_line.new(
+		prev_indent,
+		instruction_list[block_menu_drop_down.selected],
+		[]
+	)
+	draft_code.append(new_line)
+	push_code()
 
 
 func clear_cache():

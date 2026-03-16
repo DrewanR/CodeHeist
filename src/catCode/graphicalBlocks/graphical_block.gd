@@ -89,7 +89,7 @@ func get_params():
 
 ## Pushes the values in [params] to the nodes
 func push_params(will_emit_signal :bool = false):
-	for i in range(0, 0):#len(params)):
+	for i in range(0, len(params)):
 		parameter_nodes[i].set_value(params[i])
 	
 	refresh.emit()

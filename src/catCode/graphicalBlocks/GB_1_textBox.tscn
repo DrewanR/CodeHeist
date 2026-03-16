@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cuyymiwskwyam"]
+
+[ext_resource type="PackedScene" uid="uid://doelngyort570" path="res://src/catCode/graphicalBlocks/graphical_block.tscn" id="1_ouhi1"]
+[ext_resource type="Script" uid="uid://d2jguicfdlfjf" path="res://src/catCode/graphicalBlocks/text_box_param.gd" id="2_sscmf"]
+
+[node name="GraphicalNode" unique_id=830576542 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_ouhi1")]
+parameter_nodes = [NodePath("BlockBG/MarginContainer/BlockContainer/TextBoxParam")]
+
+[node name="Label" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="1" unique_id=1667569708]
+layout_mode = 2
+text = "("
+
+[node name="TextBoxParam" type="LineEdit" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="2" unique_id=1972605277]
+layout_mode = 2
+select_all_on_focus = true
+script = ExtResource("2_sscmf")
+
+[node name="Label2" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="3" unique_id=1227158201]
+layout_mode = 2
+text = ")"

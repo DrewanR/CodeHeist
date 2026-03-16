@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cq78py84ikl2x"]
+
+[ext_resource type="PackedScene" uid="uid://doelngyort570" path="res://src/catCode/graphicalBlocks/graphical_block.tscn" id="1_20qxv"]
+[ext_resource type="Script" uid="uid://d2jguicfdlfjf" path="res://src/catCode/graphicalBlocks/text_box_param.gd" id="2_fspa8"]
+
+[node name="GraphicalNode" unique_id=830576542 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_20qxv")]
+parameter_nodes = [NodePath("BlockBG/MarginContainer/BlockContainer/TextBoxParam"), NodePath("BlockBG/MarginContainer/BlockContainer/TextBoxParam2")]
+
+[node name="Label" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="1" unique_id=1667569708]
+layout_mode = 2
+text = "("
+
+[node name="TextBoxParam" type="LineEdit" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="2" unique_id=1972605277]
+layout_mode = 2
+select_all_on_focus = true
+script = ExtResource("2_fspa8")
+
+[node name="Label2" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="3" unique_id=1227158201]
+layout_mode = 2
+text = ","
+
+[node name="TextBoxParam2" type="LineEdit" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="4" unique_id=126348266]
+layout_mode = 2
+select_all_on_focus = true
+script = ExtResource("2_fspa8")
+
+[node name="Label3" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="5" unique_id=2042577110]
+layout_mode = 2
+text = ")"

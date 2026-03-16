@@ -3,7 +3,7 @@
 [node name="BasicIndentNode" type="PanelContainer" unique_id=785242262]
 
 [node name="Label" type="Label" parent="." unique_id=1447326089]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(18, 0)
 layout_mode = 2
-text = "-"
+text = " "
 horizontal_alignment = 1
