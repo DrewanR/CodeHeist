@@ -91,6 +91,11 @@ when_to_run = 3
 
 [node name="Print2Function" parent="CatCodeManager" unique_id=689348759 instance=ExtResource("8_va5gq")]
 
+[node name="booleanValueF" parent="CatCodeManager" unique_id=1333304815 instance=ExtResource("20_gs08l")]
+
+[node name="booleanValueT" parent="CatCodeManager" unique_id=2042108197 instance=ExtResource("20_gs08l")]
+value = true
+
 [node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
 
 [node name="ElseConditional" parent="DisabledNodes" unique_id=2134933032 instance=ExtResource("10_sla3n")]
@@ -112,10 +117,5 @@ when_to_run = 3
 [node name="JumpFunction" parent="DisabledNodes" unique_id=717007852 instance=ExtResource("18_trdnn")]
 
 [node name="MoveFunction" parent="DisabledNodes" unique_id=1087323960 instance=ExtResource("19_xvciy")]
-
-[node name="booleanValueT" parent="DisabledNodes" unique_id=2042108197 instance=ExtResource("20_gs08l")]
-value = true
-
-[node name="booleanValueF" parent="DisabledNodes" unique_id=1333304815 instance=ExtResource("20_gs08l")]
 
 [connection signal="pressed" from="testUI/MarginContainer/HSplitContainer/basicTextualEdit/textToGraphicalButton" to="." method="_on_text_to_graphical_button_pressed"]

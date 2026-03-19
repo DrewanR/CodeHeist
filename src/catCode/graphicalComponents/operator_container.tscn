@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://drmmayl25fcbg"]
+
+[ext_resource type="Script" uid="uid://di5p1runo3e2c" path="res://src/catCode/graphicalComponents/operator_container.gd" id="1_vnfo4"]
+
+[node name="OperatorContainer" type="PanelContainer" unique_id=599561088]
+script = ExtResource("1_vnfo4")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=152113729]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1832462984]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=37236043]
+layout_mode = 2
+text = "OP:"
+
+[node name="Selecter" type="MenuButton" parent="MarginContainer/HBoxContainer" unique_id=950730605]
+layout_mode = 2
+text = "Add Operand"

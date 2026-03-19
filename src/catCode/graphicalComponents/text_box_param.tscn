@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bg2by5gx8a656"]
+
+[ext_resource type="Script" uid="uid://d2jguicfdlfjf" path="res://src/catCode/graphicalComponents/text_box_param.gd" id="1_6ndnu"]
+
+[node name="TextBoxParam" type="LineEdit" unique_id=329846698]
+expand_to_text_length = true
+select_all_on_focus = true
+script = ExtResource("1_6ndnu")

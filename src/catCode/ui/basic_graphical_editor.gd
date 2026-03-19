@@ -16,6 +16,10 @@ signal code_recompiled(new_compiled_code :Array[instruction_line])
 var instruction_list :Array[logic_block] = []
 ## Dictionary containing the same information.
 var instruction_dict :Dictionary[String, logic_block] = {}
+## List containing only operands
+var operand_list :Array[boolean_operator] = []
+## List containing exclusively non-operands
+var function_list :Array[logic_block] = []
 
 ## The draft, local version of the code.
 ## This may include outdated parameters.
@@ -102,8 +106,8 @@ func clear_all(will_emit_signal :bool = false):
 
 
 func update_instructions(new_list, new_dict):
-	instruction_list = new_list
-	instruction_dict = new_dict
+	update_instruction_lists(new_list)
+	update_instruction_dict(new_dict)
 	refresh_command_dropdown()
 
 
@@ -111,13 +115,33 @@ func update_instruction_dict(_instruction_dict):
 	instruction_dict = _instruction_dict
 
 
-func update_instruction_list(_instruction_list):
+func update_instruction_lists(_instruction_list :Array):
 	instruction_list = _instruction_list
+	print("-   Updating sublists")	#while len(_instruction_list) > 0:
+	#	var block = _instruction_list.pop_front()
+	#	if block.block_type == "boolean_operator":
+	#		print("-     Adding " + str(block) + " to operator list")
+	#		operand_list.append(block)
+	#	else:
+	#		print("-     Adding " + str(block) + " to function list")
+	#		function_list.append(block)
+	print(instruction_list)
+	for block :logic_block in instruction_list:
+		if block.is_type("boolean_operator"):
+			print("-     Adding " + str(block) + " to operator list")
+			operand_list.append(block)
+		else:
+			print("-     Adding " + str(block) + " to function list")
+			function_list.append(block)
+	print(function_list)
 
 
 func refresh_command_dropdown():
 	block_menu_drop_down.clear()
-	for block in instruction_list:
+	print("- Updating ui")
+	print(function_list)
+	for block in function_list:
+		print("-   Adding " + str(block.block_name) + " to menu")
 		block_menu_drop_down.add_item(block.block_name)
 	block_menu_drop_down.selected = 0
 
@@ -130,7 +154,7 @@ func add_line_button_pressed():
 	var prev_indent = 0 if len(draft_code) == 0 else draft_code[-1].indent
 	var new_line = instruction_line.new(
 		prev_indent,
-		instruction_list[block_menu_drop_down.selected],
+		function_list[block_menu_drop_down.selected],
 		[]
 	)
 	draft_code.append(new_line)

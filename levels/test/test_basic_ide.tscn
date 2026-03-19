@@ -47,3 +47,10 @@ editable = false
 editor = NodePath("../testUI/MarginContainer/HSplitContainer/basicTextualEdit")
 text_output = NodePath("../testUI/MarginContainer/HSplitContainer/basicOutput")
 when_to_run = 3
+debug_scenarios = {
+"Construction": 1,
+"Instruction_set": 2,
+"Line_full": 1,
+"Line_light": 1,
+"Thread_info": 1
+}
