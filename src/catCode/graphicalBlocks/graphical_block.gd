@@ -3,9 +3,9 @@ class_name graphical_block extends HBoxContainer
 # Attributes
 #============
 
-# Publically available information
+# Publicly available information
 
-var indentifier :String = "block"
+var indentifier :String = "block" #TODO: Fix spelling
 var params :Array = []
 var indent :int = 0
 var line_number :int = 0
@@ -20,7 +20,7 @@ signal refresh
 
 # Backend information
 
-var consituent_block :logic_block
+var consituent_block :logic_block # TODO: Fix spelling
 var indent_node :PackedScene = preload("res://src/catCode/graphicalComponents/basic_indent_node.tscn")
 var indent_node_instances :Array[Node] = [] 
 

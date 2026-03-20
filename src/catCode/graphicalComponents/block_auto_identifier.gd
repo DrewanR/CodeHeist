@@ -1,6 +1,6 @@
 extends Label
 
-@export var parent :graphical_block
+@export var parent :Control
 
 func _ready() -> void:
 	parent.refresh.connect(refresh_label)
