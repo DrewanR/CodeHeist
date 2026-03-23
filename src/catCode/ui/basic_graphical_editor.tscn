@@ -51,16 +51,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="RevertButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1393895471]
-visible = false
-layout_mode = 2
-text = "✗Revert
-"
-
 [node name="SaveButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1939229514]
 layout_mode = 2
 text = "✔Save"
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer2/AddLineButton" to="." method="add_line_button_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/RevertButton" to="." method="revert_code"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton" to="." method="compile"]

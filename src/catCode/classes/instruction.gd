@@ -38,3 +38,9 @@ func uses_parameters():
 
 func _to_string() -> String:
 	return str(indent) + ": " + str(primary_block.block_name) + "(" + str(parameters) + ")"
+
+func get_next_indent() -> int:
+	if iterative_element or selective_element:
+		return indent + 1
+	else:
+		return indent

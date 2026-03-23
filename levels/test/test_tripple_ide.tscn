@@ -47,9 +47,14 @@ custom_minimum_size = Vector2(300, 500)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_kigyt")
 theme_override_font_sizes/font_size = 14
-text = "print(meow)
-print(nyah)
-print2(purr1,purr2)"
+text = "print(start)
+if(false)
+	print(true)
+elif(false)
+	print(false)
+else
+	print(else)
+print(end)"
 parent = NodePath("../../../../CatCodeManager")
 fade_on_lost_focus = false
 
@@ -96,13 +101,13 @@ when_to_run = 3
 [node name="booleanValueT" parent="CatCodeManager" unique_id=2042108197 instance=ExtResource("20_gs08l")]
 value = true
 
+[node name="IfConditional" parent="CatCodeManager" unique_id=1510405312 instance=ExtResource("11_c85x0")]
+
+[node name="ElseIfConditional" parent="CatCodeManager" unique_id=1420746851 instance=ExtResource("12_puhpg")]
+
+[node name="ElseConditional" parent="CatCodeManager" unique_id=2134933032 instance=ExtResource("10_sla3n")]
+
 [node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
-
-[node name="ElseConditional" parent="DisabledNodes" unique_id=2134933032 instance=ExtResource("10_sla3n")]
-
-[node name="IfConditional" parent="DisabledNodes" unique_id=1510405312 instance=ExtResource("11_c85x0")]
-
-[node name="ElseIfConditional" parent="DisabledNodes" unique_id=1420746851 instance=ExtResource("12_puhpg")]
 
 [node name="IsButtonHeldOperator" parent="DisabledNodes" unique_id=68021963 instance=ExtResource("13_5pnyi")]
 

@@ -35,7 +35,6 @@ var instruction_nodes :Array[graphical_block]
 @onready var code_container := $MarginContainer/VBoxContainer/CodeContainer
 
 @onready var code_compile_button := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton
-@onready var code_revert_button := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/RevertButton
 
 @onready var block_menu_drop_down := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer2/BlockMenu
 
@@ -53,7 +52,6 @@ func compile() -> Array[instruction_line]:
 		compiled_code.append(line)
 	
 	code_recompiled.emit(compiled_code)
-	code_revert_button.visible = true
 	return compiled_code
 
 
@@ -73,6 +71,7 @@ func push_code():
 		print("- " + str(i) + " " + str(draft_code[i]))
 		var this_logic_block :logic_block = draft_code[i].primary_block
 		var this_graphical_block :graphical_block = this_logic_block.ui_block.instantiate()
+		this_graphical_block.code_editor = self
 		instruction_nodes.append(this_graphical_block)
 		code_container.add_child(this_graphical_block)
 		this_graphical_block.bind_from_instruction(draft_code[i])
@@ -80,7 +79,7 @@ func push_code():
 
 func pull_code():
 	clear_draft_code()
-	print("> Compiling code...")
+	print("> Pulling code...")
 	for i in range(0, len(instruction_nodes)):
 		print("- " + str(i) + " " + str(instruction_nodes[i]))
 		draft_code.append(instruction_nodes[i].get_instruction_line())
@@ -125,15 +124,14 @@ func update_instruction_lists(_instruction_list :Array):
 	#	else:
 	#		print("-     Adding " + str(block) + " to function list")
 	#		function_list.append(block)
-	print(instruction_list)
 	for block :logic_block in instruction_list:
-		if block.is_type("boolean_operator"):
+		print(block.block_type)
+		if block.block_type == "boolean_operator":
 			print("-     Adding " + str(block) + " to operator list")
 			operand_list.append(block)
 		else:
 			print("-     Adding " + str(block) + " to function list")
 			function_list.append(block)
-	print(function_list)
 
 
 func refresh_command_dropdown():
@@ -146,21 +144,17 @@ func refresh_command_dropdown():
 	block_menu_drop_down.selected = 0
 
 
-func revert_code():
-	set_code(compiled_code)
-
-
 func add_line_button_pressed():
-	var prev_indent = 0 if len(draft_code) == 0 else draft_code[-1].indent
+	var prev_indent = 0 if len(draft_code) == 0 else draft_code[-1].get_next_indent()
 	var new_line = instruction_line.new(
 		prev_indent,
 		function_list[block_menu_drop_down.selected],
 		[]
 	)
+	pull_code()
 	draft_code.append(new_line)
 	push_code()
 
 
 func clear_cache():
 	compiled_code = []
-	code_revert_button.visible = false

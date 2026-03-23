@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ce151efnja7pj" path="res://src/catCode/graphicalBlocks/graphical_block.gd" id="1_qrm6q"]
 [ext_resource type="PackedScene" uid="uid://bi3aihmb1v2p" path="res://src/catCode/graphicalComponents/block_auto_identifier.tscn" id="2_owpwl"]
-[ext_resource type="Script" uid="uid://44rg8nidbffq" path="res://src/catCode/graphicalComponents/block_auto_identifier.gd" id="3_grrut"]
 
 [node name="GraphicalNode" type="HBoxContainer" unique_id=830576542]
 anchors_preset = 10
@@ -33,7 +32,6 @@ size_flags_horizontal = 3
 
 [node name="BlockAutoIdentifier" parent="BlockBG/MarginContainer/BlockContainer" unique_id=1589247872 node_paths=PackedStringArray("parent") instance=ExtResource("2_owpwl")]
 layout_mode = 2
-script = ExtResource("3_grrut")
 parent = NodePath("../../../..")
 
 [node name="IncreaseIndentButton" type="Button" parent="." unique_id=2142711239]

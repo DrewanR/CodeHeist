@@ -128,7 +128,7 @@ func execute() -> void:
 		):
 			debug_output("Line_full","! Reached an else if statement of indent " + str(line.indent))
 			line_number += 1
-			indent_stack.back().acc += 1
+			indent_stack.back().rep += 1
 			# Scenario 1: Currently in "SKIP" state
 			if indent_stack.back().state == PASS_STATES.SKIP:
 				indent_stack.back().state = PASS_STATES.DO if line.primary_block.evaluate(line.parameters) else PASS_STATES.SKIP
@@ -148,7 +148,7 @@ func execute() -> void:
 		):
 			debug_output("Line_full","! Reached an else statement of indent " + str(line.indent))
 			line_number += 1
-			indent_stack.back().acc += 1
+			indent_stack.back().rep += 1
 			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
 		
 		# Iterables: REPEAT (initiation)

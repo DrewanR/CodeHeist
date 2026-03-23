@@ -23,6 +23,7 @@ signal refresh
 var consituent_block :logic_block # TODO: Fix spelling
 var indent_node :PackedScene = preload("res://src/catCode/graphicalComponents/basic_indent_node.tscn")
 var indent_node_instances :Array[Node] = [] 
+var code_editor :Node
 
 @onready var indent_node_source = $IndentContainer
 
@@ -40,6 +41,7 @@ var indent_node_instances :Array[Node] = []
 
 func _ready() -> void:
 	refresh_content()
+
 
 ## Updates line from a logic block
 func bind_from_block(block :logic_block, _line_number :int = 0):

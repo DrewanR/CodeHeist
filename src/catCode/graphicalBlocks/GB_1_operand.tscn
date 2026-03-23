@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://r7em3ai2npq0"]
+
+[ext_resource type="PackedScene" uid="uid://doelngyort570" path="res://src/catCode/graphicalBlocks/graphical_block.tscn" id="1_sq6o5"]
+[ext_resource type="Script" uid="uid://bs62v5ipomt3d" path="res://src/catCode/graphicalBlocks/gb_1_operand.gd" id="2_btxuh"]
+[ext_resource type="PackedScene" uid="uid://drmmayl25fcbg" path="res://src/catCode/graphicalComponents/operator_container.tscn" id="2_sq6o5"]
+
+[node name="GraphicalNode" unique_id=830576542 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_sq6o5")]
+script = ExtResource("2_btxuh")
+parameter_nodes = [NodePath("BlockBG/MarginContainer/BlockContainer/OperatorContainer")]
+
+[node name="Label" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="1" unique_id=1667569708]
+layout_mode = 2
+text = "<"
+
+[node name="OperatorContainer" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="2" unique_id=599561088 instance=ExtResource("2_sq6o5")]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="3" unique_id=1227158201]
+layout_mode = 2
+text = ">"

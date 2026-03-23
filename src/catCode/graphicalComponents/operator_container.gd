@@ -21,30 +21,27 @@ var options :Array[boolean_operator] = []
 @onready var container := $MarginContainer/HBoxContainer
 
 func _ready() -> void:
-	#false_fallback = false_fallback.instantiate()
-	#add_child(false_fallback)
-	#update_options([false_fallback, false_fallback])
 	selector.get_popup().id_pressed.connect(upon_item_selected)
 
 
 func update_options(_options :Array[boolean_operator]):
-	print("Updating options:")
 	options = _options
+	selector.get_popup().clear()
 	for this_option in _options:
-		print("  " + str(this_option))
 		selector.get_popup().add_item(this_option.block_name.capitalize())
 
 
 func set_value(value = null):
-	if value in [null, []]:
-		constituent_block = null
+	print(value)
+	if len(value) < 1 and value in [null, []]:
 		current_state = STATES.NO_OPERAND
+		constituent_block = null
 		refresh()
 	else:
+		current_state = STATES.HAS_OPERAND
 		constituent_block = value[0]
 		refresh()
-		child_node.pass_args(value)
-		current_state = STATES.HAS_OPERAND
+		child_node.pass_args(value.slice(1))
 
 
 func set_index(index :int) -> void:
@@ -64,10 +61,10 @@ func get_value():
 
 func refresh():
 	print("Refreshing:")
-	print("  block  = " + str(constituent_block))
-	if current_state == STATES.NO_OPERAND:
+	print("  block = " + str(constituent_block))
+	if current_state == STATES.NO_OPERAND :
 		selector.visible = true
-		child_node.queue_free()
+		if child_node != null: child_node.queue_free()
 	else:
 		selector.visible = false
 		if child_node != null: child_node.queue_free()
@@ -76,6 +73,7 @@ func refresh():
 		child_node = constituent_block.ui_block.instantiate()
 		container.add_child(child_node)
 		child_node.refresh_content(constituent_block.block_name)
+	print("  child_node = " + str(child_node))
 
 
 func upon_operand_deletion() -> void:
