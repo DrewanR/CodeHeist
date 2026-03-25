@@ -74,7 +74,7 @@ func push_code():
 		this_graphical_block.code_editor = self
 		instruction_nodes.append(this_graphical_block)
 		code_container.add_child(this_graphical_block)
-		this_graphical_block.bind_from_instruction(draft_code[i])
+		this_graphical_block.bind_from_instruction(draft_code[i], i)
 
 
 func pull_code():
@@ -153,6 +153,11 @@ func add_line_button_pressed():
 	)
 	pull_code()
 	draft_code.append(new_line)
+	push_code()
+
+func remove_line(line :int):
+	pull_code()
+	draft_code.remove_at(line)
 	push_code()
 
 

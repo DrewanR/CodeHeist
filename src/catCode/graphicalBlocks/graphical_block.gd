@@ -16,6 +16,7 @@ var is_valid_line :bool = true
 #signal block_updated(line_number :int,)
 signal parameters_updated(line_number :int, new_params :Array)
 signal indent_updated(line_number :int, new_indent :int)
+signal delete_line(line_number :int)
 signal refresh
 
 # Backend information
@@ -23,6 +24,7 @@ signal refresh
 var consituent_block :logic_block # TODO: Fix spelling
 var indent_node :PackedScene = preload("res://src/catCode/graphicalComponents/basic_indent_node.tscn")
 var indent_node_instances :Array[Node] = [] 
+var is_mouse_over :bool = false
 var code_editor :Node
 
 @onready var indent_node_source = $IndentContainer
@@ -144,5 +146,20 @@ func destroy_indent_nodes():
 		var this_instance = indent_node_instances.pop_front()
 		this_instance.queue_free()
 
+# Other
+
 func _to_string() -> String:
 	return "Graphical node: " + str(get_instruction_line())
+
+func _on_block_bg_mouse_entered() -> void:
+	is_mouse_over = true
+
+func _on_block_bg_mouse_exited() -> void:
+	is_mouse_over = false
+
+func _input(event):
+	if is_mouse_over and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			delete_line.connect(code_editor.remove_line)
+			print("  Right clicked " + str(line_number) + ", deleting line...")
+			delete_line.emit(line_number)

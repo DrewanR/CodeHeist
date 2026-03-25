@@ -41,4 +41,6 @@ tooltip_text = "Increase indent"
 text = ">"
 
 [connection signal="pressed" from="DecreaseIndentButton" to="." method="decrease_indent"]
+[connection signal="mouse_entered" from="BlockBG" to="." method="_on_block_bg_mouse_entered"]
+[connection signal="mouse_exited" from="BlockBG" to="." method="_on_block_bg_mouse_exited"]
 [connection signal="pressed" from="IncreaseIndentButton" to="." method="increase_indent"]
