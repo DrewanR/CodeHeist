@@ -24,6 +24,20 @@ layout_mode = 2
 [node name="CodeContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=543115846]
 layout_mode = 2
 
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1161660330]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=737478421]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="InLineAddButton" type="MenuButton" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=638283531]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = " + Add line"
+alignment = 0
+
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=951851508]
 layout_mode = 2
 size_flags_vertical = 8

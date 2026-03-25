@@ -32,9 +32,10 @@ func update_options(_options :Array[boolean_operator]):
 
 
 func set_value(value = null):
-	print(value)
-	if len(value) < 1 and value in [null, []]:
+	print("Setting value to " + str(value))
+	if value == null or value == [] or value == [null]:
 		current_state = STATES.NO_OPERAND
+		print("Current state :" + str(current_state))
 		constituent_block = null
 		refresh()
 	else:
@@ -52,7 +53,7 @@ func set_index(index :int) -> void:
 
 func get_value():
 	if current_state == STATES.NO_OPERAND:
-		return [false_fallback.instantiate()]
+		return [null]
 	else:
 		var result = [constituent_block]
 		result.append_array(child_node.get_params())
@@ -62,7 +63,7 @@ func get_value():
 func refresh():
 	print("Refreshing:")
 	print("  block = " + str(constituent_block))
-	if current_state == STATES.NO_OPERAND :
+	if current_state == STATES.NO_OPERAND or constituent_block == null:
 		selector.visible = true
 		if child_node != null: child_node.queue_free()
 	else:

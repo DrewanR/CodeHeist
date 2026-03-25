@@ -37,9 +37,11 @@ var instruction_nodes :Array[graphical_block]
 @onready var code_compile_button := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton
 
 @onready var block_menu_drop_down := $MarginContainer/PanelContainer/MarginContainer/HBoxContainer2/BlockMenu
+@onready var inline_block_menu := $MarginContainer/VBoxContainer/PanelContainer/InLineAddButton
 
 func _ready() -> void:
 	parent.instructions_updated.connect(update_instructions)
+	inline_block_menu.get_popup().id_pressed.connect(upon_item_selected)
 	clear_cache()
 
 
@@ -141,19 +143,29 @@ func refresh_command_dropdown():
 	for block in function_list:
 		print("-   Adding " + str(block.block_name) + " to menu")
 		block_menu_drop_down.add_item(block.block_name)
+		inline_block_menu.get_popup().add_item(block.block_name)
 	block_menu_drop_down.selected = 0
 
 
 func add_line_button_pressed():
+	add_line(block_menu_drop_down.selected)
+
+
+func upon_item_selected(id :int) -> void:
+	add_line(id)
+
+
+func add_line(function_list_index):
 	var prev_indent = 0 if len(draft_code) == 0 else draft_code[-1].get_next_indent()
 	var new_line = instruction_line.new(
 		prev_indent,
-		function_list[block_menu_drop_down.selected],
+		function_list[function_list_index],
 		[]
 	)
 	pull_code()
 	draft_code.append(new_line)
 	push_code()
+
 
 func remove_line(line :int):
 	pull_code()
