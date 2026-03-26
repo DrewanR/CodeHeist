@@ -142,3 +142,7 @@ func _on_mouse_exited() -> void:
 
 func _on_focus_entered() -> void:
 	get_tree().paused = true
+
+## Updates the process name
+func update_process_name(new_name :String = "Unknown Process", description :String = "Unknown process"):
+	pass

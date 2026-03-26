@@ -61,6 +61,29 @@ enum THREAD_OVERFLOW_BEHAVIORS { NEVER_REPLACE, ALWAYS_REPLACE}
 }
 enum DEBUG_OPTIONS { NEVER, EXTERNAL, BOTH }
 
+## Process names and descriptions
+const PROCESS_NAMES := {
+	RUN_OPTIONS.NEVER: {
+		"name": "unknown process",
+		"description": "It is unknown when this process will run..." },
+	RUN_OPTIONS.READY: {
+		"name": "ready",
+		"description": "This process will run when it's target is spawned."
+	},
+	RUN_OPTIONS.PROCESS: {
+		"name": "process",
+		"description": "This process will run repeatedly until interrupted."
+	},
+	RUN_OPTIONS.PRIMARY_ACTION: {
+		"name": "onPrimaryButton",
+		"description": "This process will run when the primary button, default Z, is pressed."
+	},
+	RUN_OPTIONS.SECONDARY_ACTION: {
+		"name": "onSecondaryButton",
+		"description": "This process will run when the secondary button, default X, is pressed."
+	}
+}
+
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
 ##    that inherit the logicalBlock class. [br]
@@ -111,6 +134,7 @@ func _ready() -> void:
 			print_line("Press [X] to run!")
 	
 	editor.compile()
+	editor.update_process_name(PROCESS_NAMES[when_to_run]["name"], PROCESS_NAMES[when_to_run]["description"])
 
 func _process(_delta: float) -> void:
 	clean_threads()

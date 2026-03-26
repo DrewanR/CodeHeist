@@ -2,7 +2,14 @@
 
 [ext_resource type="Script" uid="uid://urwscuedx836" path="res://src/catCode/ui/basic_graphical_editor.gd" id="1_8ryk2"]
 
-[node name="ScrollContainer" type="ScrollContainer" unique_id=240595529]
+[sub_resource type="InputEventKey" id="InputEventKey_8ryk2"]
+device = -1
+keycode = 4194332
+
+[sub_resource type="Shortcut" id="Shortcut_wtus3"]
+events = [SubResource("InputEventKey_8ryk2")]
+
+[node name="GraphicalEditor" type="ScrollContainer" unique_id=240595529 node_paths=PackedStringArray("collapsable_nodes")]
 clip_contents = false
 custom_minimum_size = Vector2(400, 0)
 anchors_preset = 15
@@ -11,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8ryk2")
+collapsable_nodes = [NodePath("MarginContainer/VBoxContainer/HSeparator2"), NodePath("MarginContainer/VBoxContainer/FunctionLabel"), NodePath("MarginContainer/VBoxContainer/CodeContainer"), NodePath("MarginContainer/VBoxContainer/HSeparator"), NodePath("MarginContainer/VBoxContainer/PanelContainer")]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1911680033]
 layout_mode = 2
@@ -20,6 +28,78 @@ theme_override_constants/margin_left = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1542234627]
 layout_mode = 2
+
+[node name="HeaderBar" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1387368554]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HeaderBar" unique_id=630446951]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer" unique_id=1362947854]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=74602973]
+layout_mode = 2
+text = "CatCode+"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=392952543]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="InstructionSet" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=424452628]
+layout_mode = 2
+tooltip_text = "View instuction set"
+text = "Instruction Set"
+
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=1528732493]
+layout_mode = 2
+tooltip_text = "View controls"
+text = "Controls"
+
+[node name="Help" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=1531918778]
+layout_mode = 2
+tooltip_text = "Show catCode editor documentation."
+shortcut = SubResource("Shortcut_wtus3")
+text = "Help"
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=507273418]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CollapseButton" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=1856735050]
+layout_mode = 2
+tooltip_text = "Show/hide code editor"
+text = "/\\"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=2017595536]
+layout_mode = 2
+
+[node name="FunctionLabel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=2033883622]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/FunctionLabel" unique_id=192114423]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer" unique_id=1025699640]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=1155181081]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+text = " Process"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=2078514866]
+layout_mode = 2
+disabled = true
+text = "?"
 
 [node name="CodeContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=543115846]
 layout_mode = 2
@@ -69,5 +149,137 @@ size_flags_vertical = 8
 layout_mode = 2
 text = "✔Save"
 
+[node name="HelpPopup" type="Popup" parent="." unique_id=2081669404]
+oversampling_override = 1.0
+title = "CatCode+ Help"
+size = Vector2i(800, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HelpPopup" unique_id=1805094917]
+
+[node name="MarginContainer" type="MarginContainer" parent="HelpPopup/CanvasLayer" unique_id=1930670709]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HelpPopup/CanvasLayer/MarginContainer" unique_id=1564848910]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HelpPopup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=455862473]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HelpPopup/CanvasLayer/MarginContainer/VBoxContainer/PanelContainer" unique_id=967199650]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Temporay help menu."
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HelpPopup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=1553241216]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "CatCode+ is the graphical code editor, that created CatCode which controls the CatBot.
+
+[b]What is catCode?[/b]
+CatCode consists of a sequence of blocks. Each of these are an instruction that the catBot will follow in order. For example, the \"jump\" block will make catBot execute the jump function.
+
+Some blocks have values associated with them called parameters. When these functions are executed, the value specified by the parameter (or sometimes parameters) will affect how the catBot will react. For example, the strength parameter on \"jump\" will control how high the catBot will jump.
+
+Experiment with these! Unlike CatCode-, it is hard to give catBot functions it can't handle using catCode+.
+
+To view a list of instructions, their parameters and further explanations of the blocks click \"Instruction set\".
+
+[b]How do I edit CatCode?[/b]
+To add a new block, click on the \"+ add line\" button. To remove a block, right click it. Click and drag blocks to reorder them.
+
+[b]How do I add indent blocks?[/b]
+To add indent blocks, use the \"<\" and \">\" buttons on it's line.
+
+[b]Why do I indent blocks?[/b]
+Certain blocks, such as \"if\" will modify the behaviour of the blocks associated with it. Indent blocks are used to tell catBot what is beneath what.
+
+When inserting a new line, the block will be inserted at the correct indent.
+
+[i]Click outside window to close[/i]"
+
+[node name="ControlPopup" type="Popup" parent="." unique_id=858235311]
+oversampling_override = 1.0
+title = "CatCode+ Help"
+size = Vector2i(800, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ControlPopup" unique_id=815144159]
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPopup/CanvasLayer" unique_id=2105099045]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlPopup/CanvasLayer/MarginContainer" unique_id=512743299]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ControlPopup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=1824925356]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ControlPopup/CanvasLayer/MarginContainer/VBoxContainer/PanelContainer" unique_id=951880099]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Temporay controls menu."
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlPopup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=99174600]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "At present controls are hardwired.
+If you need to remap controls, return to the coverpage and follow the unexported build instructions. These instructions will guide you through the process of installing godot, downloading the project and editing the controls. This will [i]not[/i] update catCode labelling.
+
+[b]Controls[/b]
+Z-Button: [i]Z[/i]
+X-Button: [i]X[/i]
+
+Up: [i]Up arrow key[/i]
+Down: [i]Down arrow key[/i]
+left: [i]Left arrow key[/i]
+Right: [i]Right arrow key[/i]
+
+Delete block: [i]Right click[/i]
+
+It is up to you what each of the above keys do, however when relying on the autocontrollers, the following keybinds are used:
+
+[b]Auto keybindings[/b]
+Z-Button: [i]Jump[/i]
+X-Button: [i]Strike/Swipe[/i]
+Arrow keys: [i]Movement[/i]
+
+[i]Click outside window to close[/i]"
+
+[node name="ScreenDimmer" type="CanvasLayer" parent="." unique_id=266414966]
+layer = 256
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ScreenDimmer" unique_id=667737425]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/CollapseButton" to="." method="_on_collapse_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer2/AddLineButton" to="." method="add_line_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton" to="." method="compile"]
+[connection signal="popup_hide" from="HelpPopup" to="." method="screen_undim"]
+[connection signal="popup_hide" from="ControlPopup" to="." method="screen_undim"]
