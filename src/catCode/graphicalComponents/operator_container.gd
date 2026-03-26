@@ -1,4 +1,4 @@
-extends PanelContainer
+class_name operand_container extends PanelContainer
 
 enum STATES { NO_OPERAND, HAS_OPERAND }
 var current_state = STATES.NO_OPERAND
@@ -72,6 +72,7 @@ func refresh():
 		print("  constituent block = " + str(constituent_block))
 		print("  ui block = " + str(constituent_block.ui_block))
 		child_node = constituent_block.ui_block.instantiate()
+		child_node.bind_container(self)
 		container.add_child(child_node)
 		child_node.refresh_content(constituent_block.block_name)
 	print("  child_node = " + str(child_node))

@@ -17,3 +17,6 @@ layout_mode = 2
 [node name="BlockAutoIdentifier" parent="MarginContainer/HBoxContainer" unique_id=1589247872 node_paths=PackedStringArray("parent") instance=ExtResource("2_q4yvp")]
 layout_mode = 2
 parent = NodePath("../../..")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

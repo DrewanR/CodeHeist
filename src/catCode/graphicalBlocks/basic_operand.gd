@@ -12,6 +12,7 @@ var params :Array = []
 
 signal parameters_updated(new_params :Array)
 signal refresh
+signal delete_operand
 
 # Export properties
 
@@ -21,6 +22,10 @@ signal refresh
 ##          This has to be implemented by the developer.
 @export var parameter_nodes :Array[Control] = []
 
+# Private attributes
+
+var is_mouse_over := false
+var container :operand_container
 
 # Methods
 #=========
@@ -34,6 +39,8 @@ func pass_args(args :Array):
 	set_params(args)
 	refresh_content()
 
+func bind_container(_container :operand_container):
+	container = _container
 
 # Params
 
@@ -66,3 +73,21 @@ func pull_params(will_emit_signal :bool = false) -> Array:
 	
 	if will_emit_signal: parameters_updated.emit(params)
 	return params
+
+# Deletion stuff
+
+func _input(event):
+	if is_mouse_over and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			delete_operand.connect(container.upon_operand_deletion)
+			print("  Right clicked, deleting operand")
+			delete_operand.emit()
+
+
+func _on_mouse_entered() -> void:
+	print("Mouse over")
+	is_mouse_over = true
+
+func _on_mouse_exited() -> void:
+	print("Mouse off")
+	is_mouse_over = false
