@@ -31,7 +31,7 @@ func update_options(_options :Array[boolean_operator]):
 		selector.get_popup().add_item(this_option.block_name.capitalize())
 
 
-func set_value(value = null):
+func set_param_value(value = null):
 	print("Setting value to " + str(value))
 	if value == null or value == [] or value == [null]:
 		current_state = STATES.NO_OPERAND
@@ -51,7 +51,7 @@ func set_index(index :int) -> void:
 	refresh()
 
 
-func get_value():
+func get_param_value():
 	if current_state == STATES.NO_OPERAND:
 		return [null]
 	else:
@@ -79,7 +79,7 @@ func refresh():
 
 
 func upon_operand_deletion() -> void:
-	set_value(null)
+	set_param_value(null)
 
 
 func upon_item_selected(id :int) -> void:

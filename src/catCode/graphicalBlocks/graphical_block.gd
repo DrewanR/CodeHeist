@@ -33,7 +33,7 @@ var code_editor :Node
 
 ## An array of references to the nodes that contain parameter locations. [br]
 ## Must be set for parameters to work. Put in order of parameters. [br][br]
-## WARNING: All nodes MUST contain the method get_value() and set_value(). [br]
+## WARNING: All nodes MUST contain the method get_param_value() and set_param_value(). [br]
 ##          This has to be implemented by the developer.
 @export var parameter_nodes :Array[Control] = []
 
@@ -95,7 +95,7 @@ func get_params():
 func push_params(will_emit_signal :bool = false):
 	for i in range(0, len(params)):
 		print("      " + str(parameter_nodes[i]))
-		parameter_nodes[i].set_value(params[i])
+		parameter_nodes[i].set_param_value(params[i])
 	
 	refresh.emit()
 	if will_emit_signal: parameters_updated.emit(line_number, params)
@@ -105,7 +105,7 @@ func push_params(will_emit_signal :bool = false):
 func pull_params(will_emit_signal :bool = false) -> Array:
 	params = []
 	for this_parameter_node in parameter_nodes:
-		params.append(this_parameter_node.get_value())
+		params.append(this_parameter_node.get_param_value())
 	
 	if will_emit_signal: parameters_updated.emit(line_number, params)
 	return params
