@@ -167,7 +167,7 @@ func run_script():
 		create_thread()
 	# Case 2: 
 	elif (
-		len(threads) == maximum_threads and 
+		len(threads) >= maximum_threads and 
 		thread_overflow_behavior == THREAD_OVERFLOW_BEHAVIORS.ALWAYS_REPLACE
 	):
 		create_thread()
@@ -178,6 +178,8 @@ func clean_threads():
 	var index = 0
 	while index < len(threads):
 		if threads[index].thread_state == cat_thread.THREAD_STATES.DEAD:
+			kill_thread(index)
+		elif index >= maximum_threads:
 			kill_thread(index)
 		else:
 			index += 1
@@ -192,9 +194,10 @@ func create_thread():
 	for i in range(0,len(threads)):
 		if threads[i].priority <= new_thread.priority:
 			threads.insert(i, new_thread)
+			add_child(new_thread)
 			return
-	threads.append(new_thread)
 
+	threads.append(new_thread)
 	# Adds child
 	add_child(new_thread)
 

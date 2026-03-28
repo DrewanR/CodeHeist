@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ckqy5mt8iujwr"]
 
 [ext_resource type="Script" uid="uid://da7r4gqik3kid" path="res://src/catCode/logicBlocks/scripts/is_button_held_operator.gd" id="1_xhg1q"]
-[ext_resource type="PackedScene" uid="uid://dfr851ei4l6u7" path="res://src/catCode/graphicalBlocks/OP_1_textBox.tscn" id="2_im60i"]
+[ext_resource type="PackedScene" uid="uid://8gelnmp5123d" path="res://src/catCode/graphicalBlocks/OP_1_DropDown.tscn" id="2_im60i"]
 
 [node name="IsButtonHeldOperator" type="Node" unique_id=2042108197]
 script = ExtResource("1_xhg1q")

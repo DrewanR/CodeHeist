@@ -31,7 +31,7 @@ func evaluate(_args :Array = []) -> bool:
 
 ## Returns the button available for the player to use
 func get_available_options() -> Array[String]:
-	var valid_buttons = []
+	var valid_buttons :Array[String] = []
 	for this_button in permitted_buttons.keys():
 		if permitted_buttons[this_button]:
 			valid_buttons.append(this_button)
