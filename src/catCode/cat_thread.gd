@@ -49,6 +49,7 @@ enum THREAD_STATES { QUEUED, ALIVE, DEAD, KILLED}
 func _ready() -> void:
 	bind()
 	execute()
+	debug_output("Thread_info", "# Thread died: '" + name + "'")
 
 
 ## Constructs a thread. [br]
@@ -61,6 +62,7 @@ func bind(_priority :int = 0 ) -> void:
 	
 	compiled_code = manager.compiled_code
 	priority = min(_priority, 999)
+	add_blank_line()
 	
 	debug_scenarios = manager.debug_scenarios
 	
@@ -239,12 +241,19 @@ func print_line(text :String):
 	manager.print_line(text)
 
 
+func add_blank_line():
+	var pass_block = manager.pass_logic_node
+	compiled_code.append(instruction_line.new(0, pass_block))
+
+## StateStackLayer:
+## Stores a layer of the state stack used for iteration and selection.
+## Acts as a struct.
 class stateStackLayer:
-	var indent :int
-	var type :STACK_LAYER_TYPE
-	var state :PASS_STATES
-	var rep :int
-	var entry :int
+	var indent :int ## Current indent
+	var type :STACK_LAYER_TYPE ## The type of stack layer, determines if it is getting used by an if or repeat essentially
+	var state :PASS_STATES ## Determines whether instructions should be skipped
+	var rep :int ## Number of repeats completed if iterative, else the number elifs passed
+	var entry :int ## The line this layer was enterred using
 	
 	func _init(_indent :int, _type :STACK_LAYER_TYPE, entry_state :PASS_STATES, _entry :int) -> void:
 		indent = _indent

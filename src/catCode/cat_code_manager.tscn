@@ -4,3 +4,8 @@
 
 [node name="CatCodeManager" type="Node" unique_id=2046772742]
 script = ExtResource("1_ycvx2")
+when_to_run = null
+when_to_compile = null
+maximum_threads = null
+thread_overflow_behavior = null
+debug_scenarios = null

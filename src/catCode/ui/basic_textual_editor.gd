@@ -144,5 +144,5 @@ func _on_focus_entered() -> void:
 	get_tree().paused = true
 
 ## Updates the process name
-func update_process_name(new_name :String = "Unknown Process", description :String = "Unknown process"):
+func update_process_name(_new_name :String = "Unknown Process", _description :String = "Unknown process"):
 	pass

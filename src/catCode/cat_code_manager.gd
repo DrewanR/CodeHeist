@@ -108,12 +108,21 @@ var threads :Array[cat_thread] = []
 ## Preload the cat_thread node
 var cat_thread_node = preload("res://src/catCode/cat_thread.tscn")
 
+## The fallback logic_block for when nothing should occur
+var pass_logic_node_preload := preload("res://src/catCode/logicBlocks/nodes/pass_function.tscn")
+
+## The fallback logic_block for when nothing should occur
+var pass_logic_node :logic_block
+
 ## Signal emitted upon updating the instructions
 signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[String, logic_block])
 
 func _ready() -> void:
 	if when_to_compile == COMPILE_OPTIONS.DEFAULT:
 		when_to_compile = COMPILE_OPTIONS.NEVER if when_to_run == RUN_OPTIONS.PROCESS else COMPILE_OPTIONS.RUN
+	
+	pass_logic_node = pass_logic_node_preload.instantiate()
+	add_child(pass_logic_node)
 	
 	print_line("CatCodeManager Started!")
 	update_instructions()
@@ -195,6 +204,7 @@ func create_thread():
 func kill_thread(index :int):
 	var thread = threads.pop_at(index)
 	thread.thread_state = thread.THREAD_STATES.KILLED
+	debug_output("Thread_info", "# Killing thread")
 	thread.queue_free()
 
 

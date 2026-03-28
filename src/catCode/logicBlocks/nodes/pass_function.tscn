@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d6dw16ldxjld"]
+
+[ext_resource type="Script" uid="uid://bb3jrswo8kg5x" path="res://src/catCode/logicBlocks/nodes/pass_function.gd" id="1_k1dga"]
+[ext_resource type="PackedScene" uid="uid://doelngyort570" path="res://src/catCode/graphicalBlocks/graphical_block.tscn" id="2_ex3dq"]
+
+[node name="PassFunction" type="Node" unique_id=689348759]
+script = ExtResource("1_k1dga")
+block_ref = "pass"
+block_name = "pass"
+block_category = "debug"
+ui_block = ExtResource("2_ex3dq")
