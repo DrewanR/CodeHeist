@@ -59,7 +59,7 @@ func get_params():
 func push_params(will_emit_signal :bool = false):
 	for i in range(0, len(params)):
 		print("      " + str(parameter_nodes[i]))
-		parameter_nodes[i].set_value(params[i])
+		parameter_nodes[i].set_param_value(params[i])
 	
 	refresh.emit()
 	if will_emit_signal: parameters_updated.emit(params)
@@ -69,7 +69,7 @@ func push_params(will_emit_signal :bool = false):
 func pull_params(will_emit_signal :bool = false) -> Array:
 	params = []
 	for this_parameter_node in parameter_nodes:
-		params.append(this_parameter_node.get_value())
+		params.append(this_parameter_node.get_param_value())
 	
 	if will_emit_signal: parameters_updated.emit(params)
 	return params

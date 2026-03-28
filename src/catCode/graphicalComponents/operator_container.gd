@@ -28,7 +28,7 @@ func update_options(_options :Array[boolean_operator]):
 	options = _options
 	selector.get_popup().clear()
 	for this_option in _options:
-		selector.get_popup().add_item(this_option.block_name.capitalize())
+		selector.get_popup().add_item(this_option.block_name)
 
 
 func set_param_value(value = null):
@@ -42,7 +42,8 @@ func set_param_value(value = null):
 		current_state = STATES.HAS_OPERAND
 		constituent_block = value[0]
 		refresh()
-		child_node.pass_args(value.slice(1))
+		if len(value) == 2: child_node.pass_args(value[1])
+		elif len(value) == 1: child_node.pass_args([])
 
 
 func set_index(index :int) -> void:
@@ -56,7 +57,7 @@ func get_param_value():
 		return [null]
 	else:
 		var result = [constituent_block]
-		result.append_array(child_node.get_params())
+		result.append(child_node.get_params())
 		return result
 
 
@@ -74,7 +75,7 @@ func refresh():
 		child_node = constituent_block.ui_block.instantiate()
 		child_node.bind_container(self)
 		container.add_child(child_node)
-		child_node.refresh_content(constituent_block.block_name)
+		child_node.refresh_content(constituent_block.block_ref)
 	print("  child_node = " + str(child_node))
 
 

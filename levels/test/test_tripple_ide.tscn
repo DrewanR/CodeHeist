@@ -115,9 +115,9 @@ value = true
 
 [node name="ForeverIterational" parent="CatCodeManager" unique_id=2127973843 instance=ExtResource("15_fd6pm")]
 
-[node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
+[node name="IsButtonHeldOperator" parent="CatCodeManager" unique_id=68021963 instance=ExtResource("13_5pnyi")]
 
-[node name="IsButtonHeldOperator" parent="DisabledNodes" unique_id=68021963 instance=ExtResource("13_5pnyi")]
+[node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
 
 [node name="IsButtonJustPressedOperator" parent="DisabledNodes" unique_id=629059722 instance=ExtResource("14_u2hsr")]
 

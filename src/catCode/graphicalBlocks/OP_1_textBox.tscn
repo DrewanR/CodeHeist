@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dfr851ei4l6u7"]
+
+[ext_resource type="PackedScene" uid="uid://b0tvpwip5cxi3" path="res://src/catCode/graphicalBlocks/basic_operand.tscn" id="1_wusnv"]
+[ext_resource type="PackedScene" uid="uid://bg2by5gx8a656" path="res://src/catCode/graphicalComponents/text_box_param.tscn" id="2_v4y35"]
+
+[node name="BasicOperand" unique_id=782317717 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_wusnv")]
+parameter_nodes = [NodePath("MarginContainer/HBoxContainer/TextBoxParam")]
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2067633605) index="1" unique_id=914451992]
+layout_mode = 2
+text = "("
+
+[node name="TextBoxParam" parent="MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2067633605) index="2" unique_id=329846698 instance=ExtResource("2_v4y35")]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2067633605) index="3" unique_id=599389491]
+layout_mode = 2
+text = ")"

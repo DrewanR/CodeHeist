@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bx21jktbdv1m0" path="res://src/catCode/graphicalBlocks/basic_operand.gd" id="1_l21to"]
 [ext_resource type="PackedScene" uid="uid://bi3aihmb1v2p" path="res://src/catCode/graphicalComponents/block_auto_identifier.tscn" id="2_q4yvp"]
 
-[node name="BasicOperand" type="PanelContainer" unique_id=782317717]
+[node name="Operand" type="PanelContainer" unique_id=782317717]
 script = ExtResource("1_l21to")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=247510566]
