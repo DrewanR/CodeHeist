@@ -208,7 +208,7 @@ func kill_thread(index :int):
 	var thread = threads.pop_at(index)
 	thread.thread_state = thread.THREAD_STATES.KILLED
 	debug_output("Thread_info", "# Killing thread")
-	thread.queue_free()
+	thread.free()
 
 
 ## Updates the blocks in both the instruction dictionary and list
@@ -286,3 +286,9 @@ func print_instruction_dictionary(output_location :DEBUG_OPTIONS = DEBUG_OPTIONS
 
 func _on_compiled_code_received(new_code):
 	compiled_code = new_code
+	add_blank_line() # You do not want to know the trauma that went into this line.
+
+
+func add_blank_line():
+	var pass_block = pass_logic_node
+	compiled_code.append(instruction_line.new(0, pass_block))

@@ -62,7 +62,6 @@ func bind(_priority :int = 0 ) -> void:
 	
 	compiled_code = manager.compiled_code
 	priority = min(_priority, 999)
-	add_blank_line()
 	
 	debug_scenarios = manager.debug_scenarios
 	
@@ -240,10 +239,6 @@ func debug_output_fixed(output_location :DEBUG_OPTIONS, message :String) -> void
 func print_line(text :String):
 	manager.print_line(text)
 
-
-func add_blank_line():
-	var pass_block = manager.pass_logic_node
-	compiled_code.append(instruction_line.new(0, pass_block))
 
 ## StateStackLayer:
 ## Stores a layer of the state stack used for iteration and selection.
