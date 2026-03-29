@@ -2,20 +2,24 @@
 
 [ext_resource type="Script" uid="uid://dyy2325o5pr8a" path="res://src/entities/player/altPlayerInstances/cat_bot_selector.gd" id="1_bj0er"]
 [ext_resource type="PackedScene" uid="uid://bqqr342cmjyir" path="res://src/entities/player/altPlayerInstances/cat_bot_full_auto.tscn" id="3_4g4vd"]
-[ext_resource type="PackedScene" path="res://src/entities/player/altPlayerInstances/text_blank_cat_bot.tscn" id="3_ivyvp"]
-[ext_resource type="PackedScene" path="res://src/entities/player/altPlayerInstances/text_full_cat_bot.tscn" id="5_w8k43"]
+[ext_resource type="PackedScene" uid="uid://e2ocpuivbbwf" path="res://src/entities/player/altPlayerInstances/text_blank_cat_bot.tscn" id="3_ivyvp"]
+[ext_resource type="PackedScene" uid="uid://c2d7ybqqo8sft" path="res://src/entities/player/altPlayerInstances/text_full_cat_bot.tscn" id="5_w8k43"]
 [ext_resource type="PackedScene" uid="uid://dixx4xp7c6v2m" path="res://src/entities/player/altPlayerInstances/gui_full_cat_bot.tscn" id="6_4g4vd"]
-[ext_resource type="PackedScene" path="res://src/entities/player/altPlayerInstances/text_movement_only_cat_bot.tscn" id="6_bd77v"]
+[ext_resource type="PackedScene" uid="uid://db36eikw5hbbc" path="res://src/entities/player/altPlayerInstances/text_movement_only_cat_bot.tscn" id="6_bd77v"]
+[ext_resource type="PackedScene" uid="uid://bg1c2btgo2m1k" path="res://src/entities/player/altPlayerInstances/gui_movement_only_cat_bot.tscn" id="7_ivyvp"]
+[ext_resource type="PackedScene" uid="uid://d046kamv71sce" path="res://src/entities/player/altPlayerInstances/gui_blank_cat_bot.tscn" id="8_w8k43"]
 
 [node name="CatBotSelector" type="Control" unique_id=353269680]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_bj0er")
 options = Dictionary[String, PackedScene]({
+"Blank w/ graphical editor": ExtResource("8_w8k43"),
 "Blank w/ text editor": ExtResource("3_ivyvp"),
 "Full auto": ExtResource("3_4g4vd"),
 "Full auto w/ graphical editor": ExtResource("6_4g4vd"),
 "Full auto w/ text editor": ExtResource("5_w8k43"),
+"Movement only w/ graphical editor": ExtResource("7_ivyvp"),
 "Movement only w/ text editor": ExtResource("6_bd77v")
 })
 

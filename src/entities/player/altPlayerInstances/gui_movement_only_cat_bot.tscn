@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bg1c2btgo2m1k"]
+
+[ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_je3b0"]
+[ext_resource type="PackedScene" uid="uid://yfi43g18e0pe" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="2_25cgf"]
+[ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="3_0ol5v"]
+[ext_resource type="PackedScene" uid="uid://c5vxqu6jgkplc" path="res://src/entities/player/autoControllers/auto_horizontal_move_controller.tscn" id="4_pb1y3"]
+[ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="7_u22yo"]
+
+[node name="GUI_MoveOnly_CatBot" unique_id=1345683778 instance=ExtResource("1_je3b0")]
+
+[node name="MarginContainer" parent="BasicUI" parent_id_path=PackedInt32Array(1273297337) index="0" unique_id=1751148385]
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="GraphicalEditor" parent="BasicUI/MarginContainer" index="2" unique_id=240595529 node_paths=PackedStringArray("parent") instance=ExtResource("2_25cgf")]
+layout_mode = 2
+size_flags_horizontal = 0
+parent = NodePath("../../../Complete-CatCodeManager")
+
+[node name="CameraManager" parent="." index="5" unique_id=1223681043 instance=ExtResource("3_0ol5v")]
+
+[node name="AutoHorizontalMoveController" parent="." index="6" unique_id=1219527993 instance=ExtResource("4_pb1y3")]
+
+[node name="Complete-CatCodeManager" parent="." index="7" unique_id=2046772742 node_paths=PackedStringArray("parent", "editor", "text_output") instance=ExtResource("7_u22yo")]
+parent = NodePath("..")
+editor = NodePath("../BasicUI/MarginContainer/GraphicalEditor")
+text_output = NodePath("../BasicUI/MarginContainer/SimpleLog")
+when_to_run = 2

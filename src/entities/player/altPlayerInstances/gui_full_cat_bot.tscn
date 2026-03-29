@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://drpa7rlvmpksj" path="res://src/entities/player/autoControllers/auto_strike_controller.tscn" id="5_3ia3n"]
 [ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="8_yf38l"]
 
-[node name="CatBot_FullAuto_w_TCM" unique_id=1345683778 instance=ExtResource("1_mfjf1")]
+[node name="GUI_FullAuto_CatBot" unique_id=1345683778 instance=ExtResource("1_mfjf1")]
 
 [node name="MarginContainer" parent="BasicUI" parent_id_path=PackedInt32Array(1273297337) index="0" unique_id=1751148385]
 theme_override_constants/margin_left = 4
