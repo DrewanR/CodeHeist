@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bp7j51aqwyucf"]
+
+[ext_resource type="Script" uid="uid://cvqranow6bnx0" path="res://src/catCode/graphicalComponents/strength_param.gd" id="1_4r1fl"]
+
+[node name="strengthParam" type="SpinBox" unique_id=1714208596]
+offset_right = 86.5
+offset_bottom = 31.0
+min_value = -100.0
+value = 100.0
+suffix = "%"
+script = ExtResource("1_4r1fl")

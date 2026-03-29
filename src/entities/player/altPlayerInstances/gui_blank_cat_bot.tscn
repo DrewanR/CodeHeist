@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="5_mm2h6"]
 
 [node name="GUI_Blank_CatBot" unique_id=1345683778 instance=ExtResource("1_58xsp")]
+using_air_hover = false
 
 [node name="MarginContainer" parent="BasicUI" parent_id_path=PackedInt32Array(1273297337) index="0" unique_id=1751148385]
 theme_override_constants/margin_left = 4

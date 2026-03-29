@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjp2c1jbhsr44"]
 
 [ext_resource type="Script" uid="uid://conbolnxkqn54" path="res://src/catCode/logicBlocks/scripts/move_x_function.gd" id="1_8g3d5"]
+[ext_resource type="PackedScene" uid="uid://fr66fybeldow" path="res://src/catCode/graphicalBlocks/GB_1_strengthParam.tscn" id="2_a2cuj"]
 
 [node name="MoveFunction" type="Node" unique_id=689348759]
 script = ExtResource("1_8g3d5")
@@ -8,3 +9,4 @@ block_ref = "moveX"
 params = Array[String](["strength"])
 block_name = "horizontal movement"
 block_category = "action"
+ui_block = ExtResource("2_a2cuj")
