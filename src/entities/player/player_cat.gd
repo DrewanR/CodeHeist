@@ -41,6 +41,10 @@ const STRIKE_VELOCITY := Vector2(190,-100) ## The impulse given by strikes.
 ##          controlling jumping to modify this variable.
 @export var using_air_hover := true
 
+## If true, will use thr stability point system.
+## Regardless it will still increment the global error count.
+@export var unstable := false
+
 # Physics variable
 var air_time: float = 0.0 ## +ve: seconds in the air, -ve: seconds grounded.
 var air_entry: int = 0 ## How the player entered the air
@@ -198,7 +202,7 @@ func strike_logic(delta:float, _direction:float):
 ## Uses [direction] for velocity impulse
 func strike(direction: float = get_direction_x()) -> void:
 	if !(
-			must_be_less_than(air_strikes, MAX_AIR_STRIKES, false, "Air swipes", "to Swipe") and # Checks maximum strikes 
+			must_be_less_than(air_strikes, MAX_AIR_STRIKES, false, "Air swipes", "to Swipe", "CatBot can only Swipe twice in mid air.") and # Checks maximum strikes 
 			can_strike() # Legacy tests, plus checking cooldown, which fails quietly
 		):
 		return
@@ -393,20 +397,32 @@ func must_be_grounded(text="Value") -> bool:
 ##   Allows values equal to [maximum] when [allow_equal_to] is [true].
 ##
 ## Produces error "[text] should be less than (or equal to) [maximum] [message_postpend]"
-func must_be_less_than(value, maximum, allow_equal_to=true, text="Value", message_postpend=""):
+func must_be_less_than(value, maximum, allow_equal_to=true, param_name="Value", message_postpend="", message_override=""):
 	if (value <= maximum and allow_equal_to) or (value < maximum and !allow_equal_to):
 		return true
 	else:
-		if allow_equal_to:
-			produce_error(text + " should be less than or equal to " + str(maximum) + " " + message_postpend)
+		if message_override == "":
+			if allow_equal_to:
+				produce_error(param_name + " should be less than or equal to " + str(maximum) + " " + message_postpend)
+			else:
+				produce_error(param_name + " should be less than " + str(maximum) + " " + message_postpend)
+			return false
 		else:
-			produce_error(text + " should be less than " + str(maximum) + " " + message_postpend)
-		return false 
+			if allow_equal_to:
+				produce_error(message_override)
+			else:
+				produce_error(message_override)
+			return false
 
 ## Handles the error message
 func produce_error(message :String) -> void:
-	decrease_stability(1)
-	major_error_occurred.emit("Error: " + message)
+	if unstable: decrease_stability(1)
+	GlobalStatistics.incrment_error(GlobalStatistics.SOURCES.PLAYER, 1)
+	major_error_occurred.emit(
+		"Error (" +
+		str(GlobalStatistics.get_error_count(GlobalStatistics.SCOPE.GLOBAL)) + "): " +
+		message
+	)
 
 ## Prints, for compatilbity with codeManager
 func print_line(text :String):

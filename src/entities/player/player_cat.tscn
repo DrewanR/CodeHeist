@@ -155,10 +155,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 6
 
 [node name="TempFPS" type="Label" parent="BasicUI/MarginContainer" unique_id=481506965]
 layout_mode = 2
@@ -174,6 +170,7 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
 [node name="Stats" type="HBoxContainer" parent="BasicUI/MarginContainer/HUD" unique_id=547557091]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 
@@ -200,6 +197,7 @@ post_text = "SP"
 show_max = false
 
 [node name="PlayerData" type="Label" parent="BasicUI/MarginContainer/HUD" unique_id=926159387]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

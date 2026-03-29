@@ -1,4 +1,5 @@
 extends Node
+
 signal zoom_changed
 
 var centre_point :Vector2
