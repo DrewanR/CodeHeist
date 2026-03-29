@@ -5,4 +5,5 @@
 [node name="DropDownParam" type="OptionButton" unique_id=1322863275]
 offset_right = 32.0
 offset_bottom = 20.0
+focus_mode = 0
 script = ExtResource("1_htyw3")

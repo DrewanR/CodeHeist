@@ -11,12 +11,13 @@ events = [SubResource("InputEventKey_8ryk2")]
 
 [node name="GraphicalEditor" type="ScrollContainer" unique_id=240595529 node_paths=PackedStringArray("collapsable_nodes")]
 clip_contents = false
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(420, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 1
 script = ExtResource("1_8ryk2")
 collapsable_nodes = [NodePath("MarginContainer/VBoxContainer/HSeparator2"), NodePath("MarginContainer/VBoxContainer/FunctionLabel"), NodePath("MarginContainer/VBoxContainer/CodeContainer"), NodePath("MarginContainer/VBoxContainer/HSeparator"), NodePath("MarginContainer/VBoxContainer/PanelContainer")]
 
@@ -24,7 +25,6 @@ collapsable_nodes = [NodePath("MarginContainer/VBoxContainer/HSeparator2"), Node
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1542234627]
 layout_mode = 2
@@ -53,16 +53,19 @@ layout_mode = 2
 [node name="InstructionSet" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=424452628]
 layout_mode = 2
 tooltip_text = "View instuction set"
+focus_mode = 0
 text = "Instruction Set"
 
 [node name="Controls" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=1528732493]
 layout_mode = 2
 tooltip_text = "View controls"
+focus_mode = 0
 text = "Controls"
 
 [node name="Help" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=1531918778]
 layout_mode = 2
 tooltip_text = "Show catCode editor documentation."
+focus_mode = 0
 shortcut = SubResource("Shortcut_wtus3")
 text = "Help"
 
@@ -74,6 +77,7 @@ size_flags_horizontal = 3
 [node name="CollapseButton" type="Button" parent="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer" unique_id=1856735050]
 layout_mode = 2
 tooltip_text = "Show/hide code editor"
+focus_mode = 0
 text = "/\\"
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=2017595536]
@@ -98,8 +102,20 @@ text = " Process"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=2078514866]
 layout_mode = 2
+focus_mode = 0
 disabled = true
 text = "?"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=1859365820]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=317665001]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+text = "Save"
 
 [node name="CodeContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=543115846]
 layout_mode = 2
@@ -139,6 +155,7 @@ layout_mode = 2
 
 [node name="AddLineButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer2" unique_id=847579545]
 layout_mode = 2
+focus_mode = 0
 text = "Add"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=979903033]
@@ -148,6 +165,7 @@ size_flags_vertical = 8
 
 [node name="SaveButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1939229514]
 layout_mode = 2
+focus_mode = 0
 text = "✔Save"
 
 [node name="HelpPopup" type="Popup" parent="." unique_id=2081669404]
@@ -280,6 +298,7 @@ color = Color(0, 0, 0, 0.5019608)
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/Help" to="." method="_on_help_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/CollapseButton" to="." method="_on_collapse_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer/SaveButton" to="." method="compile"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer2/AddLineButton" to="." method="add_line_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton" to="." method="compile"]
 [connection signal="popup_hide" from="HelpPopup" to="." method="screen_undim"]

@@ -13,6 +13,7 @@ script = ExtResource("1_qrm6q")
 [node name="DecreaseIndentButton" type="Button" parent="." unique_id=1548651920]
 layout_mode = 2
 tooltip_text = "Decrease indent"
+focus_mode = 0
 text = "<"
 
 [node name="IndentContainer" type="HBoxContainer" parent="." unique_id=1666816614]
@@ -38,6 +39,7 @@ parent = NodePath("../../../..")
 layout_mode = 2
 size_flags_horizontal = 10
 tooltip_text = "Increase indent"
+focus_mode = 0
 text = ">"
 
 [connection signal="pressed" from="DecreaseIndentButton" to="." method="decrease_indent"]
