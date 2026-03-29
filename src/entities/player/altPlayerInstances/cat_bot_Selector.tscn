@@ -1,28 +1,22 @@
 [gd_scene format=3 uid="uid://so4qwlev1fa2"]
 
 [ext_resource type="Script" uid="uid://dyy2325o5pr8a" path="res://src/entities/player/altPlayerInstances/cat_bot_selector.gd" id="1_bj0er"]
-[ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="2_k0gdb"]
 [ext_resource type="PackedScene" uid="uid://bqqr342cmjyir" path="res://src/entities/player/altPlayerInstances/cat_bot_full_auto.tscn" id="3_4g4vd"]
-[ext_resource type="PackedScene" uid="uid://c2d7ybqqo8sft" path="res://src/entities/player/altPlayerInstances/cat_bot_full_auto_w_tcm.tscn" id="4_ivyvp"]
-[ext_resource type="PackedScene" uid="uid://b8rq1jtuk0xes" path="res://src/entities/player/altPlayerInstances/cat_bot_no_strike_w_tcm.tscn" id="5_w8k43"]
-[ext_resource type="PackedScene" uid="uid://db36eikw5hbbc" path="res://src/entities/player/altPlayerInstances/cat_bot_move_only_w_tcm.tscn" id="6_4g4vd"]
-[ext_resource type="PackedScene" uid="uid://e2ocpuivbbwf" path="res://src/entities/player/altPlayerInstances/cat_bot_blank_w_tcm.tscn" id="7_ivyvp"]
+[ext_resource type="PackedScene" path="res://src/entities/player/altPlayerInstances/text_blank_cat_bot.tscn" id="3_ivyvp"]
+[ext_resource type="PackedScene" path="res://src/entities/player/altPlayerInstances/text_full_cat_bot.tscn" id="5_w8k43"]
+[ext_resource type="PackedScene" uid="uid://dixx4xp7c6v2m" path="res://src/entities/player/altPlayerInstances/gui_full_cat_bot.tscn" id="6_4g4vd"]
+[ext_resource type="PackedScene" path="res://src/entities/player/altPlayerInstances/text_movement_only_cat_bot.tscn" id="6_bd77v"]
 
 [node name="CatBotSelector" type="Control" unique_id=353269680]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_bj0er")
 options = Dictionary[String, PackedScene]({
-"Blank": ExtResource("2_k0gdb"),
-"Blank w/ text editor": ExtResource("7_ivyvp"),
+"Blank w/ text editor": ExtResource("3_ivyvp"),
 "Full auto": ExtResource("3_4g4vd"),
-"Full auto w/ text editor": ExtResource("4_ivyvp"),
-"Movement only w/ text editor": ExtResource("6_4g4vd"),
-"No strike w/ text editor": ExtResource("5_w8k43")
+"Full auto w/ graphical editor": ExtResource("6_4g4vd"),
+"Full auto w/ text editor": ExtResource("5_w8k43"),
+"Movement only w/ text editor": ExtResource("6_bd77v")
 })
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827295498]
