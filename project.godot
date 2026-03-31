@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CameraInformation="*res://src/autoload/camera_information.gd"
-GlobalStatistics="*uid://cseoa8nn77dlr"
+GlobalStatistics="*uid://3pjrhe5i82rq"
 
 [display]
 

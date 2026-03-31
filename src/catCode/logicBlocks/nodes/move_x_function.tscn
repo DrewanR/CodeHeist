@@ -7,6 +7,6 @@
 script = ExtResource("1_8g3d5")
 block_ref = "moveX"
 params = Array[String](["strength"])
-block_name = "horizontal movement"
+block_name = "walk"
 block_category = "action"
 ui_block = ExtResource("2_a2cuj")

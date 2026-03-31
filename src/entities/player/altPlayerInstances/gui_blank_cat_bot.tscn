@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://d046kamv71sce"]
+[gd_scene format=3 uid="uid://lfpcjjcya5pd"]
 
 [ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_58xsp"]
-[ext_resource type="PackedScene" uid="uid://yfi43g18e0pe" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="2_ppgrr"]
+[ext_resource type="PackedScene" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="2_ppgrr"]
 [ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="3_wk67o"]
 [ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="5_mm2h6"]
 
@@ -26,3 +26,10 @@ parent = NodePath("..")
 editor = NodePath("../BasicUI/MarginContainer/GraphicalEditor")
 text_output = NodePath("../BasicUI/MarginContainer/SimpleLog")
 when_to_run = 2
+debug_scenarios = {
+"Construction": 1,
+"Instruction_set": 1,
+"Line_full": 0,
+"Line_light": 0,
+"Thread_info": 0
+}

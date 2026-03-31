@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://yfi43g18e0pe"]
+[gd_scene format=3 uid="uid://drhwuslik20fh"]
 
-[ext_resource type="Script" uid="uid://urwscuedx836" path="res://src/catCode/ui/basic_graphical_editor.gd" id="1_8ryk2"]
+[ext_resource type="Script" path="res://src/catCode/ui/basic_graphical_editor.gd" id="1_8ryk2"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_8ryk2"]
 device = -1
@@ -89,8 +89,8 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/FunctionLabel" unique_id=192114423]
 layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_right = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer" unique_id=1025699640]
 layout_mode = 2
@@ -98,7 +98,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=1155181081]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
-text = " Process"
+text = "Process"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/FunctionLabel/MarginContainer/HBoxContainer" unique_id=2078514866]
 layout_mode = 2
