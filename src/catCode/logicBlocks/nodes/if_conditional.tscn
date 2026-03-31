@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://lejb3pvl8mj0"]
 
 [ext_resource type="Script" uid="uid://bfsre7qceve4q" path="res://src/catCode/logicBlocks/scripts/if_conditional.gd" id="1_8e8rr"]
+[ext_resource type="PackedScene" uid="uid://r7em3ai2npq0" path="res://src/catCode/graphicalBlocks/GB_1_operand.tscn" id="2_ps0so"]
 
 [node name="IfConditional" type="Node" unique_id=2042108197]
 script = ExtResource("1_8e8rr")
@@ -8,3 +9,4 @@ block_ref = "if"
 uses_boolean_operator = true
 block_name = "if"
 block_category = "conditional"
+ui_block = ExtResource("2_ps0so")

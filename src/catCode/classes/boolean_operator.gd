@@ -9,7 +9,7 @@
 func _ready() -> void:
 	if parent == null:
 		parent = get_parent()
-	block_type = "booleanOperator"
+	block_type = "boolean_operator"
 
 	name = "logicBlock_booleanOperator_" + block_name.to_camel_case()
 

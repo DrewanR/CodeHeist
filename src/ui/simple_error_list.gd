@@ -35,6 +35,8 @@ func print_line(message) -> void:
 	if text != "":
 		text += "\n"
 	text += message
+	if text.count("\n") > 64:
+		text = text.substr(text.find("\n")+1)
 	scroll_vertical = 99999
 	focus = FOCUS_ON_OUTPUT
 

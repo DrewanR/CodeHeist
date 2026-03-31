@@ -76,16 +76,16 @@ I also decided to combine the general dissertation log with this to have one mar
 
 ## Week 06
 
-- Continued documenting catCode (it turned out to be a lot more than initially anticipated)
-- Continued hacking away at text-based catCode (specific functions were not noted)
+- Continued documenting **catCode** (it turned out to be a lot more than initially anticipated)
+- Continued hacking away at **text-based catCode** (specific functions were not noted)
 
 ## Week 07
 
-- Finished text-based catCode (finally).
-- Linked catBot and catCode.
+- Finished **text-based catCode** (finally).
+- Linked **catBot** and **catCode**.
 - Implemented different compilation and execution options 
 - Added alternative catCode instances.
-- Threading, and **catThread**. *In progress*
+- Threading, and **catThread**.
 
 ### Next Steps
 
@@ -95,5 +95,6 @@ I also decided to combine the general dissertation log with this to have one mar
 
 - Work on visual catCode (no more than 2 working days)
 - Start working on levels (should be done by the end of easter)
+
 - **week 8** Work on evaluation plan(s).
 

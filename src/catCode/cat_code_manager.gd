@@ -61,6 +61,29 @@ enum THREAD_OVERFLOW_BEHAVIORS { NEVER_REPLACE, ALWAYS_REPLACE}
 }
 enum DEBUG_OPTIONS { NEVER, EXTERNAL, BOTH }
 
+## Process names and descriptions
+const PROCESS_NAMES := {
+	RUN_OPTIONS.NEVER: {
+		"name": "unknown process",
+		"description": "It is unknown when this process will run..." },
+	RUN_OPTIONS.READY: {
+		"name": "ready",
+		"description": "This process will run when it's target is spawned."
+	},
+	RUN_OPTIONS.PROCESS: {
+		"name": "process",
+		"description": "This process will run repeatedly until interrupted."
+	},
+	RUN_OPTIONS.PRIMARY_ACTION: {
+		"name": "onPrimaryButton",
+		"description": "This process will run when the primary button, default Z, is pressed."
+	},
+	RUN_OPTIONS.SECONDARY_ACTION: {
+		"name": "onSecondaryButton",
+		"description": "This process will run when the secondary button, default X, is pressed."
+	}
+}
+
 ## List containing logicBlocks. [br]
 ## These are the backend instructions containing within [res://src/catCode/logicBlocks/]
 ##    that inherit the logicalBlock class. [br]
@@ -85,12 +108,21 @@ var threads :Array[cat_thread] = []
 ## Preload the cat_thread node
 var cat_thread_node = preload("res://src/catCode/cat_thread.tscn")
 
+## The fallback logic_block for when nothing should occur
+var pass_logic_node_preload := preload("res://src/catCode/logicBlocks/nodes/pass_function.tscn")
+
+## The fallback logic_block for when nothing should occur
+var pass_logic_node :logic_block
+
 ## Signal emitted upon updating the instructions
 signal instructions_updated(new_list :Array[logic_block], new_dict :Dictionary[String, logic_block])
 
 func _ready() -> void:
 	if when_to_compile == COMPILE_OPTIONS.DEFAULT:
 		when_to_compile = COMPILE_OPTIONS.NEVER if when_to_run == RUN_OPTIONS.PROCESS else COMPILE_OPTIONS.RUN
+	
+	pass_logic_node = pass_logic_node_preload.instantiate()
+	add_child(pass_logic_node)
 	
 	print_line("CatCodeManager Started!")
 	update_instructions()
@@ -111,6 +143,7 @@ func _ready() -> void:
 			print_line("Press [X] to run!")
 	
 	editor.compile()
+	editor.update_process_name(PROCESS_NAMES[when_to_run]["name"], PROCESS_NAMES[when_to_run]["description"])
 
 func _process(_delta: float) -> void:
 	clean_threads()
@@ -134,7 +167,7 @@ func run_script():
 		create_thread()
 	# Case 2: 
 	elif (
-		len(threads) == maximum_threads and 
+		len(threads) >= maximum_threads and 
 		thread_overflow_behavior == THREAD_OVERFLOW_BEHAVIORS.ALWAYS_REPLACE
 	):
 		create_thread()
@@ -145,6 +178,8 @@ func clean_threads():
 	var index = 0
 	while index < len(threads):
 		if threads[index].thread_state == cat_thread.THREAD_STATES.DEAD:
+			kill_thread(index)
+		elif index >= maximum_threads:
 			kill_thread(index)
 		else:
 			index += 1
@@ -159,9 +194,10 @@ func create_thread():
 	for i in range(0,len(threads)):
 		if threads[i].priority <= new_thread.priority:
 			threads.insert(i, new_thread)
+			add_child(new_thread)
 			return
-	threads.append(new_thread)
 
+	threads.append(new_thread)
 	# Adds child
 	add_child(new_thread)
 
@@ -171,7 +207,8 @@ func create_thread():
 func kill_thread(index :int):
 	var thread = threads.pop_at(index)
 	thread.thread_state = thread.THREAD_STATES.KILLED
-	thread.queue_free()
+	debug_output("Thread_info", "# Killing thread")
+	thread.free()
 
 
 ## Updates the blocks in both the instruction dictionary and list
@@ -249,3 +286,9 @@ func print_instruction_dictionary(output_location :DEBUG_OPTIONS = DEBUG_OPTIONS
 
 func _on_compiled_code_received(new_code):
 	compiled_code = new_code
+	add_blank_line() # You do not want to know the trauma that went into this line.
+
+
+func add_blank_line():
+	var pass_block = pass_logic_node
+	compiled_code.append(instruction_line.new(0, pass_block))

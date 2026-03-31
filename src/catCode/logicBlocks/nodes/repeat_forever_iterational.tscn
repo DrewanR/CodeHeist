@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dftkmtq7t6doh"]
 
 [ext_resource type="Script" uid="uid://2s0t6vdpqxph" path="res://src/catCode/logicBlocks/scripts/repeat_forever_iterational.gd" id="1_c4blt"]
+[ext_resource type="PackedScene" uid="uid://8vjy2u0ex5a3" path="res://src/catCode/graphicalBlocks/GB_1_fakeParam.tscn" id="2_n24gh"]
 
 [node name="ForeverIterational" type="Node" unique_id=2042108197]
 script = ExtResource("1_c4blt")
@@ -8,3 +9,4 @@ block_ref = "repeatForever"
 await_new_frame = true
 block_name = "repeat forever"
 block_category = "loops"
+ui_block = ExtResource("2_n24gh")

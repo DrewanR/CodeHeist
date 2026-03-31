@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://8vjy2u0ex5a3"]
+
+[ext_resource type="PackedScene" uid="uid://doelngyort570" path="res://src/catCode/graphicalBlocks/graphical_block.tscn" id="1_546tm"]
+[ext_resource type="PackedScene" uid="uid://31x837ww3c7t" path="res://src/catCode/graphicalComponents/fake_param.tscn" id="2_546tm"]
+
+[node name="GraphicalNode" unique_id=830576542 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_546tm")]
+parameter_nodes = [NodePath("BlockBG/MarginContainer/BlockContainer/fakeParam")]
+
+[node name="fakeParam" parent="BlockBG/MarginContainer/BlockContainer" parent_id_path=PackedInt32Array(630700807) index="1" unique_id=1926279272 instance=ExtResource("2_546tm")]
+layout_mode = 2

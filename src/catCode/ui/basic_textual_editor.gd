@@ -100,7 +100,7 @@ const FOCUS_ON_OUTPUT = 5
 const FOCUS_ON_MOUSE = 0.05
 
 ## If true, this node will become transparent when focus is lost.
-@export var fade_on_lost_focus = false
+@export var fade_on_lost_focus = true
 
 var focus = FOCUS_ON_OUTPUT
 var mouse_over = false
@@ -118,6 +118,9 @@ func _process(delta: float) -> void:
 		alpha = lerp(alpha, 0.0, 0.05)
 	
 	if mouse_over:
+		focus = FOCUS_ON_MOUSE
+	
+	if not fade_on_lost_focus:
 		focus = FOCUS_ON_MOUSE
 	
 	modulate = Color8(255, 255, 255, round(alpha))
@@ -139,3 +142,7 @@ func _on_mouse_exited() -> void:
 
 func _on_focus_entered() -> void:
 	get_tree().paused = true
+
+## Updates the process name
+func update_process_name(_new_name :String = "Unknown Process", _description :String = "Unknown process"):
+	pass

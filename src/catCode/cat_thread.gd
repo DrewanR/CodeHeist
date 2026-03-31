@@ -49,6 +49,7 @@ enum THREAD_STATES { QUEUED, ALIVE, DEAD, KILLED}
 func _ready() -> void:
 	bind()
 	execute()
+	debug_output("Thread_info", "# Thread died: '" + name + "'")
 
 
 ## Constructs a thread. [br]
@@ -128,7 +129,7 @@ func execute() -> void:
 		):
 			debug_output("Line_full","! Reached an else if statement of indent " + str(line.indent))
 			line_number += 1
-			indent_stack.back().acc += 1
+			indent_stack.back().rep += 1
 			# Scenario 1: Currently in "SKIP" state
 			if indent_stack.back().state == PASS_STATES.SKIP:
 				indent_stack.back().state = PASS_STATES.DO if line.primary_block.evaluate(line.parameters) else PASS_STATES.SKIP
@@ -148,7 +149,7 @@ func execute() -> void:
 		):
 			debug_output("Line_full","! Reached an else statement of indent " + str(line.indent))
 			line_number += 1
-			indent_stack.back().acc += 1
+			indent_stack.back().rep += 1
 			indent_stack.back().state = PASS_STATES.DO if indent_stack.back().state == PASS_STATES.SKIP else PASS_STATES.SKIP_ALL
 		
 		# Iterables: REPEAT (initiation)
@@ -239,12 +240,15 @@ func print_line(text :String):
 	manager.print_line(text)
 
 
+## StateStackLayer:
+## Stores a layer of the state stack used for iteration and selection.
+## Acts as a struct.
 class stateStackLayer:
-	var indent :int
-	var type :STACK_LAYER_TYPE
-	var state :PASS_STATES
-	var rep :int
-	var entry :int
+	var indent :int ## Current indent
+	var type :STACK_LAYER_TYPE ## The type of stack layer, determines if it is getting used by an if or repeat essentially
+	var state :PASS_STATES ## Determines whether instructions should be skipped
+	var rep :int ## Number of repeats completed if iterative, else the number elifs passed
+	var entry :int ## The line this layer was enterred using
 	
 	func _init(_indent :int, _type :STACK_LAYER_TYPE, entry_state :PASS_STATES, _entry :int) -> void:
 		indent = _indent

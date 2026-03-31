@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CameraInformation="*res://src/autoload/camera_information.gd"
+GlobalStatistics="*uid://3pjrhe5i82rq"
 
 [display]
 
@@ -31,7 +32,9 @@ folder_colors={
 "res://levels/": "orange",
 "res://menus/": "yellow",
 "res://src/": "green",
+"res://src/catCode/logicBlocks/": "yellow",
 "res://src/catCode/logicBlocks/nodes/": "yellow",
+"res://src/catCode/logicBlocks/scripts/": "green",
 "res://src/catCode/preconfigCCInstances/": "yellow",
 "res://src/entities/player/": "yellow",
 "res://src/platformer/": "green",

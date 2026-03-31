@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bi3aihmb1v2p"]
+
+[ext_resource type="Script" uid="uid://44rg8nidbffq" path="res://src/catCode/graphicalComponents/block_auto_identifier.gd" id="1_3g41t"]
+
+[node name="BlockAutoIdentifier" type="Label" unique_id=1589247872]
+text = "BlockName"
+script = ExtResource("1_3g41t")

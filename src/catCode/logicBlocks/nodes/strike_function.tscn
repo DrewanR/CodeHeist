@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c67x8bopyhobv"]
 
 [ext_resource type="Script" uid="uid://cnqc03kssu1py" path="res://src/catCode/logicBlocks/scripts/strike_function.gd" id="1_nonuf"]
+[ext_resource type="PackedScene" uid="uid://8vjy2u0ex5a3" path="res://src/catCode/graphicalBlocks/GB_1_fakeParam.tscn" id="2_wyo8q"]
 
 [node name="StrikeFunction" type="Node" unique_id=689348759]
 script = ExtResource("1_nonuf")
@@ -8,3 +9,4 @@ block_ref = "swipe"
 params = Array[String](["direction"])
 block_name = "swipe"
 block_category = "action"
+ui_block = ExtResource("2_wyo8q")

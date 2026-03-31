@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://cocvyuid05p3q"]
 
 [ext_resource type="Script" uid="uid://cakdfohmvnp5u" path="res://src/catCode/logicBlocks/scripts/repeat_iterational.gd" id="1_4u0uo"]
+[ext_resource type="PackedScene" uid="uid://fh1khfer8a6g" path="res://src/catCode/graphicalBlocks/GB_1_openPossitiveIntBox.tscn" id="2_vxbwc"]
 
 [node name="RepeatIterational" type="Node" unique_id=2042108197]
 script = ExtResource("1_4u0uo")
-params = Array[String](["iterations"])
+params = ["iterations"]
 block_ref = "repeat"
 await_new_frame = true
 block_name = "repeat"
 block_category = "loops"
+ui_block = ExtResource("2_vxbwc")

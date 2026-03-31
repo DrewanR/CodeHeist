@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://cn4tubf45jhsd"]
+
+[ext_resource type="Script" uid="uid://dub3y3wjcoyiv" path="res://levels/test/test_tripple_ide.gd" id="1_e1ob7"]
+[ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="1_tah83"]
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="2_kigyt"]
+[ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="3_e1ob7"]
+[ext_resource type="PackedScene" uid="uid://yfi43g18e0pe" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="3_kigyt"]
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="4_yox0k"]
+[ext_resource type="PackedScene" uid="uid://d1mjc7o4kc5ew" path="res://src/catCode/cat_code_manager.tscn" id="7_cc4mx"]
+[ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="8_va5gq"]
+[ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="9_xwh4k"]
+[ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="10_sla3n"]
+[ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="11_c85x0"]
+[ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="12_puhpg"]
+[ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="13_5pnyi"]
+[ext_resource type="PackedScene" uid="uid://c6yxftaraoskd" path="res://src/catCode/logicBlocks/nodes/is_button_just_pressed_operator.tscn" id="14_u2hsr"]
+[ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="15_fd6pm"]
+[ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="16_fdqot"]
+[ext_resource type="PackedScene" uid="uid://c67x8bopyhobv" path="res://src/catCode/logicBlocks/nodes/strike_function.tscn" id="17_r5con"]
+[ext_resource type="PackedScene" uid="uid://dcbd422tsefck" path="res://src/catCode/logicBlocks/nodes/jump_function.tscn" id="18_trdnn"]
+[ext_resource type="PackedScene" uid="uid://cjp2c1jbhsr44" path="res://src/catCode/logicBlocks/nodes/move_x_function.tscn" id="19_xvciy"]
+[ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="20_gs08l"]
+
+[node name="TestBasicIde" type="Node2D" unique_id=759264037]
+script = ExtResource("1_e1ob7")
+
+[node name="testUI" type="CanvasLayer" parent="." unique_id=743464664]
+
+[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=1090640253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=1802660511]
+layout_mode = 2
+split_offsets = PackedInt32Array(320, 332)
+split_offset = 320
+
+[node name="basicTextualEdit" parent="testUI/MarginContainer/HSplitContainer" unique_id=383483393 node_paths=PackedStringArray("parent") instance=ExtResource("1_tah83")]
+custom_minimum_size = Vector2(300, 500)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_kigyt")
+theme_override_font_sizes/font_size = 14
+text = "print(start)
+if(false)
+	print(true)
+elif(false)
+	print(false)
+else
+	print(else)
+print(end)"
+parent = NodePath("../../../../CatCodeManager2")
+fade_on_lost_focus = false
+
+[node name="textToGraphicalButton" type="Button" parent="testUI/MarginContainer/HSplitContainer/basicTextualEdit" unique_id=205109529]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -45.0
+offset_right = -14.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Text → Graphical"
+
+[node name="basicGraphicalEditor" parent="testUI/MarginContainer/HSplitContainer" unique_id=1640264809 node_paths=PackedStringArray("parent") instance=ExtResource("3_kigyt")]
+layout_mode = 2
+parent = NodePath("../../../../CatCodeManager2")
+
+[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("3_e1ob7")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yox0k")
+theme_override_font_sizes/font_size = 12
+editable = false
+
+[node name="CatCodeManager2" parent="." unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output") instance=ExtResource("7_cc4mx")]
+editor = NodePath("../testUI/MarginContainer/HSplitContainer/basicGraphicalEditor")
+text_output = NodePath("../testUI/MarginContainer/HSplitContainer/basicOutput")
+when_to_run = 4
+when_to_compile = 1
+thread_overflow_behavior = 1
+debug_scenarios = {
+"Construction": 1,
+"Instruction_set": 2,
+"Line_full": 1,
+"Line_light": 1,
+"Thread_info": 1
+}
+
+[node name="PrintLineFunction" parent="CatCodeManager2" unique_id=721487939 instance=ExtResource("9_xwh4k")]
+
+[node name="Print2Function" parent="CatCodeManager2" unique_id=689348759 instance=ExtResource("8_va5gq")]
+
+[node name="booleanValueF" parent="CatCodeManager2" unique_id=1333304815 instance=ExtResource("20_gs08l")]
+
+[node name="booleanValueT" parent="CatCodeManager2" unique_id=2042108197 instance=ExtResource("20_gs08l")]
+value = true
+
+[node name="IfConditional" parent="CatCodeManager2" unique_id=1510405312 instance=ExtResource("11_c85x0")]
+
+[node name="ElseIfConditional" parent="CatCodeManager2" unique_id=1420746851 instance=ExtResource("12_puhpg")]
+
+[node name="ElseConditional" parent="CatCodeManager2" unique_id=2134933032 instance=ExtResource("10_sla3n")]
+
+[node name="RepeatIterational" parent="CatCodeManager2" unique_id=507125798 instance=ExtResource("16_fdqot")]
+
+[node name="ForeverIterational" parent="CatCodeManager2" unique_id=2127973843 instance=ExtResource("15_fd6pm")]
+
+[node name="IsButtonHeldOperator" parent="CatCodeManager2" unique_id=68021963 instance=ExtResource("13_5pnyi")]
+
+[node name="IsButtonJustPressedOperator" parent="CatCodeManager2" unique_id=629059722 instance=ExtResource("14_u2hsr")]
+
+[node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
+
+[node name="StrikeFunction" parent="DisabledNodes" unique_id=1824457365 instance=ExtResource("17_r5con")]
+
+[node name="JumpFunction" parent="DisabledNodes" unique_id=717007852 instance=ExtResource("18_trdnn")]
+
+[node name="MoveFunction" parent="DisabledNodes" unique_id=1087323960 instance=ExtResource("19_xvciy")]
+
+[connection signal="pressed" from="testUI/MarginContainer/HSplitContainer/basicTextualEdit/textToGraphicalButton" to="." method="_on_text_to_graphical_button_pressed"]

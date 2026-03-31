@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b4rkq5t6gkai4"]
+
+[ext_resource type="Script" uid="uid://bks1p3q75galm" path="res://src/catCode/graphicalComponents/integer_param.gd" id="1_h0kdj"]
+
+[node name="integerParam" type="SpinBox" unique_id=1714208596]
+offset_right = 86.5
+offset_bottom = 31.0
+rounded = true
+script = ExtResource("1_h0kdj")
