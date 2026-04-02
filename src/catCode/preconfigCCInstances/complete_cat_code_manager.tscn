@@ -13,9 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://c67x8bopyhobv" path="res://src/catCode/logicBlocks/nodes/strike_function.tscn" id="11_qxj0j"]
 [ext_resource type="PackedScene" uid="uid://dcbd422tsefck" path="res://src/catCode/logicBlocks/nodes/jump_function.tscn" id="12_kf2c7"]
 [ext_resource type="PackedScene" uid="uid://cjp2c1jbhsr44" path="res://src/catCode/logicBlocks/nodes/move_x_function.tscn" id="14_e40wp"]
-[ext_resource type="PackedScene" path="res://src/catCode/logicBlocks/nodes/and_operand.tscn" id="14_tslmu"]
+[ext_resource type="PackedScene" uid="uid://cqnk6k280ruxa" path="res://src/catCode/logicBlocks/nodes/and_operand.tscn" id="14_tslmu"]
 [ext_resource type="PackedScene" uid="uid://t20e11cgaji5" path="res://src/catCode/logicBlocks/nodes/or_operand.tscn" id="15_douhl"]
 [ext_resource type="PackedScene" uid="uid://o3je4k776pau" path="res://src/catCode/logicBlocks/nodes/is_grounded_operand.tscn" id="16_douhl"]
+[ext_resource type="PackedScene" uid="uid://cm6u3moe6ypyn" path="res://src/catCode/logicBlocks/nodes/can_strike_operand.tscn" id="17_7omtx"]
 
 [node name="Complete-CatCodeManager" unique_id=2046772742 instance=ExtResource("1_1684m")]
 
@@ -51,3 +52,5 @@ value = true
 [node name="OrOperand" parent="." index="14" unique_id=1840797232 instance=ExtResource("15_douhl")]
 
 [node name="IsGroundedOperand" parent="." index="15" unique_id=689348759 instance=ExtResource("16_douhl")]
+
+[node name="CanStrikeOperand" parent="." index="16" unique_id=1728936324 instance=ExtResource("17_7omtx")]

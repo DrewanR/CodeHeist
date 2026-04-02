@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cm6u3moe6ypyn"]
+
+[ext_resource type="Script" uid="uid://dp6tnghnje46l" path="res://src/catCode/logicBlocks/scripts/can_strike_operand.gd" id="1_ac2lg"]
+[ext_resource type="PackedScene" uid="uid://b0tvpwip5cxi3" path="res://src/catCode/graphicalBlocks/basic_operand.tscn" id="2_uo0el"]
+
+[node name="CanStrikeOperand" type="Node" unique_id=689348759]
+script = ExtResource("1_ac2lg")
+block_ref = "canSwipe"
+block_name = "can swipe"
+block_category = "physics logic"
+ui_block = ExtResource("2_uo0el")
