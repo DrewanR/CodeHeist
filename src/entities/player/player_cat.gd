@@ -391,7 +391,7 @@ func must_be_within_range(value, minimum, maximum, text="Value") -> bool:
 ##
 ## Produces error "Catbot must be grounded to [text]."
 func must_be_grounded(text="Value") -> bool:
-	if (air_time < COYOTE_TIME):
+	if (is_coyote_grounded()):
 		return true
 	else:
 		produce_error("Catbot must be grounded to " + text)
