@@ -260,6 +260,10 @@ func calculate_walktime(delta: float, direction: float) -> void:
 
 ## Returns [true] if the player can currently jump
 func can_jump() -> bool:
+	return is_coyote_grounded()
+
+## Returns [true] if the player is considerred grounded according to coyote time.
+func is_coyote_grounded() -> bool:
 	return air_time < COYOTE_TIME
 
 ## Returns [true] if the cat can attack
@@ -387,7 +391,7 @@ func must_be_within_range(value, minimum, maximum, text="Value") -> bool:
 ##
 ## Produces error "Catbot must be grounded to [text]."
 func must_be_grounded(text="Value") -> bool:
-	if (air_time < COYOTE_TIME):
+	if (is_coyote_grounded()):
 		return true
 	else:
 		produce_error("Catbot must be grounded to " + text)

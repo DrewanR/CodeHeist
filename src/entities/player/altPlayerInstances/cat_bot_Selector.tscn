@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://bqqr342cmjyir" path="res://src/entities/player/altPlayerInstances/cat_bot_full_auto.tscn" id="3_4g4vd"]
 [ext_resource type="PackedScene" uid="uid://e2ocpuivbbwf" path="res://src/entities/player/altPlayerInstances/text_blank_cat_bot.tscn" id="3_ivyvp"]
 [ext_resource type="PackedScene" uid="uid://c2d7ybqqo8sft" path="res://src/entities/player/altPlayerInstances/text_full_cat_bot.tscn" id="5_w8k43"]
-[ext_resource type="PackedScene" uid="uid://dixx4xp7c6v2m" path="res://src/entities/player/altPlayerInstances/gui_full_cat_bot.tscn" id="6_4g4vd"]
+[ext_resource type="PackedScene" uid="uid://dphktytohiy0g" path="res://src/entities/player/altPlayerInstances/gui_full_cat_bot.tscn" id="6_4g4vd"]
 [ext_resource type="PackedScene" uid="uid://db36eikw5hbbc" path="res://src/entities/player/altPlayerInstances/text_movement_only_cat_bot.tscn" id="6_bd77v"]
-[ext_resource type="PackedScene" uid="uid://bg1c2btgo2m1k" path="res://src/entities/player/altPlayerInstances/gui_movement_only_cat_bot.tscn" id="7_ivyvp"]
-[ext_resource type="PackedScene" uid="uid://d046kamv71sce" path="res://src/entities/player/altPlayerInstances/gui_blank_cat_bot.tscn" id="8_w8k43"]
+[ext_resource type="PackedScene" uid="uid://bav3svnv2top5" path="res://src/entities/player/altPlayerInstances/gui_movement_only_cat_bot.tscn" id="7_ivyvp"]
+[ext_resource type="PackedScene" uid="uid://lfpcjjcya5pd" path="res://src/entities/player/altPlayerInstances/gui_blank_cat_bot.tscn" id="8_w8k43"]
 
 [node name="CatBotSelector" type="Control" unique_id=353269680]
 layout_mode = 3
@@ -64,5 +64,13 @@ size_flags_horizontal = 3
 [node name="Button" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1195466758]
 layout_mode = 2
 text = "Spawn"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=897087896]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Warning: certain combinations of editors and player instances can cause unexpected behaviour, such as full auto allowing for infinite jumping through catCode editors."
+fit_content = true
+horizontal_alignment = 3
 
 [connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
