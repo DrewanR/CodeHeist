@@ -85,9 +85,9 @@ func _input(event):
 
 
 func _on_mouse_entered() -> void:
-	print("Mouse over")
+	#print("Mouse over")
 	is_mouse_over = true
 
 func _on_mouse_exited() -> void:
-	print("Mouse off")
+	#print("Mouse off")
 	is_mouse_over = false

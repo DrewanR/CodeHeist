@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://t20e11cgaji5"]
+
+[ext_resource type="Script" uid="uid://puue53hhfaie" path="res://src/catCode/logicBlocks/scripts/or_operand.gd" id="1_lnxu6"]
+[ext_resource type="PackedScene" uid="uid://b8hctohw6jbpa" path="res://src/catCode/graphicalBlocks/OP_2_operandContainers.tscn" id="2_dki73"]
+
+[node name="OrOperand" type="Node" unique_id=2095126168]
+script = ExtResource("1_lnxu6")
+block_ref = "or"
+params = Array[String](["operand1", "operand2"])
+block_name = "or"
+block_category = "logic"
+ui_block = ExtResource("2_dki73")

@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dwfnewviahhpc"]
+
+[ext_resource type="PackedScene" uid="uid://drhwuslik20fh" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="4_n7qxt"]
+[ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="5_qrgum"]
+[ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="6_456vb"]
+[ext_resource type="PackedScene" uid="uid://d1mjc7o4kc5ew" path="res://src/catCode/cat_code_manager.tscn" id="7_vgs1n"]
+[ext_resource type="PackedScene" uid="uid://bt0jsuso54toa" path="res://src/catCode/logicBlocks/nodes/print_line_function.tscn" id="8_iw4hg"]
+[ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="9_sam8d"]
+[ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="10_mnvr2"]
+[ext_resource type="PackedScene" uid="uid://lejb3pvl8mj0" path="res://src/catCode/logicBlocks/nodes/if_conditional.tscn" id="11_mayr0"]
+[ext_resource type="PackedScene" uid="uid://rwkm5vdqcwdc" path="res://src/catCode/logicBlocks/nodes/else_if_conditional.tscn" id="12_d8u55"]
+[ext_resource type="PackedScene" uid="uid://dch0lgl1no7hr" path="res://src/catCode/logicBlocks/nodes/else_conditional.tscn" id="13_egynj"]
+[ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="14_cnf0d"]
+[ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="15_pqa3f"]
+[ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="16_lteh2"]
+[ext_resource type="PackedScene" uid="uid://c6yxftaraoskd" path="res://src/catCode/logicBlocks/nodes/is_button_just_pressed_operator.tscn" id="17_xu43i"]
+[ext_resource type="PackedScene" uid="uid://cqnk6k280ruxa" path="res://src/catCode/logicBlocks/nodes/and_operand.tscn" id="18_cntjd"]
+[ext_resource type="PackedScene" uid="uid://t20e11cgaji5" path="res://src/catCode/logicBlocks/nodes/or_operand.tscn" id="19_5mvok"]
+[ext_resource type="PackedScene" uid="uid://c67x8bopyhobv" path="res://src/catCode/logicBlocks/nodes/strike_function.tscn" id="19_m1r88"]
+[ext_resource type="PackedScene" uid="uid://dcbd422tsefck" path="res://src/catCode/logicBlocks/nodes/jump_function.tscn" id="20_jwlsr"]
+[ext_resource type="PackedScene" uid="uid://cjp2c1jbhsr44" path="res://src/catCode/logicBlocks/nodes/move_x_function.tscn" id="21_v4bjp"]
+
+[node name="GuiIDE" type="Node2D" unique_id=759264037]
+
+[node name="testUI" type="CanvasLayer" parent="." unique_id=743464664]
+
+[node name="MarginContainer" type="MarginContainer" parent="testUI" unique_id=1090640253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HSplitContainer" type="HSplitContainer" parent="testUI/MarginContainer" unique_id=1802660511]
+layout_mode = 2
+split_offsets = PackedInt32Array(420)
+split_offset = 420
+
+[node name="basicGraphicalEditor" parent="testUI/MarginContainer/HSplitContainer" unique_id=1640264809 node_paths=PackedStringArray("parent") instance=ExtResource("4_n7qxt")]
+layout_mode = 2
+parent = NodePath("../../../../CatCodeManager2")
+
+[node name="basicOutput" parent="testUI/MarginContainer/HSplitContainer" unique_id=561888404 instance=ExtResource("5_qrgum")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_456vb")
+theme_override_font_sizes/font_size = 12
+editable = false
+
+[node name="CatCodeManager2" parent="." unique_id=2046772742 node_paths=PackedStringArray("editor", "text_output") instance=ExtResource("7_vgs1n")]
+editor = NodePath("../testUI/MarginContainer/HSplitContainer/basicGraphicalEditor")
+text_output = NodePath("../testUI/MarginContainer/HSplitContainer/basicOutput")
+when_to_run = 4
+when_to_compile = 1
+thread_overflow_behavior = 1
+debug_scenarios = {
+"Construction": 1,
+"Instruction_set": 2,
+"Line_full": 1,
+"Line_light": 1,
+"Thread_info": 1
+}
+
+[node name="PrintLineFunction" parent="CatCodeManager2" unique_id=721487939 instance=ExtResource("8_iw4hg")]
+
+[node name="Print2Function" parent="CatCodeManager2" unique_id=689348759 instance=ExtResource("9_sam8d")]
+
+[node name="booleanValueF" parent="CatCodeManager2" unique_id=1333304815 instance=ExtResource("10_mnvr2")]
+
+[node name="booleanValueT" parent="CatCodeManager2" unique_id=2042108197 instance=ExtResource("10_mnvr2")]
+value = true
+
+[node name="IfConditional" parent="CatCodeManager2" unique_id=1510405312 instance=ExtResource("11_mayr0")]
+
+[node name="ElseIfConditional" parent="CatCodeManager2" unique_id=1420746851 instance=ExtResource("12_d8u55")]
+
+[node name="ElseConditional" parent="CatCodeManager2" unique_id=2134933032 instance=ExtResource("13_egynj")]
+
+[node name="RepeatIterational" parent="CatCodeManager2" unique_id=507125798 instance=ExtResource("14_cnf0d")]
+
+[node name="ForeverIterational" parent="CatCodeManager2" unique_id=2127973843 instance=ExtResource("15_pqa3f")]
+
+[node name="IsButtonHeldOperator" parent="CatCodeManager2" unique_id=68021963 instance=ExtResource("16_lteh2")]
+
+[node name="IsButtonJustPressedOperator" parent="CatCodeManager2" unique_id=629059722 instance=ExtResource("17_xu43i")]
+
+[node name="AndOperand" parent="CatCodeManager2" unique_id=2095126168 instance=ExtResource("18_cntjd")]
+
+[node name="OrOperand" parent="CatCodeManager2" unique_id=2081969748 instance=ExtResource("19_5mvok")]
+
+[node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
+
+[node name="StrikeFunction" parent="DisabledNodes" unique_id=1824457365 instance=ExtResource("19_m1r88")]
+
+[node name="JumpFunction" parent="DisabledNodes" unique_id=717007852 instance=ExtResource("20_jwlsr")]
+
+[node name="MoveFunction" parent="DisabledNodes" unique_id=1087323960 instance=ExtResource("21_v4bjp")]

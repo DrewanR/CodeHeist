@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cqnk6k280ruxa"]
+
+[ext_resource type="Script" uid="uid://bni21puoabowi" path="res://src/catCode/logicBlocks/scripts/and_operand.gd" id="1_pir8m"]
+[ext_resource type="PackedScene" uid="uid://b8hctohw6jbpa" path="res://src/catCode/graphicalBlocks/OP_2_operandContainers.tscn" id="2_ip5e7"]
+
+[node name="AndOperand" type="Node" unique_id=2095126168]
+script = ExtResource("1_pir8m")
+block_ref = "and"
+params = Array[String](["operand1", "operand2"])
+block_name = "and"
+block_category = "logic"
+ui_block = ExtResource("2_ip5e7")

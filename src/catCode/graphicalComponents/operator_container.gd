@@ -64,6 +64,7 @@ func get_param_value():
 func refresh():
 	print("Refreshing:")
 	print("  block = " + str(constituent_block))
+	# First, updates the child block
 	if current_state == STATES.NO_OPERAND or constituent_block == null:
 		selector.visible = true
 		if child_node != null: child_node.queue_free()

@@ -100,6 +100,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "text_IDE"
 
+[node name="Button6" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2" unique_id=431401318]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "graphical_IDE"
+
 [node name="Button5" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2" unique_id=30701944]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -109,4 +114,5 @@ text = "tripple_IDE"
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button2" to="Icon" method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button3" to="Icon" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button4" to="Icon" method="_on_button_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button6" to="Icon" method="_on_button_6_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button5" to="Icon" method="_on_button_5_pressed"]

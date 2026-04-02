@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ocldpbbvpw8g" path="res://src/catCode/ui/basic_textual_editor.tscn" id="1_tah83"]
 [ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="2_kigyt"]
 [ext_resource type="PackedScene" uid="uid://qgk825dvuc0n" path="res://src/catCode/ui/basic_output.tscn" id="3_e1ob7"]
-[ext_resource type="PackedScene" uid="uid://yfi43g18e0pe" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="3_kigyt"]
+[ext_resource type="PackedScene" uid="uid://drhwuslik20fh" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="3_kigyt"]
 [ext_resource type="FontFile" uid="uid://ddpc1nh0p7wqn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="4_yox0k"]
 [ext_resource type="PackedScene" uid="uid://d1mjc7o4kc5ew" path="res://src/catCode/cat_code_manager.tscn" id="7_cc4mx"]
 [ext_resource type="PackedScene" uid="uid://diwphrghc5yir" path="res://src/catCode/logicBlocks/nodes/print_2_function.tscn" id="8_va5gq"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cocvyuid05p3q" path="res://src/catCode/logicBlocks/nodes/repeat_iterational.tscn" id="16_fdqot"]
 [ext_resource type="PackedScene" uid="uid://c67x8bopyhobv" path="res://src/catCode/logicBlocks/nodes/strike_function.tscn" id="17_r5con"]
 [ext_resource type="PackedScene" uid="uid://dcbd422tsefck" path="res://src/catCode/logicBlocks/nodes/jump_function.tscn" id="18_trdnn"]
+[ext_resource type="PackedScene" uid="uid://cqnk6k280ruxa" path="res://src/catCode/logicBlocks/nodes/and_operand.tscn" id="18_va5gq"]
 [ext_resource type="PackedScene" uid="uid://cjp2c1jbhsr44" path="res://src/catCode/logicBlocks/nodes/move_x_function.tscn" id="19_xvciy"]
 [ext_resource type="PackedScene" uid="uid://b4ovl2l62g44b" path="res://src/catCode/logicBlocks/nodes/boolean_value.tscn" id="20_gs08l"]
 
@@ -122,6 +123,8 @@ value = true
 [node name="IsButtonHeldOperator" parent="CatCodeManager2" unique_id=68021963 instance=ExtResource("13_5pnyi")]
 
 [node name="IsButtonJustPressedOperator" parent="CatCodeManager2" unique_id=629059722 instance=ExtResource("14_u2hsr")]
+
+[node name="AndOperand" parent="CatCodeManager2" unique_id=2095126168 instance=ExtResource("18_va5gq")]
 
 [node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
 
