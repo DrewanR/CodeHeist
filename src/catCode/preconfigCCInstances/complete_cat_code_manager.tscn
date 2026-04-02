@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://c67x8bopyhobv" path="res://src/catCode/logicBlocks/nodes/strike_function.tscn" id="11_qxj0j"]
 [ext_resource type="PackedScene" uid="uid://dcbd422tsefck" path="res://src/catCode/logicBlocks/nodes/jump_function.tscn" id="12_kf2c7"]
 [ext_resource type="PackedScene" uid="uid://cjp2c1jbhsr44" path="res://src/catCode/logicBlocks/nodes/move_x_function.tscn" id="14_e40wp"]
+[ext_resource type="PackedScene" uid="uid://cqnk6k280ruxa" path="res://src/catCode/logicBlocks/nodes/and_operand.tscn" id="14_tslmu"]
+[ext_resource type="PackedScene" uid="uid://t20e11cgaji5" path="res://src/catCode/logicBlocks/nodes/or_operand.tscn" id="15_douhl"]
 
 [node name="Complete-CatCodeManager" unique_id=2046772742 instance=ExtResource("1_1684m")]
 
@@ -42,3 +44,7 @@ value = true
 [node name="RepeatIterational" parent="." index="11" unique_id=507125798 instance=ExtResource("10_0jnnq")]
 
 [node name="ForeverIterational" parent="." index="12" unique_id=2127973843 instance=ExtResource("9_1b5aa")]
+
+[node name="AndOperand" parent="." index="13" unique_id=2095126168 instance=ExtResource("14_tslmu")]
+
+[node name="OrOperand" parent="." index="14" unique_id=1840797232 instance=ExtResource("15_douhl")]

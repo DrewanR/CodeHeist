@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dluprxrhim6e0"]
+
+[ext_resource type="Script" uid="uid://dqcielcyjpo5o" path="res://src/catCode/logicBlocks/scripts/not_operand.gd" id="1_ro0tb"]
+[ext_resource type="PackedScene" uid="uid://dkl4rm0b4mbdr" path="res://src/catCode/graphicalBlocks/OP_1_operandContainer.tscn" id="2_ksuoa"]
+
+[node name="NotOperand" type="Node" unique_id=2095126168]
+script = ExtResource("1_ro0tb")
+block_ref = "not"
+params = Array[String](["operand"])
+block_name = "not"
+block_category = "logic"
+ui_block = ExtResource("2_ksuoa")

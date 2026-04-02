@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b8hctohw6jbpa"]
+
+[ext_resource type="PackedScene" uid="uid://b0tvpwip5cxi3" path="res://src/catCode/graphicalBlocks/basic_operand.tscn" id="1_s2vmk"]
+[ext_resource type="Script" uid="uid://b13i6cfngrjxv" path="res://src/catCode/graphicalBlocks/compoundOperand.gd" id="2_reqij"]
+[ext_resource type="PackedScene" uid="uid://drmmayl25fcbg" path="res://src/catCode/graphicalComponents/operator_container.tscn" id="2_s2vmk"]
+
+[node name="CompoundOperand" unique_id=782317717 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_s2vmk")]
+script = ExtResource("2_reqij")
+parameter_nodes = [NodePath("MarginContainer/HBoxContainer/OperatorContainer"), NodePath("MarginContainer/HBoxContainer/OperatorContainer2")]
+
+[node name="OperatorContainer" parent="MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2067633605) index="0" unique_id=599561088 instance=ExtResource("2_s2vmk")]
+layout_mode = 2
+
+[node name="OperatorContainer2" parent="MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2067633605) index="2" unique_id=352906591 instance=ExtResource("2_s2vmk")]
+layout_mode = 2
