@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dkl4rm0b4mbdr"]
+
+[ext_resource type="PackedScene" uid="uid://b0tvpwip5cxi3" path="res://src/catCode/graphicalBlocks/basic_operand.tscn" id="1_ggmd2"]
+[ext_resource type="Script" uid="uid://b13i6cfngrjxv" path="res://src/catCode/graphicalBlocks/compoundOperand.gd" id="2_jvs5x"]
+[ext_resource type="PackedScene" uid="uid://drmmayl25fcbg" path="res://src/catCode/graphicalComponents/operator_container.tscn" id="3_ik1fo"]
+
+[node name="CompoundOperand" unique_id=782317717 node_paths=PackedStringArray("parameter_nodes") instance=ExtResource("1_ggmd2")]
+script = ExtResource("2_jvs5x")
+parameter_nodes = [NodePath("MarginContainer/HBoxContainer/OperatorContainer2")]
+
+[node name="OperatorContainer2" parent="MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2067633605) index="1" unique_id=352906591 instance=ExtResource("3_ik1fo")]
+layout_mode = 2

@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dftkmtq7t6doh" path="res://src/catCode/logicBlocks/nodes/repeat_forever_iterational.tscn" id="15_pqa3f"]
 [ext_resource type="PackedScene" uid="uid://ckqy5mt8iujwr" path="res://src/catCode/logicBlocks/nodes/is_button_held.tscn" id="16_lteh2"]
 [ext_resource type="PackedScene" uid="uid://c6yxftaraoskd" path="res://src/catCode/logicBlocks/nodes/is_button_just_pressed_operator.tscn" id="17_xu43i"]
+[ext_resource type="PackedScene" uid="uid://dluprxrhim6e0" path="res://src/catCode/logicBlocks/nodes/not_operand.tscn" id="17_xw632"]
 [ext_resource type="PackedScene" uid="uid://cqnk6k280ruxa" path="res://src/catCode/logicBlocks/nodes/and_operand.tscn" id="18_cntjd"]
 [ext_resource type="PackedScene" uid="uid://t20e11cgaji5" path="res://src/catCode/logicBlocks/nodes/or_operand.tscn" id="19_5mvok"]
 [ext_resource type="PackedScene" uid="uid://c67x8bopyhobv" path="res://src/catCode/logicBlocks/nodes/strike_function.tscn" id="19_m1r88"]
@@ -91,6 +92,8 @@ value = true
 [node name="AndOperand" parent="CatCodeManager2" unique_id=2095126168 instance=ExtResource("18_cntjd")]
 
 [node name="OrOperand" parent="CatCodeManager2" unique_id=2081969748 instance=ExtResource("19_5mvok")]
+
+[node name="NotOperand" parent="CatCodeManager2" unique_id=52246088 instance=ExtResource("17_xw632")]
 
 [node name="DisabledNodes" type="Node3D" parent="." unique_id=2063241663]
 
