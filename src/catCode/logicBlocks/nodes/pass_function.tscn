@@ -8,4 +8,5 @@ script = ExtResource("1_k1dga")
 block_ref = "pass"
 block_name = "pass"
 block_category = "debug"
+block_description = "Does literally nothing."
 ui_block = ExtResource("2_ex3dq")

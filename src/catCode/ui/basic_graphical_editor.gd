@@ -246,10 +246,10 @@ func update_single_string_descriptions() -> String:
 	var result = "[b][i]# Logic blocks [/i][/b]\n"
 	for this_block in function_list:
 		result += "\n" + this_block.get_formatted_block_description() + "\n"
-	result += "\n\n[b][i]# Boolean Operators [/i][/b]\n"
+	result += "\n\n\n\n[b][i]# Boolean Operators [/i][/b]\n"
 	for this_block in operand_list:
 		result += "\n" + this_block.get_formatted_block_description() + "\n"
-	return result
+	return result + "\n\n[i]Click outside popup to close[/i]"
 
 
 ## Hides the collapsible elements specified in [collapsable_nodes]

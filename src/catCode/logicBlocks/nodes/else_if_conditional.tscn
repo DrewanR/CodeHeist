@@ -9,4 +9,13 @@ block_ref = "elif"
 uses_boolean_operator = true
 block_name = "else if"
 block_category = "conditional"
+block_description = "SELECTIVE BLOCK
+An if statement that will only be considered if none of the previous selective blocks are true.
+For example:
+IF(false):
+    # This will not be executed
+ELSE IF (true):
+    # But this will be executed
+ELSE IF (true)
+    # However, this will not be"
 ui_block = ExtResource("2_hj6pa")

@@ -9,4 +9,8 @@ block_ref = "repeatForever"
 await_new_frame = true
 block_name = "repeat forever"
 block_category = "loops"
+block_description = "ITERATIVE BLOCK
+The code section indented beneath this will be repeated forever.
+One iteration will occur per frame.
+If this is getting used, you will need to manually save the code for CatBot's behavior to update"
 ui_block = ExtResource("2_n24gh")

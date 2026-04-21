@@ -9,4 +9,7 @@ block_ref = "jump"
 params = Array[String](["strength"])
 block_name = "jump"
 block_category = "action"
+block_description = "Causes catbot to jump.
+\"Strength\" controls the height of the job.
+Will result in an error if used when CatBot isn't on the ground."
 ui_block = ExtResource("2_54ehg")

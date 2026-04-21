@@ -8,4 +8,11 @@ script = ExtResource("1_bex2t")
 block_ref = "else"
 block_name = "else"
 block_category = "conditional"
+block_description = "SELECTIVE BLOCK
+The section indented after this block will only be executed if none of the previous selective blocks are true.
+For example:
+IF(false):
+    # This will not be executed
+ELSE:
+    # But this will be executed"
 ui_block = ExtResource("2_ofucu")

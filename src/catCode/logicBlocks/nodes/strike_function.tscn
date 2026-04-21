@@ -9,4 +9,7 @@ block_ref = "swipe"
 params = Array[String](["direction"])
 block_name = "swipe"
 block_category = "action"
+block_description = "Causes CatBot to swipe.
+CatBot can swipe twice in midair.
+If this number is exceeded, an error will occur."
 ui_block = ExtResource("2_wyo8q")

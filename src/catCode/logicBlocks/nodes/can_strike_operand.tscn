@@ -8,4 +8,5 @@ script = ExtResource("1_ac2lg")
 block_ref = "canSwipe"
 block_name = "can swipe"
 block_category = "physics logic"
+block_description = "Will return true if CatBot can swipe."
 ui_block = ExtResource("2_uo0el")

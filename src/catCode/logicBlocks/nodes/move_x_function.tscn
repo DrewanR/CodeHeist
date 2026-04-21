@@ -9,4 +9,7 @@ block_ref = "moveX"
 params = Array[String](["strength"])
 block_name = "walk"
 block_category = "action"
+block_description = "Causes catbot to walk in a direction.
+Strength =  100%: Full speed to the right,
+Strength = -100%: Full speed to the left."
 ui_block = ExtResource("2_a2cuj")

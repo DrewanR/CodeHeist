@@ -9,4 +9,7 @@ block_ref = "or"
 params = Array[String](["operand1", "operand2"])
 block_name = "or"
 block_category = "logic"
+block_description = "Contains two operators.
+Returns true if either operator is true.
+This means that code indented beneath an if statement executes if one statement is true."
 ui_block = ExtResource("2_dki73")
