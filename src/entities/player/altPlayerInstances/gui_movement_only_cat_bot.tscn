@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://bav3svnv2top5"]
 
 [ext_resource type="PackedScene" uid="uid://cyg8iga1g5alj" path="res://src/entities/player/player_cat.tscn" id="1_je3b0"]
-[ext_resource type="PackedScene" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="2_25cgf"]
+[ext_resource type="PackedScene" uid="uid://drhwuslik20fh" path="res://src/catCode/ui/basic_graphical_editor.tscn" id="2_25cgf"]
 [ext_resource type="PackedScene" uid="uid://c6f7lpxxyh6ae" path="res://src/camera/camera_manager.tscn" id="3_0ol5v"]
 [ext_resource type="PackedScene" uid="uid://c5vxqu6jgkplc" path="res://src/entities/player/autoControllers/auto_horizontal_move_controller.tscn" id="4_pb1y3"]
 [ext_resource type="PackedScene" uid="uid://c15qjaeg6ndhp" path="res://src/catCode/preconfigCCInstances/complete_cat_code_manager.tscn" id="7_u22yo"]
 
 [node name="GUI_MoveOnly_CatBot" unique_id=1345683778 instance=ExtResource("1_je3b0")]
+using_air_hover = false
 
 [node name="MarginContainer" parent="BasicUI" parent_id_path=PackedInt32Array(1273297337) index="0" unique_id=1751148385]
 theme_override_constants/margin_left = 4

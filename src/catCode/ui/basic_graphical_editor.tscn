@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drhwuslik20fh"]
 
-[ext_resource type="Script" path="res://src/catCode/ui/basic_graphical_editor.gd" id="1_8ryk2"]
+[ext_resource type="Script" uid="uid://urwscuedx836" path="res://src/catCode/ui/basic_graphical_editor.gd" id="1_8ryk2"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_8ryk2"]
 device = -1
@@ -283,6 +283,42 @@ Arrow keys: [i]Movement[/i]
 
 [i]Click outside window to close[/i]"
 
+[node name="InstructionPopup" type="Popup" parent="." unique_id=2077194290]
+oversampling_override = 1.0
+title = "CatCode+ Help"
+size = Vector2i(800, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="InstructionPopup" unique_id=135838292]
+
+[node name="MarginContainer" type="MarginContainer" parent="InstructionPopup/CanvasLayer" unique_id=701349157]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InstructionPopup/CanvasLayer/MarginContainer" unique_id=2083270517]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="InstructionPopup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=209756534]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InstructionPopup/CanvasLayer/MarginContainer/VBoxContainer/PanelContainer" unique_id=794514788]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Current Instruction Set"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InstructionPopup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=1649675883]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[i]Click outside window to close[/i]"
+
 [node name="ScreenDimmer" type="CanvasLayer" parent="." unique_id=266414966]
 layer = 256
 visible = false
@@ -295,6 +331,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/InstructionSet" to="." method="_on_instruction_set_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/Help" to="." method="_on_help_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderBar/MarginContainer/HBoxContainer/CollapseButton" to="." method="_on_collapse_button_pressed"]
@@ -303,3 +340,4 @@ color = Color(0, 0, 0, 0.5019608)
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/SaveButton" to="." method="compile"]
 [connection signal="popup_hide" from="HelpPopup" to="." method="screen_undim"]
 [connection signal="popup_hide" from="ControlPopup" to="." method="screen_undim"]
+[connection signal="popup_hide" from="InstructionPopup" to="." method="screen_undim"]

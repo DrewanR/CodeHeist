@@ -22,6 +22,7 @@
 
 [node name="booleanValueT" parent="." index="0" unique_id=2042108197 instance=ExtResource("2_2kepx")]
 value = true
+block_description = "Boolean value."
 
 [node name="booleanValueF" parent="." index="1" unique_id=1333304815 instance=ExtResource("2_2kepx")]
 

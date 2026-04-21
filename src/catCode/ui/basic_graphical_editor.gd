@@ -10,7 +10,7 @@ signal code_recompiled(new_compiled_code :Array[instruction_line])
 ## You know it, you hate it, the usual hack
 @export var parent :Node
 
-## Interal export properties, do not edit on instances unless strucutre has been modified.
+## Interal export properties, do not edit on instances unless structure has been modified.
 @export_subgroup("Internal")
 
 ## List of nodes that will be hidden or show when the minimise button is pressed
@@ -42,7 +42,7 @@ var instruction_nodes :Array[graphical_block]
 ## The name of the process, i.e. on_z_press, process etc.
 var process_name :String = ""
 
-## The current visibility of the window: if [true] the code is visbile, else it is hidden.
+## The current visibility of the window: if [true] the code is visible, else it is hidden.
 var is_collapsed :bool = false
 
 ## Node that all of the graphical_blocks will be a child of
@@ -241,6 +241,17 @@ func update_process_name(new_name :String = "Unknown Process", description :Stri
 	process_description_button.tooltip_text = description
 
 
+## Returns a formatted string containing all of the descriptions of the current blocks
+func update_single_string_descriptions() -> String:
+	var result = "[b][i]# Logic blocks [/i][/b]\n"
+	for this_block in function_list:
+		result += "\n" + this_block.get_formatted_block_description() + "\n"
+	result += "\n\n\n\n[b][i]# Boolean Operators [/i][/b]\n"
+	for this_block in operand_list:
+		result += "\n" + this_block.get_formatted_block_description() + "\n"
+	return result + "\n\n[i]Click outside popup to close[/i]"
+
+
 ## Hides the collapsible elements specified in [collapsable_nodes]
 func _on_collapse_button_pressed() -> void:
 	is_collapsed = not is_collapsed
@@ -260,6 +271,12 @@ func _on_help_pressed() -> void:
 func _on_controls_pressed() -> void:
 	screen_dim()
 	$ControlPopup.popup_centered()
+
+
+func _on_instruction_set_pressed() -> void:
+	screen_dim()
+	$InstructionPopup/CanvasLayer/MarginContainer/VBoxContainer/RichTextLabel.text = update_single_string_descriptions()
+	$InstructionPopup.popup_centered()
 
 
 ## Dims the screen

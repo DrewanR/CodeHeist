@@ -9,4 +9,6 @@ block_ref = "isButtonHeld"
 params = Array[String](["button"])
 block_name = "is button held"
 block_category = "input"
+block_description = "Will return true if the specified button is currently pressed.
+This will return true every frame that the button is held."
 ui_block = ExtResource("2_im60i")

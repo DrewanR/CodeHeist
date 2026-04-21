@@ -66,7 +66,6 @@ layout_mode = 2
 text = "Spawn"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=897087896]
-modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
 text = "Warning: certain combinations of editors and player instances can cause unexpected behaviour, such as full auto allowing for infinite jumping through catCode editors."

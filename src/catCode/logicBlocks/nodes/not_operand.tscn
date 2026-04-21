@@ -9,4 +9,7 @@ block_ref = "not"
 params = Array[String](["operand"])
 block_name = "not"
 block_category = "logic"
+block_description = "Contains one operator.
+Returns true if the operator is false.
+True becomes false, and false becomes true, for example"
 ui_block = ExtResource("2_ksuoa")

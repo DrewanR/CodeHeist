@@ -9,4 +9,8 @@ block_ref = "if"
 uses_boolean_operator = true
 block_name = "if"
 block_category = "conditional"
+block_description = "SELECTIVE BLOCK
+Contains a boolean operator (view operator section).
+The section indented beneath this block will be executed if the operator is true.
+If the statement is not true, it will skip the section."
 ui_block = ExtResource("2_ps0so")

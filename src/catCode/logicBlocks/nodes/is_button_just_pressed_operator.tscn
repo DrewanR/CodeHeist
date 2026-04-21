@@ -9,4 +9,7 @@ block_ref = "isButtonJustPressed"
 params = Array[String](["button"])
 block_name = "is button just pressed"
 block_category = "input"
+block_description = "Will return true if the specified button has just been pressed.
+This will only return true the first frame that the button is pressed.
+This is recommended for jumping."
 ui_block = ExtResource("2_jhhvv")

@@ -9,4 +9,5 @@ block_ref = "print"
 params = Array[String](["text"])
 block_name = "print"
 block_category = "output"
+block_description = "Outputs the contents of the parameter to CatBot's console."
 ui_block = ExtResource("2_war1a")
