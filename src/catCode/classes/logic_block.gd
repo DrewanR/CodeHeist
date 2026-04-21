@@ -9,6 +9,8 @@ signal error_occurred(message :String)
 @export var block_name     :String ## The name of the current block
 @export var block_category :String ## The type of block
 
+@export_multiline() var block_description :String ## The description of the block.
+
 @export var ui_block :PackedScene ## The graphical_block equivalent of this logical block
 
 var block_type :String
@@ -38,10 +40,15 @@ func get_primary_reference() -> String
 func convert_to_string(arg) -> String:
 	return str(arg)
 
-## Convets to a float. [br]
+## Converts to a float. [br]
 ## returning a 0 if blank or invalid.
 func convert_to_float(arg) -> float:
 	if arg.is_valid_float():
 		return float(arg)
 	else:
 		return 0.0
+
+## Returns a rich-text string including the name of the block
+## and a description of it.
+func get_formatted_block_description() -> String:
+	return "[b][i]%s[/i][/b]\n   %s" % [block_name, block_description.replace("\n","\n   ")]
