@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 CameraInformation="*res://src/autoload/camera_information.gd"
 GlobalStatistics="*uid://3pjrhe5i82rq"
+TempSlideManager="*uid://iud2fut6yqux"
 
 [display]
 
