@@ -1,17 +1,19 @@
 # CodeHeist
 
-This is a test page.
+This is a prototype for a game designed to teach programming developed in godot, for my dissertation. It was designed to evaluate the efficacy of using a platformer to teach programming.
 
-There will likely be some amount of information on taking part in the study here.
+The report is available in the following places:
 
-## Playing the game
 
-### Online Web Version
+The source-code for the project is available here: https://github.com/DrewanR/CodeHeist
 
-1. Follow [this link](https://drewanr.github.io/CodeHeist/game/)
-2. ???
-3. Profit
+## Builds available
 
-Warning: The web version of this game can expirience performance issues on certain browsers such as firefox, I have been unable to determine the cause, and suspect it might be engine related.
+There are two builds available on this website:
 
-### Offline Downloads
+| Name | Description | URL |
+| ---- | ----------- | --- |
+| Main | The most up to date build | https://drewanr.github.io/CodeHeist/game/ |
+| Dissertation Build | Build used for the survey as part of the dissertation | https://drewanr.github.io/CodeHeist/userEvaluation/play |
+
+
