@@ -35,6 +35,7 @@ func show_popup(title := "title", body := "body"):
 	pupup_title.text = title
 	popup_body.text = body + "\n\n[i]Click outside popup to close[/i]"
 	screen_dim()
+	print("Showing popup: " + title)
 	popup.popup_centered()
 
 

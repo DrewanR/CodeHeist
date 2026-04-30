@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b6va2o2ytx0i0" path="res://src/ui/slide_show_manager.gd" id="1_phd3y"]
 
 [node name="SlideManager" type="CanvasLayer" unique_id=1977986039 node_paths=PackedStringArray("popup", "pupup_title", "popup_body", "screen_dimmer")]
+layer = 101
 script = ExtResource("1_phd3y")
 popup = NodePath("Popup")
 pupup_title = NodePath("Popup/CanvasLayer/MarginContainer/VBoxContainer/PanelContainer/Title")
@@ -34,6 +35,7 @@ layout_mode = 2
 [node name="PreviousSlideButton" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=232737041]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+focus_mode = 0
 text = "<"
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=271213339]
@@ -48,6 +50,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 8
+focus_mode = 0
 text = ">"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2073612690]
@@ -56,26 +59,31 @@ alignment = 2
 
 [node name="DescriptionButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=69608560]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "Description"
 
 [node name="Hint1Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1948988918]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "Hint 1"
 
 [node name="Hint2Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205596989]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "Hint 2"
 
 [node name="Hint3Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=269170295]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "Hint 3"
 
 [node name="SolutionButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=27134841]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 10
 text = "Solution"
 

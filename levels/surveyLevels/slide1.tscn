@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dds7l8lq82d0c"]
+
+[ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="1_55ss5"]
+[ext_resource type="PackedScene" uid="uid://c7okualn20lt2" path="res://src/ui/slide_show_manager.tscn" id="1_61msq"]
+[ext_resource type="Texture2D" uid="uid://bj80vvfqyk6fr" path="res://levels/surveyLevels/QRCode for Code Heist User Evaluation Survey.png" id="2_kc1jq"]
+
+[sub_resource type="Gradient" id="Gradient_tjvdy"]
+colors = PackedColorArray(0.10349945, 0.06969477, 0.108776756, 1, 0.43684575, 0.34013224, 0.45386934, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fa730"]
+gradient = SubResource("Gradient_tjvdy")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o25lc"]
+font = ExtResource("1_55ss5")
+font_size = 32
+
+[node name="Slide1" type="Control" unique_id=1022441167]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2127272583]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=754735730]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fa730")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=552414996]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=1025137898]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=729741969]
+layout_mode = 2
+text = "//CodeHeist:
+Core Systems user evaluation"
+label_settings = SubResource("LabelSettings_o25lc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1702241803]
+layout_mode = 2
+text = "Please answer Q1-3 of the survey before proceeding.
+If you do not already have the survey open, use the QR code below."
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=932783062]
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("2_kc1jq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=891106648]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -377.0
+offset_top = 75.0
+offset_right = -3.0
+offset_bottom = 98.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Use these buttons to navigate between slides! ↑"
+
+[node name="SlideManager" parent="." unique_id=1977986039 instance=ExtResource("1_61msq")]
+slide_hint1 = "Certain slides will contain hints, you just pressed the button will show them!
+
+There will also be a button here that shows the slides introduction screen again on other slides."

@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://iud2fut6yqux"]
 
 [ext_resource type="Script" uid="uid://bvjew6xhbt3oc" path="res://src/autoload/temp_slide_manager.gd" id="1_s1nfi"]
-[ext_resource type="PackedScene" uid="uid://dn0g7a4b0t7wg" path="res://levels/surveyLevels/test_level.tscn" id="2_ain88"]
-[ext_resource type="PackedScene" uid="uid://c8phja8a0ylji" path="res://levels/surveyLevels/another_test_level.tscn" id="3_2fbrk"]
+[ext_resource type="PackedScene" uid="uid://dds7l8lq82d0c" path="res://levels/surveyLevels/slide1.tscn" id="2_2fbrk"]
+[ext_resource type="PackedScene" uid="uid://bxvuyl7ho5sd7" path="res://levels/surveyLevels/slide2.tscn" id="3_v5p3b"]
+[ext_resource type="PackedScene" uid="uid://cralixy5j8uy4" path="res://levels/surveyLevels/slide3.tscn" id="4_7cas4"]
+[ext_resource type="PackedScene" uid="uid://dmlauwcojyu2n" path="res://levels/surveyLevels/slide4.tscn" id="4_v5p3b"]
+[ext_resource type="PackedScene" uid="uid://b8h4q4u2hffyt" path="res://levels/surveyLevels/slide5.tscn" id="6_winuw"]
+[ext_resource type="PackedScene" uid="uid://ny8165j5mnbi" path="res://levels/surveyLevels/slide6.tscn" id="7_1hbmk"]
+[ext_resource type="PackedScene" uid="uid://dqljq8u8x25wg" path="res://levels/surveyLevels/slide7.tscn" id="8_vqh2m"]
 
 [node name="TempSlideManager" type="Node" unique_id=543708927]
 script = ExtResource("1_s1nfi")
-slides = Array[PackedScene]([ExtResource("2_ain88"), ExtResource("3_2fbrk")])
+slides = Array[PackedScene]([ExtResource("2_2fbrk"), ExtResource("3_v5p3b"), ExtResource("4_7cas4"), ExtResource("4_v5p3b"), ExtResource("6_winuw"), ExtResource("7_1hbmk"), ExtResource("8_vqh2m")])

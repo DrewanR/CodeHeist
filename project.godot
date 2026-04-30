@@ -25,6 +25,7 @@ TempSlideManager="*uid://iud2fut6yqux"
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_height"
 
 [file_customization]
 
