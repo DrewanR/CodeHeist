@@ -30,9 +30,9 @@ fi
 # Survey-build local repo
 if [[ $* == *-s* ]]
 then
-    echo "  Exporting web build to $EXPORT_DIR/pages/userEvaluation/pages"
-    mkdir -p "$EXPORT_DIR/pages/userEvaluation/pages"
-    godot --headless --verbose --export-release "Web" "$EXPORT_DIR/pages/userEvaluation/pages/index.html"
+    echo "  Exporting web build to $EXPORT_DIR/pages/userEvaluation/play"
+    mkdir -p "$EXPORT_DIR/pages/userEvaluation/play"
+    godot --headless --verbose --export-release "Web" "$EXPORT_DIR/pages/userEvaluation/play/index.html"
 fi
 
 # Git for pages export
