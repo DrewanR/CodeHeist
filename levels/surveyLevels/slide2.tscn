@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bxvuyl7ho5sd7"]
 
 [ext_resource type="FontFile" uid="uid://ba6m76e3xd4io" path="res://assets/fonts/JetBrainsMono-Bold.ttf" id="1_v3ukf"]
+[ext_resource type="Texture2D" uid="uid://d2awt0rp7klg7" path="res://levels/surveyLevels/Controls..png" id="2_v3ukf"]
 [ext_resource type="PackedScene" uid="uid://c7okualn20lt2" path="res://src/ui/slide_show_manager.tscn" id="3_3dtvp"]
 
 [sub_resource type="Gradient" id="Gradient_cli01"]
@@ -58,5 +59,13 @@ layout_mode = 2
 text = "Please answer Q4 and Q5 before proceeding.
 Feel free to return to the previous slides whilst answering the questions."
 fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1000894710]
+custom_minimum_size = Vector2(320, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("2_v3ukf")
+expand_mode = 5
 
 [node name="SlideManager" parent="." unique_id=1977986039 instance=ExtResource("3_3dtvp")]

@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b8h4q4u2hffyt" path="res://levels/surveyLevels/slide5.tscn" id="6_winuw"]
 [ext_resource type="PackedScene" uid="uid://ny8165j5mnbi" path="res://levels/surveyLevels/slide6.tscn" id="7_1hbmk"]
 [ext_resource type="PackedScene" uid="uid://dqljq8u8x25wg" path="res://levels/surveyLevels/slide7.tscn" id="8_vqh2m"]
+[ext_resource type="PackedScene" uid="uid://bw1xtgtkkoj3v" path="res://levels/surveyLevels/slide8.tscn" id="9_winuw"]
 
 [node name="TempSlideManager" type="Node" unique_id=543708927]
 script = ExtResource("1_s1nfi")
-slides = Array[PackedScene]([ExtResource("2_2fbrk"), ExtResource("3_v5p3b"), ExtResource("4_7cas4"), ExtResource("4_v5p3b"), ExtResource("6_winuw"), ExtResource("7_1hbmk"), ExtResource("8_vqh2m")])
+slides = Array[PackedScene]([ExtResource("2_2fbrk"), ExtResource("3_v5p3b"), ExtResource("4_7cas4"), ExtResource("4_v5p3b"), ExtResource("6_winuw"), ExtResource("7_1hbmk"), ExtResource("8_vqh2m"), ExtResource("9_winuw")])

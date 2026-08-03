@@ -50,12 +50,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=729741969]
 layout_mode = 2
 text = "//CodeHeist:
-Pre-implemented Controls"
+CatCoded Controls"
 label_settings = SubResource("LabelSettings_o25lc")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1702241803]
 layout_mode = 2
-text = "You will be asked to complete three levels before answering Q4 and Q5.
+text = "You will be asked to complete three levels before answering QX and QX.
 You may skip levels using the buttons on the top right.
 
 You goal is to reach the big *
