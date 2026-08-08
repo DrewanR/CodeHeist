@@ -2,9 +2,11 @@
 
 A platformer designed to teach programming made for my final not-final year project, or rather what could be finished within the time constraints. At present, this game only contains some of the core systems.
 
-The final report can be found at: .
+The final report can be found at: TBD.
 
-The present version of the game has been developed using **Godot 4.7.1**.
+An online version of this build can be found at [drewanr.github.io/CodeHeist/game](https://drewanr.github.io/CodeHeist/game).
+
+This branch uses **Godot 4.7.1**.
 
 ## Branches
 
