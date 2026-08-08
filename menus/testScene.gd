@@ -21,3 +21,6 @@ func _on_button_5_pressed() -> void:
 
 func _on_button_6_pressed() -> void:
 	get_tree().change_scene_to_file("res://levels/test/gui_basic_ide.tscn")
+
+func _on_button_7_pressed() -> void:
+	get_tree().change_scene_to_file("res://levels/surveyLevels/slide1.tscn")
