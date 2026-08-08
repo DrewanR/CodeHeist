@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Code Heist"
-run/main_scene="uid://c2bagp16dmh4l"
+run/main_scene="uid://dds7l8lq82d0c"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="uid://w34ucavaoxd1"
@@ -20,10 +20,12 @@ config/icon="res://icon.svg"
 
 CameraInformation="*res://src/autoload/camera_information.gd"
 GlobalStatistics="*uid://3pjrhe5i82rq"
+TempSlideManager="*uid://iud2fut6yqux"
 
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_height"
 
 [file_customization]
 

@@ -26,6 +26,16 @@ then
     mkdir -p "$EXPORT_DIR/pages/game"
     godot --headless --verbose --export-release "Web" "$EXPORT_DIR/pages/game/index.html"
 fi
+
+# Survey-build local repo
+if [[ $* == *-s* ]]
+then
+    echo "  Exporting web build to $EXPORT_DIR/pages/userEvaluation/play"
+    mkdir -p "$EXPORT_DIR/pages/userEvaluation/play"
+    godot --headless --verbose --export-release "Web" "$EXPORT_DIR/pages/userEvaluation/play/index.html"
+fi
+
+# Git for pages export
 if [[ $* == *-g* ]]
 then
     cd "$EXPORT_DIR/pages"

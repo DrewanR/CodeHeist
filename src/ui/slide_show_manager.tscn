@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://c7okualn20lt2"]
+
+[ext_resource type="Script" uid="uid://b6va2o2ytx0i0" path="res://src/ui/slide_show_manager.gd" id="1_phd3y"]
+
+[node name="SlideManager" type="CanvasLayer" unique_id=1977986039 node_paths=PackedStringArray("popup", "pupup_title", "popup_body", "screen_dimmer")]
+layer = 101
+script = ExtResource("1_phd3y")
+popup = NodePath("Popup")
+pupup_title = NodePath("Popup/CanvasLayer/MarginContainer/VBoxContainer/PanelContainer/Title")
+popup_body = NodePath("Popup/CanvasLayer/MarginContainer/VBoxContainer/BodyText")
+screen_dimmer = NodePath("ScreenDimmer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1380807061]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=280934635]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=506196790]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=829237630]
+custom_minimum_size = Vector2(239, 0)
+layout_mode = 2
+
+[node name="PreviousSlideButton" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=232737041]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "<"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=271213339]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Slide x / y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextSlideButton" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer" unique_id=850137639]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+text = ">"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2073612690]
+layout_mode = 2
+alignment = 2
+
+[node name="DescriptionButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=69608560]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Description"
+
+[node name="Hint1Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1948988918]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Hint 1"
+
+[node name="Hint2Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205596989]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Hint 2"
+
+[node name="Hint3Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=269170295]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Hint 3"
+
+[node name="SolutionButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=27134841]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Solution"
+
+[node name="Popup" type="Popup" parent="." unique_id=1787681544]
+oversampling_override = 1.0
+title = "CatCode+ Help"
+size = Vector2i(800, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Popup" unique_id=1196631892]
+
+[node name="MarginContainer" type="MarginContainer" parent="Popup/CanvasLayer" unique_id=1659455182]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/CanvasLayer/MarginContainer" unique_id=195491509]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Popup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=790146758]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Popup/CanvasLayer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1452727727]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Title"
+
+[node name="BodyText" type="RichTextLabel" parent="Popup/CanvasLayer/MarginContainer/VBoxContainer" unique_id=1002235300]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Description"
+
+[node name="ScreenDimmer" type="CanvasLayer" parent="." unique_id=2053958871]
+layer = 256
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ScreenDimmer" unique_id=1020044832]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/PreviousSlideButton" to="." method="_on_previous_slide_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/NextSlideButton" to="." method="_on_next_slide_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/DescriptionButton" to="." method="_on_description_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Hint1Button" to="." method="_on_hint_1_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Hint2Button" to="." method="_on_hint_2_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Hint3Button" to="." method="_on_hint_3_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SolutionButton" to="." method="_on_solution_button_pressed"]
+[connection signal="popup_hide" from="Popup" to="." method="screen_undim"]
