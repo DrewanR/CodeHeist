@@ -20,7 +20,7 @@ offset_left = 100.0
 offset_top = 88.0
 offset_right = 298.0
 offset_bottom = 133.0
-text = "CodeHeist"
+text = "CodeHeist Alpha v1.0"
 label_settings = SubResource("LabelSettings_ia1lp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=357747509]
@@ -39,20 +39,62 @@ size_flags_horizontal = 8
 layout_mode = 2
 size_flags_vertical = 0
 bbcode_enabled = true
-text = "This is a quick prototype for testing physics with controls hardwired.
+text = "This is a prototype version of CodeHeist, which implements CatCode and some test levels.
 Everything is still a work in progress.
 
-[b]Controls[/b]
+"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=966464386]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/HBoxContainer3" unique_id=1253542432]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[b]AutoController Controls[/b]
 Arrow keys: Movement
 [Z] / [SPACE]: Primary action (Jump)
-[X]: Secondary action (Strike)
-[b]Debug Controls[/b]
-[+] [-]: Damage / Heal 
-[{]: Simulate error
-[}]: Recover stability
+[X]: Secondary action (Strike)"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
 
+[node name="RichTextLabel4" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/HBoxContainer3" unique_id=561873301]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[b]Debug Controls*[/b]
+[+] [-]: Damage / Heal
+[{]: Simulate error
+[}]: Recover stability"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/HBoxContainer3" unique_id=1863540449]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[b]Editor Controls[/b]
+[LMB] Select
+[RMB] Delete"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=1782387554]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "
 [b]Test Levels[/b]
-Click buttons to access"
+Click buttons to access test level
+"
 fit_content = true
 horizontal_alignment = 2
 
@@ -110,9 +152,38 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "tripple_IDE"
 
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=1613087938]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "
+[b]Survey Build[/b]
+A build of the game with some basic levels made to evaluate the Core Systems"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1168987278]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button7" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer4" unique_id=1809645879]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "survey build: Slide 1"
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=542511680]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "
+
+
+*UI displaying all these attributes is not visible in current prototype"
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button" to="Icon" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button2" to="Icon" method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Button3" to="Icon" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button4" to="Icon" method="_on_button_4_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button6" to="Icon" method="_on_button_6_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/Button5" to="Icon" method="_on_button_5_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer4/Button7" to="Icon" method="_on_button_7_pressed"]
